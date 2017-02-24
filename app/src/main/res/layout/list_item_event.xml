@@ -5,11 +5,15 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     card_view:cardUseCompatPadding="true"
-    card_view:cardCornerRadius="8dp">
+    card_view:cardCornerRadius="2dp"
+    android:elevation="4dp"
+    card_view:cardPreventCornerOverlap="false"
+    android:layout_margin="8dp">
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        >
 
         <ImageView
             android:id="@+id/IVgambarevent"
@@ -46,10 +50,6 @@
                 android:textColor="#6666cc"
                 android:textStyle="bold"
                 />
-
-
-
-
 
     </RelativeLayout>
 
