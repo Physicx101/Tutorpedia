@@ -1,82 +1,77 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+<android.support.v7.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="8dp"
+    android:elevation="4dp"
+    app:cardCornerRadius="2dp"
+    app:cardPreventCornerOverlap="false"
+    app:cardUseCompatPadding="true">
 
-    <android.support.v7.widget.CardView
-        android:layout_margin="@dimen/activity_horizontal_margin"
+    <LinearLayout
+        android:layout_height="match_parent"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:orientation="horizontal">
 
         <LinearLayout
-            android:orientation="horizontal"
+            android:layout_height="match_parent"
+            android:layout_weight="2"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:orientation="vertical">
 
-            <LinearLayout
-                android:layout_weight="2"
-                android:orientation="vertical"
+            <ImageView
+                android:background="#000000"
+                android:id="@+id/IVgambar"
+                android:layout_height="match_parent"
+                android:layout_width="match_parent"/>
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:id="@+id/LLayout"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_width="match_parent"
+            android:orientation="vertical"
+            android:padding="@dimen/activity_horizontal_margin">
+
+            <TextView
+                android:id="@+id/TVdate"
+                android:layout_height="wrap_content"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
-
-                <ImageView
-                    android:background="#000000"
-                    android:id="@+id/IVgambar"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent" />
-            </LinearLayout>
+                android:text="Hari"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"/>
 
 
-            <LinearLayout
-                android:layout_weight="1"
-                android:id="@+id/LLayout"
-                android:padding="@dimen/activity_horizontal_margin"
+            <TextView
+                android:id="@+id/TVhead"
+                android:layout_height="wrap_content"
                 android:layout_width="match_parent"
-                android:orientation="vertical"
-                android:layout_height="wrap_content">
+                android:text="Heading"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"/>
 
-                <TextView
-                    android:id="@+id/TVdate"
-                    android:text="Hari"
-                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
-
+            <TextView
+                android:id="@+id/TVdesc"
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:text="Description"/>
 
 
-                <TextView
-                    android:id="@+id/TVhead"
-                    android:text="Heading"
-                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
-
-                <TextView
-                    android:id="@+id/TVdesc"
-                    android:text="Description"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
-
-
-                <TextView
-                    android:id="@+id/TVnohp"
-                    android:text="No HP"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
-
-
-
-            </LinearLayout>
-
-
-
+            <TextView
+                android:id="@+id/TVnohp"
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:text="No HP"/>
 
 
         </LinearLayout>
 
 
-    </android.support.v7.widget.CardView>
+    </LinearLayout>
 
 
+</android.support.v7.widget.CardView>
 
-</LinearLayout>
+

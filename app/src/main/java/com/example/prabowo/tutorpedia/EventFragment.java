@@ -86,9 +86,9 @@ public class EventFragment extends Fragment {
                 for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
                     //long max = dataSnapshot.getChildrenCount();
                     //for(int i = 1; i<=max ; i++){
-                    ListEventItemBeneran listItem = new ListEventItemBeneran(postSnapshot.child("desc").getValue().toString(),
-                            postSnapshot.child("head").getValue().toString(),
+                    ListEventItemBeneran listItem = new ListEventItemBeneran(postSnapshot.child("head").getValue().toString(),
                             postSnapshot.child("img").getValue().toString(),
+                            postSnapshot.child("desc").getValue().toString(),
                             postSnapshot.child("nomor").getValue().toString(),
                             postSnapshot.child("waktu").getValue().toString());
                     listItems.add(listItem);
