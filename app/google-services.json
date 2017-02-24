@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "501641179756",
+    "firebase_url": "https://tutorpedia-17ba0.firebaseio.com",
+    "project_id": "tutorpedia-17ba0",
+    "storage_bucket": "tutorpedia-17ba0.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:501641179756:android:99215c2f09681c51",
+        "android_client_info": {
+          "package_name": "com.example.prabowo.tutorpedia"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "501641179756-r7ekdktc6tkutagkotvnajse98nq1vd2.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDEvtDBUNB_ngmhcBLvQxITKIQlmmMG97M"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "501641179756-r7ekdktc6tkutagkotvnajse98nq1vd2.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

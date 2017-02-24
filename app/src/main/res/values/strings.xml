@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">Tutorpedia</string>
+    <string name="title_activity_main">MainActivity</string>
+    <string name="action_settings">Settings</string>
+    <string name="section_format">Hello World from section: %1$d</string>
+    <string name="text_home">BERANDA</string>
+    <string name="text_event">EVENT</string>
+    <string name="text_find">CARI TUTOR</string>
+    <string name="text_account">AKUN</string>
+    <string name="Soal">SOAL</string>
+    <string name="Deskripsi">DESKRIPSI</string>
+</resources>
