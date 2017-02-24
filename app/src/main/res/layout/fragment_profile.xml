@@ -4,24 +4,25 @@
                 android:id="@+id/activity_profile"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:paddingLeft="50dp"
-                android:paddingRight="50dp"
-                android:paddingTop="20dp"
-                tools:context="com.example.prabowo.tutorpedia.ProfileActivity">
+
+                tools:context="com.example.prabowo.tutorpedia.MainActivity">
+
+    <include
+        android:id="@+id/toolbar"
+        layout="@layout/toolbar_main"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+
 
 
     <LinearLayout
+        android:layout_below="@id/toolbar"
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="100dp"
         android:layout_alignParentTop="true"
         android:layout_alignParentStart="true">
-
-        <ImageView
-            android:src="@drawable/login"
-            android:id="@+id/IVprofile"
-            android:layout_width="95dp"
-            android:layout_height="95dp" />
 
         <Button
             android:textSize="5pt"
@@ -33,6 +34,7 @@
     </LinearLayout>
 
     <LinearLayout
+        android:layout_below="@id/toolbar"
         android:layout_marginTop="120dp"
         android:orientation="vertical"
         android:layout_width="match_parent"
@@ -93,6 +95,15 @@
             android:layout_height="wrap_content"
             android:id="@+id/BTlogout" />
     </LinearLayout>
+
+    <ImageView
+        android:src="@drawable/login"
+        android:id="@+id/IVprofile"
+        android:layout_width="95dp"
+        android:layout_height="95dp"
+        android:layout_marginTop="18dp"
+        android:layout_below="@+id/toolbar"
+        android:layout_alignParentStart="true"/>
 
 
 </RelativeLayout>

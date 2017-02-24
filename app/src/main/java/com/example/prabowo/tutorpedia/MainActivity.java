@@ -6,6 +6,7 @@ import android.support.annotation.IdRes;
 import android.support.v7.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 
 
 import com.roughike.bottombar.BottomBar;
@@ -23,6 +24,7 @@ public class MainActivity extends AppCompatActivity {
         if (savedInstanceState == null) {
             HomeFragment homeFragment = new HomeFragment();
             getSupportFragmentManager().beginTransaction().replace(R.id.container, homeFragment).addToBackStack(null).commit();
+
 
             BottomBar bottomBar = (BottomBar) findViewById(R.id.bottomBar);
             bottomBar.setOnTabSelectListener(new OnTabSelectListener() {
