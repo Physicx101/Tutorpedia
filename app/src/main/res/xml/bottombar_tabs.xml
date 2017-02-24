@@ -1,0 +1,26 @@
+<tabs>
+    <tab
+        id="@+id/tab_home"
+        icon="@drawable/ic_home_black_24dp"
+        title="BERANDA"
+        activeColor="#FFFF"
+        barColorWhenSelected="#6666cb"/>
+    <tab
+        id="@+id/tab_event"
+        icon="@drawable/ic_reorder_black_24dp"
+        title="EVENT"
+        activeColor="#FFFF"
+        barColorWhenSelected="#6666cb"/>
+    <tab
+        id="@+id/tab_find"
+        icon="@drawable/ic_search_black_24dp"
+        title="CARI TUTOR"
+        activeColor="#FFFF"
+        barColorWhenSelected="#6666cb"/>
+    <tab
+        id="@+id/tab_account"
+        icon="@drawable/ic_account_circle_black_24dp"
+        title="AKUN"
+        activeColor="#FFFF"
+        barColorWhenSelected="#6666cb"/>
+</tabs>
