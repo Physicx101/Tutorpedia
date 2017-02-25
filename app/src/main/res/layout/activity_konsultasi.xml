@@ -8,10 +8,15 @@
     tools:context="com.example.prabowo.tutorpedia.Konsultasi">
 
     <android.support.v7.widget.RecyclerView
-        android:paddingBottom="50dp"
+        android:paddingBottom="8dp"
+        android:paddingTop="8dp"
+        android:paddingRight="8dp"
+        android:paddingLeft="8dp"
         android:id="@+id/recycleViewKonsultasi"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"></android.support.v7.widget.RecyclerView>
+        android:layout_height="match_parent"
+        android:clipToPadding="false">
+    </android.support.v7.widget.RecyclerView>
 
 
 </RelativeLayout>
