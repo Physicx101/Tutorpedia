@@ -3,12 +3,14 @@ package com.example.prabowo.tutorpedia;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.LinearLayout;
 
 import com.google.firebase.database.DataSnapshot;
@@ -20,21 +22,18 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Konsultasi extends AppCompatActivity {
+public class Konsultasi extends AppCompatActivity implements View.OnClickListener {
 
     public String Matkul;
     public String Jenis;
     public static String a,b;
-
-
-
-
 
     private FirebaseDatabase eventfirebasedatabase;
     private RecyclerView recyclerView;
     private RecyclerView.Adapter adapter;
     private LinearLayout linear;
     private LinearLayoutManager linearLayoutManager;
+    private FloatingActionButton fab;
 
 
 
@@ -59,16 +58,14 @@ public class Konsultasi extends AppCompatActivity {
         setContentView(R.layout.activity_konsultasi);
 
 
-            Bundle extras = getIntent().getExtras();
-            Bundle extras2=getIntent().getExtras();
 
 
-            a = extras.getString("Matkul");
-            b = extras2.getString("Jenis");
+        Bundle extras = getIntent().getExtras();
+        Bundle extras2=getIntent().getExtras();
 
 
-
-
+        a = extras.getString("Matkul");
+        b = extras2.getString("Jenis");
 
         recyclerView = (RecyclerView) findViewById(R.id.recycleViewKonsultasi);
         recyclerView.setHasFixedSize(true);
@@ -80,6 +77,8 @@ public class Konsultasi extends AppCompatActivity {
 
         listItems = new ArrayList<>();
 
+        fab = (FloatingActionButton) findViewById(R.id.fabkonsul);
+        fab.setOnClickListener(this);
 
 
 
@@ -87,30 +86,13 @@ public class Konsultasi extends AppCompatActivity {
 
     }
 
-
-
-
-
-
-
-
-
-
-
     public void tambahInfo() {
-
 
 
         Bundle extras = getIntent().getExtras();
         Matkul = extras.getString("Matkul");
         Bundle extras2=getIntent().getExtras();
         Jenis = extras2.getString("Jenis");
-
-
-
-
-
-
 
         DatabaseReference event = mRootref.child(Jenis).child(Matkul);
         event.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -145,7 +127,20 @@ public class Konsultasi extends AppCompatActivity {
     }
 
 
+    @Override
+    public void onClick(View v) {
+        if(v == fab){
+            Bundle extras = getIntent().getExtras();
+            Matkul = extras.getString("Matkul");
 
+            Intent intent = new Intent(Konsultasi.this,FormTambahKonsultasi.class);
+            intent.putExtra("Matkul",Matkul);
+            startActivity(intent);
 
+        }
 
+    }
 }
+
+
+

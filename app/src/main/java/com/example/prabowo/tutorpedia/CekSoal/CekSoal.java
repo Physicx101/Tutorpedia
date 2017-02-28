@@ -22,6 +22,7 @@ public class CekSoal extends AppCompatActivity {
     public static double score = 0;
     public static  int selesai = 0;
     public static String NilaiAkhir;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

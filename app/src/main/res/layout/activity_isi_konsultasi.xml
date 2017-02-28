@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/activity_list_item_isi_diskusi"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context="com.example.prabowo.tutorpedia.IsiKonsultasi">
+                xmlns:tools="http://schemas.android.com/tools"
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                android:id="@+id/activity_list_item_isi_diskusi"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                tools:context="com.example.prabowo.tutorpedia.IsiKonsultasi">
 
     <LinearLayout
         android:orientation="vertical"
@@ -64,66 +64,55 @@
         </LinearLayout>
 
         <LinearLayout
+            android:orientation="vertical"
             android:layout_weight="1"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
-            <android.support.v7.widget.CardView
-                android:layout_margin="@dimen/activity_horizontal_margin"
+
+            <LinearLayout
+                android:layout_weight="1"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="match_parent">
 
-                <LinearLayout
-                    android:id="@+id/LLayoutisidiskusi"
-                    android:orientation="horizontal"
+                <ListView
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent">
+                    android:layout_height="match_parent"
+                    android:layout_below="@+id/textView"
+                    android:layout_alignParentStart="true"
+                    android:layout_marginStart="14dp"
+                    android:id="@+id/demooListView" />
 
-                    <LinearLayout
-                        android:orientation="vertical"
-                        android:layout_weight="1"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent">
-
-                        <ImageView
-                            android:background="#000000"
-                            android:id="@+id/IVkomenisidiskusi"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent" />
-
-                    </LinearLayout>
+            </LinearLayout>
 
 
 
+            <LinearLayout
+                android:layout_weight="6"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/colorPrimary"
+                android:gravity="bottom">
 
-                    <LinearLayout
-                        android:layout_weight="1"
-                        android:padding="@dimen/activity_horizontal_margin"
-                        android:layout_width="match_parent"
-                        android:orientation="vertical"
-                        android:layout_height="wrap_content">
+                <EditText
+                    android:id="@+id/ETtambahkomentar"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textColorHint="#CFD8DC"
+                    android:textColor="#CFD8DC"
+                    android:hint="Tulis komentar"
+                    android:paddingLeft="16dp"/>
 
+                <ImageView
+                    android:id="@+id/BTmasukkankomentar"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="5"
+                    android:padding="4dp"
+                    android:src="@android:drawable/ic_menu_send" />
 
-                        <TextView
-                            android:id="@+id/TVkomenheadisidiskusi"
-                            android:text="Heading"
-                            android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content" />
-
-                        <TextView
-                            android:id="@+id/TVkomendescisidiskusi"
-                            android:text="Description"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content" />
-
-
-                    </LinearLayout>
-
-
-
-                </LinearLayout>
-
-            </android.support.v7.widget.CardView>
+            </LinearLayout>
 
         </LinearLayout>
 

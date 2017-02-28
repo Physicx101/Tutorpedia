@@ -48,6 +48,7 @@ public class Tab1Ipa extends Fragment implements View.OnClickListener {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getActivity().getApplicationContext(), Transisi.class);
+                intent.putExtra("Matkul","Matematika");
                 startActivity(intent);
             }
         });

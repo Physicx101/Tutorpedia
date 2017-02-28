@@ -196,7 +196,7 @@
         android:layout_marginRight="16dp"
         android:layout_toEndOf="@+id/BTgetcv"
         android:id="@+id/floatingActionButton"
-        app:fab_type="normal"/>
+        app:fabSize="normal"/>
 
 
 </RelativeLayout>

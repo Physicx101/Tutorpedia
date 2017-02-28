@@ -33,7 +33,9 @@
         <activity android:name=".Transisi" />
         <activity android:name=".IsiKonsultasi"/>
         <activity android:name=".Soal" />
-        <activity android:name=".CekSoal.CekSoal"></activity>
+        <activity android:name=".CekSoal.CekSoal" />
+        <activity android:name=".FormTambahKonsultasi">
+        </activity>
     </application>
 
 </manifest>
