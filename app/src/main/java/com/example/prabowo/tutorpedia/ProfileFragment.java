@@ -58,7 +58,7 @@ public class ProfileFragment extends android.support.v4.app.Fragment implements 
 
         TVuseremail= (TextView) view.findViewById(R.id.TVuseremail);
 
-        TVuseremail.setText("Email anda : " + user.getEmail() );
+        //TVuseremail.setText("Email anda : " + user.getEmail() );
         BTlogout = (Button) view.findViewById(R.id.BTlogout);
 
         BTlogout.setOnClickListener(this);

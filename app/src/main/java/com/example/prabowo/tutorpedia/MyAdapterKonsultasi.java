@@ -52,9 +52,9 @@ public class MyAdapterKonsultasi extends RecyclerView.Adapter<MyAdapterKonsultas
 
         holder.TVheadkonsultasi.setText(listItem.getJudulkonsultasi());
         holder.TVdesckonsultasi.setText(listItem.getDeskripsikonsultasi());
-        Picasso.with(context)
+        /*Picasso.with(context)
                 .load(listItem.getImageUrlkonsultasi())
-                .into(holder.IVgambarkonsultasi);
+                .into(holder.IVgambarkonsultasi);*/
 
     }
 
