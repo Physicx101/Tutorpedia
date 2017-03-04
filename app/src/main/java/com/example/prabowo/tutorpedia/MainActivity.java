@@ -44,7 +44,7 @@ public class MainActivity extends AppCompatActivity {
                             getSupportFragmentManager().beginTransaction().replace(R.id.container, findFragment).addToBackStack(null).commit();
                             break;
                         case R.id.tab_account:
-                            ProfileFragment profileFragment = new ProfileFragment();
+                            ProfileTestFragment profileFragment = new ProfileTestFragment();
                             getSupportFragmentManager().beginTransaction().replace(R.id.container, profileFragment).addToBackStack(null).commit();
                             break;
                     }

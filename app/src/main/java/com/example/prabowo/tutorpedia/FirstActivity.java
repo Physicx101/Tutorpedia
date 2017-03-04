@@ -57,7 +57,7 @@ public class FirstActivity extends AppCompatActivity implements View.OnClickList
 
         String localTime = date.format(currentLocalTime);
 
-        //ListItem listItem = new ListItem(judul,desc,"https://image.ibb.co/fuP3yv/headbar.png",localTime);
+        //ListItemTutor listItem = new ListItemTutor(judul,desc,"https://image.ibb.co/fuP3yv/headbar.png",localTime);
         //databaseReference.child("post").setValue(listItem);
         Toast.makeText(this,"Berhasil",Toast.LENGTH_LONG).show();
 

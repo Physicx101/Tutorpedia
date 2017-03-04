@@ -32,7 +32,7 @@ public class FindFragment extends Fragment implements View.OnClickListener {
     int recyclerItemPosition;
     DatabaseReference mRootref = FirebaseDatabase.getInstance().getReference();
 
-    private List<ListItem> listItems;
+    private List<ListItemTutor> mListItemTutors;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -47,7 +47,7 @@ public class FindFragment extends Fragment implements View.OnClickListener {
         linearLayoutManager.setReverseLayout(true);
         Toolbar toolbar = (Toolbar) getActivity().findViewById(R.id.toolbar);
 
-        listItems = new ArrayList<>();
+        mListItemTutors = new ArrayList<>();
         tambahInfo();
 
         return view;
@@ -73,19 +73,19 @@ public class FindFragment extends Fragment implements View.OnClickListener {
                 for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
                     //long max = dataSnapshot.getChildrenCount();
                     //for(int i = 1; i<=max ; i++){
-                    ListItem listItem = new ListItem(postSnapshot.child("nama").getValue().toString(),
+                    ListItemTutor listItemTutor = new ListItemTutor(postSnapshot.child("nama").getValue().toString(),
                             postSnapshot.child("tanggallahir").getValue().toString(),
                             postSnapshot.child("img").getValue().toString(),
                             postSnapshot.child("lokasi").getValue().toString(),
                             postSnapshot.child("kontak").getValue().toString(),
                             postSnapshot.child("deskripsi").getValue().toString(),
                             postSnapshot.child("linkcv").getValue().toString());
-                    listItems.add(listItem);
+                    mListItemTutors.add(listItemTutor);
 
 
                 }
 
-                adapter = new MyAdapter(listItems, getActivity().getApplicationContext());
+                adapter = new AdapterTutor(mListItemTutors, getActivity().getApplicationContext());
                 recyclerView.setAdapter(adapter);
 
 

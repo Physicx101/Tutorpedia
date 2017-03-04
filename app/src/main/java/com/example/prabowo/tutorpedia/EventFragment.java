@@ -1,9 +1,7 @@
 package com.example.prabowo.tutorpedia;
 
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
@@ -12,7 +10,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
-import com.example.prabowo.tutorpedia.CekSoal.CekSoal;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -57,12 +54,12 @@ public class EventFragment extends Fragment {
         if (CekSoal.selesai==0) {
             ListEventItemBeneran sikat = new ListEventItemBeneran("Matematika SMA", "http://i.imgur.com/cNt6sqyh.jpg", "Jumlah : 40 Soal", "Waktu  : 90 Menit", "Nilai     : Belum Dikerjakan");
             listItems.add(0, sikat);
-            adapter = new MyAdapterEventBeneran(listItems, getActivity().getApplicationContext());
+            adapter = new AdapterEvent(listItems, getActivity().getApplicationContext());
             recyclerView.setAdapter(adapter);
         } else {
             ListEventItemBeneran sikat = new ListEventItemBeneran("Matematika SMA", "http://i.imgur.com/cNt6sqyh.jpg", "Jumlah : 40 Soal", "Waktu  : 90 Menit","Nilai     : "+CekSoal.NilaiAkhir);
             listItems.add(0, sikat);
-            adapter = new MyAdapterEventBeneran(listItems, getActivity().getApplicationContext());
+            adapter = new AdapterEvent(listItems, getActivity().getApplicationContext());
             recyclerView.setAdapter(adapter);
         }*/
         listItems = new ArrayList<>();
@@ -98,7 +95,7 @@ public class EventFragment extends Fragment {
 
                 }
 
-                adapter = new MyAdapterEventBeneran(listItems, getActivity().getApplicationContext());
+                adapter = new AdapterEvent(listItems, getActivity().getApplicationContext());
                 recyclerView.setAdapter(adapter);
 
 

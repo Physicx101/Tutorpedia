@@ -1,17 +1,13 @@
 package com.example.prabowo.tutorpedia;
 
-import android.app.Fragment;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -19,8 +15,6 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-
-import java.util.ArrayList;
 
 /**
  * Created by Bogi on 19-Feb-17.
@@ -44,7 +38,7 @@ public class ProfileFragment extends android.support.v4.app.Fragment implements 
 
         if (firebaseAuth.getCurrentUser() == null){
             getActivity().finish();
-            startActivity(new Intent(this.getActivity(),Login.class));
+            startActivity(new Intent(this.getActivity(),LoginActivity.class));
         }
 
         databaseReference = FirebaseDatabase.getInstance().getReference();
@@ -89,7 +83,7 @@ public class ProfileFragment extends android.support.v4.app.Fragment implements 
 
             firebaseAuth.signOut();
             getActivity().finish();
-            startActivity(new Intent(this.getActivity(),Login.class));}
+            startActivity(new Intent(this.getActivity(),LoginActivity.class));}
 
         if(v == BTsave){
             saveUserInfo();

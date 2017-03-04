@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginLeft="8dp"
+    android:layout_marginRight="8dp"
+    android:layout_marginTop="4dp"
+    android:layout_marginBottom="4dp"
+    android:elevation="4dp"
+    app:cardCornerRadius="2dp"
+    app:cardPreventCornerOverlap="false"
+    app:cardUseCompatPadding="true">
+
+    <LinearLayout
+        android:layout_height="match_parent"
+        android:layout_width="match_parent"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_height="match_parent"
+            android:layout_weight="2"
+            android:layout_width="match_parent"
+            android:orientation="vertical">
+
+            <ImageView
+                android:background="#000000"
+                android:id="@+id/IVgambar"
+                android:layout_height="match_parent"
+                android:layout_width="match_parent"/>
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:id="@+id/LLayout"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_width="match_parent"
+            android:orientation="vertical"
+            android:padding="@dimen/activity_horizontal_margin">
+
+            <TextView
+                android:id="@+id/TVdate"
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:text="Hari"
+                android:layout_marginBottom="4dp"
+                android:layout_marginLeft="8dp"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"/>
+
+
+            <TextView
+                android:id="@+id/TVhead"
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:text="Heading"
+                android:layout_marginBottom="4dp"
+                android:layout_marginLeft="8dp"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Title"/>
+
+            <TextView
+                android:id="@+id/TVdesc"
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:layout_marginBottom="4dp"
+                android:layout_marginLeft="8dp"
+                android:text="Description"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"/>
+
+            <TextView
+                android:id="@+id/TVnohp"
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:layout_marginLeft="8dp"
+                android:text="No HP"/>
+
+
+
+
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+
+</android.support.v7.widget.CardView>
+
+

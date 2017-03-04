@@ -16,10 +16,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".FirstScreen"
+        <activity android:name=".SignUpActivity"
                   android:theme="@style/AppTheme.NoActionBar"
                   android:windowSoftInputMode="stateVisible|adjustPan"/>
-        <activity android:name=".Login"
+        <activity android:name=".LoginActivity"
                   android:theme="@style/AppTheme.NoActionBar"
                   android:windowSoftInputMode="stateVisible|adjustPan"/>
         <activity android:name=".FirstActivity" />

@@ -1,19 +1,14 @@
 package com.example.prabowo.tutorpedia;
 
 import android.content.Intent;
-import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.design.widget.BottomNavigationView;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -28,7 +23,7 @@ import java.util.List;
 public class IsiEvent extends AppCompatActivity implements View.OnClickListener{
     private ImageView IVisievent;
     int posisiItemRecycler;
-    private List<ListItem> listItems;
+    private List<ListItemTutor> mListItemTutors;
     private TextView TVisieventnama;
     private TextView TVisievent;
     private TextView TVisieventdesc;
@@ -91,14 +86,14 @@ public class IsiEvent extends AppCompatActivity implements View.OnClickListener{
 
                     System.out.println("There are " + snapshot.getChildrenCount() + " shout messages");
                     for (DataSnapshot postSnapshot : snapshot.getChildren()) {
-                        ListItem listItem = new ListItem(postSnapshot.child("nama").getValue().toString(),
+                        ListItemTutor listItemTutor = new ListItemTutor(postSnapshot.child("nama").getValue().toString(),
                                 postSnapshot.child("tanggallahir").getValue().toString(),
                                 postSnapshot.child("img").getValue().toString(),
                                 postSnapshot.child("lokasi").getValue().toString(),
                                 postSnapshot.child("kontak").getValue().toString(),
                                 postSnapshot.child("deskripsi").getValue().toString(),
                                 postSnapshot.child("linkcv").getValue().toString());
-                       // listItems.add(listItem);
+                       // mListItemTutors.add(listItemTutor);
 //                    System.out.println(i + " " + post.getTitle() + " - " + post.getUsername());
 //                    post.getDate();
 //                    post.getTime();
@@ -112,15 +107,15 @@ public class IsiEvent extends AppCompatActivity implements View.OnClickListener{
 
 //
 
-                            TVisieventnama.setText(listItem.getNama());
-                            TVisieventasal.setText(listItem.getAsal());
-                            TVisieventlahir.setText(listItem.getTanggallahir());
-                            TVisieventdesc.setText(listItem.getDeskripsi());
-                            TVisieventkontak.setText(listItem.getNohp());
+                            TVisieventnama.setText(listItemTutor.getNama());
+                            TVisieventasal.setText(listItemTutor.getAsal());
+                            TVisieventlahir.setText(listItemTutor.getTanggallahir());
+                            TVisieventdesc.setText(listItemTutor.getDeskripsi());
+                            TVisieventkontak.setText(listItemTutor.getNohp());
                             Picasso.with(getApplicationContext())
-                                    .load(listItem.getImageUrl())
+                                    .load(listItemTutor.getImageUrl())
                                     .into(IVisievent);
-                            CV = listItem.getLinkcv().toString();
+                            CV = listItemTutor.getLinkcv().toString();
 
 
 
