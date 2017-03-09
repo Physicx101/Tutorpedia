@@ -29,12 +29,14 @@ public class ProfileTestFragment extends Fragment {
     String[] titleprofile = new String[] {"Ringkasan Akun", "Pesan Masuk", "Riwayat Tes", "Pengaturan", "Bantuan"};
 
     int[] imageprofile = new int[] {R.drawable.ic_account_circle_black_24dp, R.drawable.ic_mail_black_24dp, R.drawable.ic_class_black_24dp
-    , R.drawable.ic_settings_black_24dp, R.drawable.ic_help_black_24dp};
+            , R.drawable.ic_settings_black_24dp, R.drawable.ic_help_black_24dp};
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.test_profile, container, false);
         firebaseAuth = FirebaseAuth.getInstance();
+
+        Toolbar toolbar = (Toolbar) getActivity().findViewById(R.id.toolbar);
 
         List<HashMap<String, String>> list = new ArrayList<HashMap<String, String>>();
 

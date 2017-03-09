@@ -10,6 +10,7 @@
         android:layout_height="50dp"
         android:layout_marginTop="15dp"
         android:layout_gravity="top"
+        android:elevation="8dp"
         android:id="@+id/reviewAvatar"
         app:srcCompat="@drawable/avatar"/>
 
