@@ -34,7 +34,9 @@
         <activity android:name=".IsiKonsultasi"/>
         <activity android:name=".Soal" />
         <activity android:name=".CekSoal.CekSoal" />
-        <activity android:name=".FormTambahKonsultasi">
+        <activity android:name=".FormTambahKonsultasi"
+                  android:theme="@style/Theme.AppCompat.Light.Dialog.Alert"
+                    android:label="Tambah Konsultasi">
         </activity>
     </application>
 
