@@ -57,7 +57,6 @@ public class AdapterEvent extends RecyclerView.Adapter<AdapterEvent.ViewHolder> 
             Picasso.with(context)
                     .load(listItem.getImageUrleventbeneran())
                     .into(holder.IVgambareventBeneran);
-
         }
 
         @Override

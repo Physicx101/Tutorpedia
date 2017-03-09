@@ -41,31 +41,29 @@ public class EventFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_event, container, false);
 
-        recyclerView = (RecyclerView) view.findViewById(R.id.recycleVieweventBeneran);
-        recyclerView.setHasFixedSize(true);
+        Toolbar toolbar = (Toolbar) getActivity().findViewById(R.id.toolbar);
+
+        return view;
+    }
+
+    @Override
+    public void onViewCreated(View view, Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
         linearLayoutManager = new LinearLayoutManager(this.getActivity());
-        recyclerView.setLayoutManager(linearLayoutManager);
         linear = (LinearLayout) view.findViewById(R.id.LLayouteventBeneran);
         linearLayoutManager.setStackFromEnd(true);
         linearLayoutManager.setReverseLayout(true);
-        Toolbar toolbar = (Toolbar) getActivity().findViewById(R.id.toolbar);
 
-        /*listItems = new ArrayList<>();
-        if (CekSoal.selesai==0) {
-            ListEventItemBeneran sikat = new ListEventItemBeneran("Matematika SMA", "http://i.imgur.com/cNt6sqyh.jpg", "Jumlah : 40 Soal", "Waktu  : 90 Menit", "Nilai     : Belum Dikerjakan");
-            listItems.add(0, sikat);
-            adapter = new AdapterEvent(listItems, getActivity().getApplicationContext());
-            recyclerView.setAdapter(adapter);
-        } else {
-            ListEventItemBeneran sikat = new ListEventItemBeneran("Matematika SMA", "http://i.imgur.com/cNt6sqyh.jpg", "Jumlah : 40 Soal", "Waktu  : 90 Menit","Nilai     : "+CekSoal.NilaiAkhir);
-            listItems.add(0, sikat);
-            adapter = new AdapterEvent(listItems, getActivity().getApplicationContext());
-            recyclerView.setAdapter(adapter);
-        }*/
+        recyclerView = (RecyclerView) view.findViewById(R.id.recycleVieweventBeneran);
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setLayoutManager(linearLayoutManager);
+
+
+
         listItems = new ArrayList<>();
         tambahInfo();
 
-        return view;
     }
 
 
@@ -92,14 +90,10 @@ public class EventFragment extends Fragment {
                             postSnapshot.child("waktu").getValue().toString());
                     listItems.add(listItem);
 
+                    adapter = new AdapterEvent(listItems, getActivity());
+                    recyclerView.setAdapter(adapter);
 
                 }
-
-                adapter = new AdapterEvent(listItems, getActivity().getApplicationContext());
-                recyclerView.setAdapter(adapter);
-
-
-
             }
 
             @Override

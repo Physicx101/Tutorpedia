@@ -9,9 +9,14 @@
                 android:layout_height="match_parent"
                 tools:context="com.example.prabowo.tutorpedia.IsiEvent">
 
-
+    <include
+        android:id="@+id/toolbar"
+        layout="@layout/toolbar_main"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
 
     <Button
+        android:layout_below="@+id/toolbar"
         android:id="@+id/BTgetcv"
         android:text="Get CV"
         android:layout_width="wrap_content"
@@ -25,7 +30,8 @@
         android:paddingBottom="60dp"
         android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:layout_below="@id/toolbar">
 
         <LinearLayout
             android:background="#000000"
@@ -196,6 +202,7 @@
         android:layout_marginRight="16dp"
         android:layout_toEndOf="@+id/BTgetcv"
         android:id="@+id/floatingActionButton"
+        android:layout_below="@id/toolbar"
         app:fabSize="normal"/>
 
 

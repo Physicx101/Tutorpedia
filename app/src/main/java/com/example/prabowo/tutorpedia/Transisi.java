@@ -3,6 +3,7 @@ package com.example.prabowo.tutorpedia;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.ImageView;
 
@@ -16,12 +17,25 @@ public class Transisi extends AppCompatActivity implements View.OnClickListener 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_transisi);
 
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
+
         IVtransisikonsultasi = (ImageView) findViewById(R.id.IVtransisikonsultasi);
         IVtransisimateri = (ImageView) findViewById(R.id.IVtransisimateri);
         IVtransisimateri.setOnClickListener(this);
         IVtransisikonsultasi.setOnClickListener(this);
 
 
+    }
+
+    @Override
+    public boolean onSupportNavigateUp() {
+        onBackPressed();
+        return true;
     }
 
 

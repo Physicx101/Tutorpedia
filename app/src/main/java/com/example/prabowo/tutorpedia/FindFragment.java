@@ -2,6 +2,7 @@ package com.example.prabowo.tutorpedia;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
@@ -38,19 +39,28 @@ public class FindFragment extends Fragment implements View.OnClickListener {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_find, container, false);
 
-        recyclerView = (RecyclerView) view.findViewById(R.id.recycleView);
-        recyclerView.setHasFixedSize(true);
+        Toolbar toolbar = (Toolbar) getActivity().findViewById(R.id.toolbar);
+
+        return view;
+    }
+
+    @Override
+    public void onViewCreated(View view, Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
         linearLayoutManager = new LinearLayoutManager(this.getActivity());
-        recyclerView.setLayoutManager(linearLayoutManager);
         linear = (LinearLayout) view.findViewById(R.id.LLayout);
         linearLayoutManager.setStackFromEnd(true);
         linearLayoutManager.setReverseLayout(true);
-        Toolbar toolbar = (Toolbar) getActivity().findViewById(R.id.toolbar);
+
+        recyclerView = (RecyclerView) view.findViewById(R.id.recycleView);
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setLayoutManager(linearLayoutManager);
+
 
         mListItemTutors = new ArrayList<>();
         tambahInfo();
 
-        return view;
     }
 
     @Override
@@ -67,7 +77,6 @@ public class FindFragment extends Fragment implements View.OnClickListener {
         DatabaseReference event =mRootref.child("Mentor");
         event.addListenerForSingleValueEvent(new ValueEventListener() {
 
-
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
@@ -83,13 +92,10 @@ public class FindFragment extends Fragment implements View.OnClickListener {
                     mListItemTutors.add(listItemTutor);
 
 
+                    adapter = new AdapterTutor(mListItemTutors, getActivity());
+                    recyclerView.setAdapter(adapter);
+
                 }
-
-                adapter = new AdapterTutor(mListItemTutors, getActivity().getApplicationContext());
-                recyclerView.setAdapter(adapter);
-
-
-
             }
 
             @Override
