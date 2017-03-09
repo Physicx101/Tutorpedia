@@ -5,55 +5,54 @@
     android:paddingLeft="16dp"
     android:paddingRight="16dp"
     android:paddingBottom="100dp"
-    tools:context="com.example.prabowo.tutorpedia.MainActivity$PlaceholderFragment">
+    tools:context="com.example.prabowo.tutorpedia.MainActivity" >
+
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
         <LinearLayout
-            android:layout_weight="1"
             android:orientation="horizontal"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="250dp">
 
             <ImageView
-                android:paddingRight="10dp"
+                android:paddingRight="4dp"
                 android:id="@+id/IVmatips"
                 android:src="@drawable/matematika"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"/>
 
             <ImageView
-                android:paddingLeft="10dp"
+                android:paddingLeft="4dp"
                 android:id="@+id/IVsos"
                 android:src="@drawable/sosiologi"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"/>
 
         </LinearLayout>
 
         <LinearLayout
-            android:layout_weight="1"
             android:orientation="horizontal"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="200dp">
 
             <ImageView
-                android:paddingRight="10dp"
+                android:paddingRight="4dp"
                 android:id="@+id/IVeko"
                 android:src="@drawable/ekonomi"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"/>
 
             <ImageView
-                android:paddingLeft="10dp"
+                android:paddingLeft="4dp"
                 android:id="@+id/IVgeo"
                 android:src="@drawable/geografi"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"/>
         </LinearLayout>

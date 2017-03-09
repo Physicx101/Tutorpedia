@@ -10,6 +10,7 @@ import android.content.res.Resources;
 import android.graphics.Rect;
 import android.media.Image;
 import android.os.Bundle;
+import android.provider.ContactsContract;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.DefaultItemAnimator;
@@ -30,6 +31,7 @@ import java.util.List;
 
 public class Tab1Ipa extends Fragment implements View.OnClickListener {
     private ImageView IVmatipa;
+    private ImageView IVbio;
 
 
 
@@ -42,8 +44,8 @@ public class Tab1Ipa extends Fragment implements View.OnClickListener {
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.tab1ipa, container, false);
-        IVmatipa = (ImageView) rootView.findViewById(R.id.IVmatipa);
+        View view = inflater.inflate(R.layout.tab1ipa, container, false);
+        IVmatipa = (ImageView) view.findViewById(R.id.IVmatipa);
         IVmatipa.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -52,13 +54,17 @@ public class Tab1Ipa extends Fragment implements View.OnClickListener {
                 startActivity(intent);
             }
         });
+        IVbio = (ImageView) view.findViewById(R.id.IVbio);
+        IVbio.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getActivity().getApplicationContext(), Transisi.class);
+                intent.putExtra("Matkul", "Biologi");
+                startActivity(intent);
+            }
+        });
 
-
-
-
-
-
-        return rootView;
+        return view;
 
 
 
