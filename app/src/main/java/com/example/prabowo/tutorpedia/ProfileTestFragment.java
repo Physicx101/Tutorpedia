@@ -54,9 +54,17 @@ public class ProfileTestFragment extends Fragment implements View.OnClickListene
     int[] imageprofile = new int[]{R.drawable.ic_account_circle_black_24dp, R.drawable.ic_class_black_24dp
             , R.drawable.ic_help_black_24dp};
 
+
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.test_profile, container, false);
+
+        return view;
+    }
+
+    @Override
+    public void onViewCreated(View view, Bundle savedInstanceState){
         firebaseAuth = FirebaseAuth.getInstance();
         FirebaseUser user = firebaseAuth.getCurrentUser();
 
@@ -65,11 +73,10 @@ public class ProfileTestFragment extends Fragment implements View.OnClickListene
             startActivity(new Intent(this.getActivity(),LoginActivity.class));
         }
 
-        userEmail = (TextView) view.findViewById(R.id.user_email);
-        userName = (TextView) view.findViewById(R.id.user_profile_name);
+        userEmail = (TextView) getActivity().findViewById(R.id.user_email);
+        userName = (TextView) getActivity().findViewById(R.id.user_profile_name);
 
         userEmail.setText(user.getEmail());
-
 
 
         Toolbar toolbar = (Toolbar) getActivity().findViewById(R.id.toolbar);
@@ -124,7 +131,6 @@ public class ProfileTestFragment extends Fragment implements View.OnClickListene
             }
         });
 
-        return view;
     }
 
 
