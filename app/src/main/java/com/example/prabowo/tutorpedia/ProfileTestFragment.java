@@ -47,10 +47,10 @@ public class ProfileTestFragment extends Fragment implements View.OnClickListene
     private String nama;
     DatabaseReference mRootref = FirebaseDatabase.getInstance().getReference();
 
-    String[] titleprofile = new String[] {"Ringkasan Akun", "Pesan Masuk", "Riwayat Tes", "Pengaturan", "Bantuan"};
+    String[] titleprofile = new String[] {"Ringkasan Akun", "Riwayat Tes", "Bantuan"};
 
-    int[] imageprofile = new int[] {R.drawable.ic_account_circle_black_24dp, R.drawable.ic_mail_black_24dp, R.drawable.ic_class_black_24dp
-            , R.drawable.ic_settings_black_24dp, R.drawable.ic_help_black_24dp};
+    int[] imageprofile = new int[] {R.drawable.ic_account_circle_black_24dp, R.drawable.ic_class_black_24dp
+            , R.drawable.ic_help_black_24dp};
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -100,7 +100,7 @@ public class ProfileTestFragment extends Fragment implements View.OnClickListene
 
         List<HashMap<String, String>> list = new ArrayList<HashMap<String, String>>();
 
-        for (int i = 0; i < 5; i++) {
+        for (int i = 0; i < 3; i++) {
             HashMap<String, String> hm = new HashMap<String, String>();
             hm.put("listview_title", titleprofile[i]);
             hm.put("listview_image", Integer.toString(imageprofile[i]));

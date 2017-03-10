@@ -6,6 +6,7 @@
         android:allowBackup="true"
         android:icon="@drawable/login"
         android:supportsRtl="true"
+        android:label="Tutorpedia"
         android:theme="@style/AppTheme.NoActionBar">
         <activity android:name=".SplashScreen"
                   android:theme="@style/AppTheme.NoActionBar">

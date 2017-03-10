@@ -1,59 +1,60 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:paddingLeft="16dp"
-    android:paddingRight="16dp"
-    tools:context="com.example.prabowo.tutorpedia.MainActivity" >
+                xmlns:tools="http://schemas.android.com/tools"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:paddingBottom="40dp"
+                android:paddingLeft="16dp"
+                android:paddingRight="16dp"
+                tools:context="com.example.prabowo.tutorpedia.MainActivity">
 
     <LinearLayout
-        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
         <LinearLayout
-            android:orientation="horizontal"
             android:layout_width="match_parent"
-            android:layout_height="250dp">
+            android:layout_height="200dp"
+            android:orientation="horizontal">
 
             <ImageView
-                android:paddingRight="4dp"
                 android:id="@+id/IVmatips"
-                android:src="@drawable/matematika"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"/>
+                android:layout_weight="1"
+                android:paddingRight="4dp"
+                android:src="@drawable/matematika"/>
 
             <ImageView
-                android:paddingLeft="4dp"
                 android:id="@+id/IVsos"
-                android:src="@drawable/sosiologi"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"/>
+                android:layout_weight="1"
+                android:paddingLeft="4dp"
+                android:src="@drawable/sosiologi"/>
 
         </LinearLayout>
 
         <LinearLayout
-            android:orientation="horizontal"
             android:layout_width="match_parent"
-            android:layout_height="250dp">
+            android:layout_height="200dp"
+            android:orientation="horizontal">
 
             <ImageView
-                android:paddingRight="4dp"
                 android:id="@+id/IVeko"
-                android:src="@drawable/ekonomi"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"/>
+                android:layout_weight="1"
+                android:paddingRight="4dp"
+                android:src="@drawable/ekonomi"/>
 
             <ImageView
-                android:paddingLeft="4dp"
                 android:id="@+id/IVgeo"
-                android:src="@drawable/geografi"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"/>
+                android:layout_weight="1"
+                android:paddingLeft="4dp"
+                android:src="@drawable/geografi"/>
         </LinearLayout>
     </LinearLayout>
 

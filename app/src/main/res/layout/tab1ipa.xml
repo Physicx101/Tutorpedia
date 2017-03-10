@@ -1,61 +1,62 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:paddingLeft="16dp"
-    android:paddingRight="16dp"
-    tools:context="com.example.prabowo.tutorpedia.MainActivity">
+                xmlns:tools="http://schemas.android.com/tools"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:paddingBottom="40dp"
+                android:paddingLeft="16dp"
+                android:paddingRight="16dp"
+                tools:context="com.example.prabowo.tutorpedia.MainActivity">
 
     <LinearLayout
-        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
         <LinearLayout
-            android:orientation="horizontal"
             android:layout_width="match_parent"
-            android:layout_height="250dp">
+            android:layout_height="200dp"
+            android:orientation="horizontal">
 
             <ImageView
-                android:paddingRight="4dp"
                 android:id="@+id/IVmatipa"
-                android:src="@drawable/matematika"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:onClick="buttonIVmatipa"/>
+                android:onClick="buttonIVmatipa"
+                android:paddingRight="4dp"
+                android:src="@drawable/matematika"/>
 
             <ImageView
-                android:paddingLeft="4dp"
                 android:id="@+id/IVbio"
-                android:src="@drawable/biologi"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:onClick="buttonIVmbio"/>
+                android:onClick="buttonIVmbio"
+                android:paddingLeft="4dp"
+                android:src="@drawable/biologi"/>
 
         </LinearLayout>
 
         <LinearLayout
-            android:orientation="horizontal"
             android:layout_width="match_parent"
-            android:layout_height="250dp">
+            android:layout_height="200dp"
+            android:orientation="horizontal">
 
             <ImageView
-                android:paddingRight="4dp"
                 android:id="@+id/IVkimia"
-                android:src="@drawable/kimia"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"/>
+                android:layout_weight="1"
+                android:paddingRight="4dp"
+                android:src="@drawable/kimia"/>
 
             <ImageView
-                android:paddingLeft="4dp"
                 android:id="@+id/IVfisika"
-                android:src="@drawable/fisika"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"/>
+                android:layout_weight="1"
+                android:paddingLeft="4dp"
+                android:src="@drawable/fisika"/>
         </LinearLayout>
     </LinearLayout>
 
