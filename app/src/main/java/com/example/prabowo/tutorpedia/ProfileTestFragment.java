@@ -2,6 +2,7 @@ package com.example.prabowo.tutorpedia;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
@@ -37,6 +38,7 @@ import java.util.List;
 
 public class ProfileTestFragment extends Fragment implements View.OnClickListener {
     private FirebaseAuth firebaseAuth;
+    private FirebaseAuth.AuthStateListener mAuthStateListener;
     private Button BTlogout;
     private DatabaseReference databaseReference;
     private TextView userEmail;
@@ -47,55 +49,30 @@ public class ProfileTestFragment extends Fragment implements View.OnClickListene
     private String nama;
     DatabaseReference mRootref = FirebaseDatabase.getInstance().getReference();
 
-    String[] titleprofile = new String[] {"Ringkasan Akun", "Riwayat Tes", "Bantuan"};
+    String[] titleprofile = new String[]{"Ringkasan Akun", "Riwayat Tes", "Bantuan"};
 
-    int[] imageprofile = new int[] {R.drawable.ic_account_circle_black_24dp, R.drawable.ic_class_black_24dp
+    int[] imageprofile = new int[]{R.drawable.ic_account_circle_black_24dp, R.drawable.ic_class_black_24dp
             , R.drawable.ic_help_black_24dp};
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.test_profile, container, false);
         firebaseAuth = FirebaseAuth.getInstance();
+        FirebaseUser user = firebaseAuth.getCurrentUser();
 
-
-        if (firebaseAuth.getCurrentUser() == null){
+        if (user == null) {
             getActivity().finish();
             startActivity(new Intent(this.getActivity(),LoginActivity.class));
         }
 
-        FirebaseUser user = firebaseAuth.getCurrentUser();
         userEmail = (TextView) view.findViewById(R.id.user_email);
-        userEmail.setText(user.getEmail());
         userName = (TextView) view.findViewById(R.id.user_profile_name);
-        DatabaseReference ref = mRootref.child("User").child(user.getUid()).child("nama");
 
-        ref.addValueEventListener(new ValueEventListener() {
-
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                userName.setText(dataSnapshot.getValue().toString());
-                nama = dataSnapshot.getValue().toString();
-                storage = FirebaseStorage.getInstance();
-                mStorageReference = storage.getReferenceFromUrl("gs://tutorpedia-17ba0.appspot.com/FotoProfil/");
-                StorageReference foto = mStorageReference.child(nama + ".jpg");
-               /* Glide.with(getContext())
-                        .using(new FirebaseImageLoader())
-                        .load(foto)
-                        .into(fotoProfil);*/
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
-        });
-
+        userEmail.setText(user.getEmail());
 
 
 
         Toolbar toolbar = (Toolbar) getActivity().findViewById(R.id.toolbar);
-
-
 
 
         List<HashMap<String, String>> list = new ArrayList<HashMap<String, String>>();
@@ -121,11 +98,35 @@ public class ProfileTestFragment extends Fragment implements View.OnClickListene
             public void onClick(View view) {
                 firebaseAuth.signOut();
                 getActivity().finish();
-                startActivity(new Intent(getActivity(),LoginActivity.class));}
+                startActivity(new Intent(getActivity(), LoginActivity.class));
+            }
+        });
+
+        DatabaseReference ref = mRootref.child("User").child(user.getUid()).child("nama");
+        ref.addValueEventListener(new ValueEventListener() {
+
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                userName.setText(dataSnapshot.getValue().toString());
+                nama = dataSnapshot.getValue().toString();
+                storage = FirebaseStorage.getInstance();
+                mStorageReference = storage.getReferenceFromUrl("gs://tutorpedia-17ba0.appspot.com/FotoProfil/");
+                StorageReference foto = mStorageReference.child(nama + ".jpg");
+               /* Glide.with(getContext())
+                        .using(new FirebaseImageLoader())
+                        .load(foto)
+                        .into(fotoProfil);*/
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
         });
 
         return view;
     }
+
 
     @Override
     public void onClick(View view) {
