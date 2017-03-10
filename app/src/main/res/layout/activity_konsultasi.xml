@@ -9,14 +9,11 @@
         android:id="@+id/toolbar"
         layout="@layout/toolbar_main"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"/>
 
     <android.support.v7.widget.RecyclerView
         android:layout_below="@+id/toolbar"
-        android:paddingBottom="8dp"
-        android:paddingTop="8dp"
-        android:paddingRight="8dp"
-        android:paddingLeft="8dp"
         android:id="@+id/recycleViewKonsultasi"
         android:layout_width="match_parent"
         android:layout_height="match_parent"

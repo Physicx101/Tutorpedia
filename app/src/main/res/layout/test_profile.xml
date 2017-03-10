@@ -46,12 +46,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Nama Pengguna"
-            android:layout_marginTop="8dp"
-            android:layout_marginBottom="4dp"
-            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            android:layout_marginTop="18dp"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large"
             android:textColor="@color/primaryText"
             android:layout_alignTop="@+id/user_profile_photo"
-            android:layout_centerHorizontal="true"/>
+            android:layout_toEndOf="@+id/user_profile_photo"
+            android:layout_marginStart="18dp"/>
 
     </RelativeLayout>
 

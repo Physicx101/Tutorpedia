@@ -31,7 +31,8 @@
             android:theme="@style/AppTheme.NoActionBar"/>
         <activity android:name=".Materi" />
         <activity android:name=".Transisi" />
-        <activity android:name=".IsiKonsultasi"/>
+        <activity android:name=".IsiKonsultasi"
+                  android:windowSoftInputMode="adjustPan"/>
         <activity android:name=".Soal" />
         <activity android:name=".CekSoal.CekSoal" />
         <activity android:name=".FormTambahKonsultasi"

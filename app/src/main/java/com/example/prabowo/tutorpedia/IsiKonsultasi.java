@@ -13,8 +13,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 
-
-
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -26,7 +24,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class IsiKonsultasi extends AppCompatActivity implements View.OnClickListener{
+public class IsiKonsultasi extends AppCompatActivity implements View.OnClickListener {
     private ImageView IVisikonsultasisoal;
     private static int posisiItemRecycler;
     private List<ListItemTutor> mListItemTutors;
@@ -36,13 +34,14 @@ public class IsiKonsultasi extends AppCompatActivity implements View.OnClickList
     private ImageView BTtambahkomentar;
     public static long jumlah;
     private static int filter;
-    String Matkuldis,Jenisdis;
+    String Matkuldis, Jenisdis;
     public static int langkahkomen = 1;
     String CV;
     int i = 0;
     DatabaseReference mRootref = FirebaseDatabase.getInstance().getReference();
     private List<Komentar> komenku = new ArrayList<Komentar>();
-    private DatabaseReference databaseReference;;
+    private DatabaseReference databaseReference;
+    ;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,7 +60,8 @@ public class IsiKonsultasi extends AppCompatActivity implements View.OnClickList
         TVisikonsultasidesc = (TextView) findViewById(R.id.TVisikonsultasidesc);
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
-            posisiItemRecycler = extras.getInt("PosisiItemRecycler");}
+            posisiItemRecycler = extras.getInt("PosisiItemRecycler");
+        }
 
         System.out.print("Urutan ke " + posisiItemRecycler);
         filter = 1;
@@ -79,13 +79,12 @@ public class IsiKonsultasi extends AppCompatActivity implements View.OnClickList
 
                 Komentar klikkomen = komenku.get(position);
                 String Message = " Ini posisi " + position + klikkomen.getKomen();
-                Toast.makeText(IsiKonsultasi.this,Message,Toast.LENGTH_LONG).show();
+                Toast.makeText(IsiKonsultasi.this, Message, Toast.LENGTH_LONG).show();
 
             }
         });
 
     }
-
 
 
     private void populatekomentarlist() {
@@ -97,22 +96,20 @@ public class IsiKonsultasi extends AppCompatActivity implements View.OnClickList
         Jenisdis = extras4.getString("Jenisdis");
 
 
-
-
-
-        DatabaseReference ref = mRootref.child(Jenisdis).child(Matkuldis).child("Post" +(posisiItemRecycler)).child("Komentar");
+        DatabaseReference ref = mRootref.child(Jenisdis).child(Matkuldis).child("Post" + (posisiItemRecycler)).child("Komentar");
 
         ref.addValueEventListener(new ValueEventListener() {
 
             @Override
             public void onDataChange(DataSnapshot snapshot) {
-                if (filter == 1){
+                if (filter == 1) {
                     for (DataSnapshot postSnapshot : snapshot.getChildren()) {
                         komenku.add(new Komentar(postSnapshot.child("pengirim").getValue().toString(),
                                 postSnapshot.child("desc").getValue().toString(),
                                 postSnapshot.child("img").getValue().toString()));
 
-                    }}
+                    }
+                }
 
 
                 populatelistview();
@@ -145,8 +142,8 @@ public class IsiKonsultasi extends AppCompatActivity implements View.OnClickList
         @Override
         public View getView(int position, View convertView, ViewGroup parent) {
             View itemView = convertView;
-            if(itemView == null){
-                itemView = getLayoutInflater().inflate(R.layout.item_view,parent,false);
+            if (itemView == null) {
+                itemView = getLayoutInflater().inflate(R.layout.item_view, parent, false);
             }
             Komentar currentKomentar = komenku.get(position);
             /*ImageView gambarkomen = (ImageView) itemView.findViewById(R.id.IVkomen);
@@ -162,7 +159,6 @@ public class IsiKonsultasi extends AppCompatActivity implements View.OnClickList
         }
 
 
-
     }
 
 
@@ -172,17 +168,14 @@ public class IsiKonsultasi extends AppCompatActivity implements View.OnClickList
 
         Bundle extras3 = getIntent().getExtras();
         Matkuldis = extras3.getString("Matkuldis");
-        Bundle extras4=getIntent().getExtras();
+        Bundle extras4 = getIntent().getExtras();
         Jenisdis = extras4.getString("Jenisdis");
 
-        System.out.print("Dis : " + Matkuldis + Jenisdis );
+        System.out.print("Dis : " + Matkuldis + Jenisdis);
         DatabaseReference ref = mRootref.child(Jenisdis).child(Matkuldis);
 
 
-
         ref.addValueEventListener(new ValueEventListener() {
-
-
 
 
             @Override
@@ -193,7 +186,6 @@ public class IsiKonsultasi extends AppCompatActivity implements View.OnClickList
                     ListItemKonsultasi listItem = new ListItemKonsultasi(postSnapshot.child("judul").getValue().toString(),
                             postSnapshot.child("img").getValue().toString(),
                             postSnapshot.child("deskripsi").getValue().toString());
-
 
 
                     if (i == posisiItemRecycler) {
@@ -222,31 +214,31 @@ public class IsiKonsultasi extends AppCompatActivity implements View.OnClickList
     @Override
     public void onClick(View v) {
 
-        if(v == BTtambahkomentar){
+        if (v == BTtambahkomentar) {
             filter = 2;
 
             Bundle extras3 = getIntent().getExtras();
             Matkuldis = extras3.getString("Matkuldis");
             Bundle extras4 = getIntent().getExtras();
             Jenisdis = extras4.getString("Jenisdis");
-            langkahkomen=1;
+            langkahkomen = 1;
             System.out.println("Langkah Komen nya : " + langkahkomen);
 
-            DatabaseReference ref =mRootref.child("JumlahKomentarBenar").child(Matkuldis).child("Post"+posisiItemRecycler);
+            DatabaseReference ref = mRootref.child("JumlahKomentarBenar").child(Matkuldis).child("Post" + posisiItemRecycler);
             ref.addValueEventListener(new ValueEventListener() {
 
                                           @Override
                                           public void onDataChange(DataSnapshot snapshot) {
                                               if (langkahkomen == 1) {
                                                   Integer jumlah = Integer.parseInt(snapshot.getValue().toString());
-                                                  databaseReference.child("JumlahKomentarBenar").child(Matkuldis).child("Post"+posisiItemRecycler).setValue(jumlah+1);
+                                                  databaseReference.child("JumlahKomentarBenar").child(Matkuldis).child("Post" + posisiItemRecycler).setValue(jumlah + 1);
                                                   System.out.println(jumlah);
-                                                  databaseReference.child(Jenisdis).child(Matkuldis).child("Post" +(posisiItemRecycler)).
-                                                          child("Komentar").child("Komentar" +(jumlah)).child("desc").setValue(ETtambahkomentar.getText().toString());
-                                                  databaseReference.child(Jenisdis).child(Matkuldis).child("Post" +(posisiItemRecycler)).
-                                                          child("Komentar").child("Komentar"+(jumlah)).child("pengirim").setValue("Anonymous");
-                                                  databaseReference.child(Jenisdis).child(Matkuldis).child("Post" +(posisiItemRecycler)).
-                                                          child("Komentar").child("Komentar"+(jumlah)).child("img").setValue("xxx");
+                                                  databaseReference.child(Jenisdis).child(Matkuldis).child("Post" + (posisiItemRecycler)).
+                                                          child("Komentar").child("Komentar" + (jumlah)).child("desc").setValue(ETtambahkomentar.getText().toString());
+                                                  databaseReference.child(Jenisdis).child(Matkuldis).child("Post" + (posisiItemRecycler)).
+                                                          child("Komentar").child("Komentar" + (jumlah)).child("pengirim").setValue("Anonymous");
+                                                  databaseReference.child(Jenisdis).child(Matkuldis).child("Post" + (posisiItemRecycler)).
+                                                          child("Komentar").child("Komentar" + (jumlah)).child("img").setValue("xxx");
                                                   langkahkomen++;
                                               }
 
@@ -261,9 +253,6 @@ public class IsiKonsultasi extends AppCompatActivity implements View.OnClickList
 
                                       }
             );
-
-
-
 
 
         }

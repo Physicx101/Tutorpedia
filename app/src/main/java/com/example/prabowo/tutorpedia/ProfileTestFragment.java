@@ -8,14 +8,23 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+
+import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -26,12 +35,16 @@ import java.util.List;
  * Created by Fauziw97 on 3/4/17.
  */
 
-public class ProfileTestFragment extends Fragment {
+public class ProfileTestFragment extends Fragment implements View.OnClickListener {
     private FirebaseAuth firebaseAuth;
     private Button BTlogout;
     private DatabaseReference databaseReference;
     private TextView userEmail;
     private TextView userName;
+    private StorageReference mStorageReference;
+    private FirebaseStorage storage;
+    private ImageView fotoProfil;
+    private String nama;
     DatabaseReference mRootref = FirebaseDatabase.getInstance().getReference();
 
     String[] titleprofile = new String[] {"Ringkasan Akun", "Pesan Masuk", "Riwayat Tes", "Pengaturan", "Bantuan"};
@@ -51,7 +64,31 @@ public class ProfileTestFragment extends Fragment {
         }
 
         FirebaseUser user = firebaseAuth.getCurrentUser();
-        DatabaseReference ref = mRootref.child("User");
+        userEmail = (TextView) view.findViewById(R.id.user_email);
+        userEmail.setText(user.getEmail());
+        userName = (TextView) view.findViewById(R.id.user_profile_name);
+        DatabaseReference ref = mRootref.child("User").child(user.getUid()).child("nama");
+
+        ref.addValueEventListener(new ValueEventListener() {
+
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                userName.setText(dataSnapshot.getValue().toString());
+                nama = dataSnapshot.getValue().toString();
+                storage = FirebaseStorage.getInstance();
+                mStorageReference = storage.getReferenceFromUrl("gs://tutorpedia-17ba0.appspot.com/FotoProfil/");
+                StorageReference foto = mStorageReference.child(nama + ".jpg");
+               /* Glide.with(getContext())
+                        .using(new FirebaseImageLoader())
+                        .load(foto)
+                        .into(fotoProfil);*/
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
 
 
 
@@ -59,8 +96,7 @@ public class ProfileTestFragment extends Fragment {
         Toolbar toolbar = (Toolbar) getActivity().findViewById(R.id.toolbar);
 
 
-        userEmail = (TextView) view.findViewById(R.id.user_email);
-        userEmail.setText(user.getEmail());
+
 
         List<HashMap<String, String>> list = new ArrayList<HashMap<String, String>>();
 
@@ -89,5 +125,10 @@ public class ProfileTestFragment extends Fragment {
         });
 
         return view;
+    }
+
+    @Override
+    public void onClick(View view) {
+
     }
 }
