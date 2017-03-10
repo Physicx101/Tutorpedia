@@ -7,10 +7,19 @@
     android:layout_height="match_parent"
     tools:context="com.example.prabowo.tutorpedia.Materi">
 
+    <include
+        android:id="@+id/toolbar"
+        layout="@layout/toolbar_main"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
     <android.support.v7.widget.RecyclerView
+        android:layout_below="@+id/toolbar"
         android:paddingBottom="50dp"
         android:id="@+id/recycleViewMateri"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"></android.support.v7.widget.RecyclerView>
+        android:layout_height="match_parent">
+
+    </android.support.v7.widget.RecyclerView>
 
 </RelativeLayout>

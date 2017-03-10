@@ -4,7 +4,6 @@
     android:layout_height="match_parent"
     android:paddingLeft="16dp"
     android:paddingRight="16dp"
-    android:paddingBottom="100dp"
     tools:context="com.example.prabowo.tutorpedia.MainActivity">
 
     <LinearLayout
@@ -40,7 +39,7 @@
         <LinearLayout
             android:orientation="horizontal"
             android:layout_width="match_parent"
-            android:layout_height="200dp">
+            android:layout_height="250dp">
 
             <ImageView
                 android:paddingRight="4dp"

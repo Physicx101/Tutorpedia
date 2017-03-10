@@ -93,7 +93,7 @@ public class AdapterTutor extends RecyclerView.Adapter<AdapterTutor.ViewHolder> 
             switch (getAdapterPosition()){
                 default:
                  recyclerItemPosition = getAdapterPosition();
-                intent = new Intent(context,IsiEvent.class);
+                intent = new Intent(context,IsiTutor.class);
                 intent.putExtra("PosisiItemRecycler",recyclerItemPosition);
                 break;
             }

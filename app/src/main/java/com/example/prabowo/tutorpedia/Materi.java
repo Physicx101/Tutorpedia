@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.LinearLayout;
@@ -38,6 +39,14 @@ public class Materi extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_materi);
 
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
+
+
         recyclerView = (RecyclerView) findViewById(R.id.recycleViewMateri);
         recyclerView.setHasFixedSize(true);
         linearLayoutManager = new LinearLayoutManager(this);
@@ -50,18 +59,18 @@ public class Materi extends AppCompatActivity {
         tambahInfo();
     }
 
-
-
-
-
-
+    @Override
+    public boolean onSupportNavigateUp() {
+        onBackPressed();
+        return true;
+    }
 
 
     public void tambahInfo() {
 
         Bundle extras = getIntent().getExtras();
         Matkul = extras.getString("Matkul");
-        Bundle extras2=getIntent().getExtras();
+        Bundle extras2 = getIntent().getExtras();
         Jenis = extras2.getString("Jenis");
 
 
@@ -97,7 +106,6 @@ public class Materi extends AppCompatActivity {
         });
 
     }
-
 
 
 }

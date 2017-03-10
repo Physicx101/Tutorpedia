@@ -10,8 +10,12 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
+import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -25,6 +29,10 @@ import java.util.List;
 public class ProfileTestFragment extends Fragment {
     private FirebaseAuth firebaseAuth;
     private Button BTlogout;
+    private DatabaseReference databaseReference;
+    private TextView userEmail;
+    private TextView userName;
+    DatabaseReference mRootref = FirebaseDatabase.getInstance().getReference();
 
     String[] titleprofile = new String[] {"Ringkasan Akun", "Pesan Masuk", "Riwayat Tes", "Pengaturan", "Bantuan"};
 
@@ -36,7 +44,23 @@ public class ProfileTestFragment extends Fragment {
         View view = inflater.inflate(R.layout.test_profile, container, false);
         firebaseAuth = FirebaseAuth.getInstance();
 
+
+        if (firebaseAuth.getCurrentUser() == null){
+            getActivity().finish();
+            startActivity(new Intent(this.getActivity(),LoginActivity.class));
+        }
+
+        FirebaseUser user = firebaseAuth.getCurrentUser();
+        DatabaseReference ref = mRootref.child("User");
+
+
+
+
         Toolbar toolbar = (Toolbar) getActivity().findViewById(R.id.toolbar);
+
+
+        userEmail = (TextView) view.findViewById(R.id.user_email);
+        userEmail.setText(user.getEmail());
 
         List<HashMap<String, String>> list = new ArrayList<HashMap<String, String>>();
 
