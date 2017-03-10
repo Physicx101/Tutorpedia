@@ -14,7 +14,7 @@ import com.example.prabowo.tutorpedia.CekSoal.CekSoal;
 import com.squareup.picasso.Picasso;
 
 public class Soal extends AppCompatActivity {
-    public static int nomor;
+    public static int nomor = 1;
     public static int[] warna = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
     public static int[] soal = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
     public static int paket = 1;
