@@ -87,7 +87,7 @@
 
 
             <LinearLayout
-                android:layout_weight="6"
+                android:layout_weight="8"
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -102,7 +102,8 @@
                     android:textColorHint="#CFD8DC"
                     android:textColor="#CFD8DC"
                     android:hint="Tulis komentar"
-                    android:paddingLeft="16dp"/>
+                    android:paddingLeft="16dp"
+                    android:background="@android:color/transparent"/>
 
                 <ImageView
                     android:id="@+id/BTmasukkankomentar"
