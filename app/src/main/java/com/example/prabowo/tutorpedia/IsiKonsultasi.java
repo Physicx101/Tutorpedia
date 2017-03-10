@@ -72,7 +72,7 @@ public class IsiKonsultasi extends AppCompatActivity implements View.OnClickList
     }
 
     private void registerClickCallBack() {
-        ListView list = (ListView) findViewById(R.id.demooListView);
+        ListView list = (ListView) findViewById(R.id.komenListView);
         list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View viewClicked, int position, long id) {
@@ -127,8 +127,9 @@ public class IsiKonsultasi extends AppCompatActivity implements View.OnClickList
 
     private void populatelistview() {
         ArrayAdapter<Komentar> adapter = new MyListAdapter();
-        ListView list = (ListView) findViewById(R.id.demooListView);
+        ListView list = (ListView) findViewById(R.id.komenListView);
         list.setAdapter(adapter);
+
 
     }
 
