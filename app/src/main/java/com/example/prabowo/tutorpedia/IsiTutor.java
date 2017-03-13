@@ -21,7 +21,7 @@ import com.squareup.picasso.Picasso;
 import java.util.List;
 
 
-public class IsiTutor extends AppCompatActivity implements View.OnClickListener{
+public class IsiTutor extends AppCompatActivity {
     private ImageView IVisievent;
     int posisiItemRecycler;
     private List<ListItemTutor> mListItemTutors;
@@ -54,16 +54,23 @@ public class IsiTutor extends AppCompatActivity implements View.OnClickListener{
         IVisievent = (ImageView) findViewById(R.id.IVisievent);
         TVisieventnama = (TextView) findViewById(R.id.TVisieventnama);
         TVisieventdesc = (TextView) findViewById(R.id.TVisieventdesc);
-        TVisieventlahir= (TextView) findViewById(R.id.TVisieventlahir);
+        TVisieventlahir = (TextView) findViewById(R.id.TVisieventlahir);
         TVisieventasal = (TextView) findViewById(R.id.TVisieventasal);
         TVisieventkontak = (TextView) findViewById(R.id.TVisieventkontak);
         BTgetcv = (Button) findViewById(R.id.BTgetcv);
         fab = (FloatingActionButton) findViewById(R.id.floatingActionButton);
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
-             posisiItemRecycler = extras.getInt("PosisiItemRecycler");}
+            posisiItemRecycler = extras.getInt("PosisiItemRecycler");
+        }
 
-        BTgetcv.setOnClickListener(this);
+        BTgetcv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(CV));
+                startActivity(intent);
+            }
+        });
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -87,27 +94,24 @@ public class IsiTutor extends AppCompatActivity implements View.OnClickListener{
         super.onStart();
 
 
+        DatabaseReference ref = mRootref.child("Mentor");
 
-            DatabaseReference ref = mRootref.child("Mentor");
-
-            ref.addValueEventListener(new ValueEventListener() {
-
+        ref.addValueEventListener(new ValueEventListener() {
 
 
+            @Override
+            public void onDataChange(DataSnapshot snapshot) {
 
-                @Override
-                public void onDataChange(DataSnapshot snapshot) {
-
-                    System.out.println("There are " + snapshot.getChildrenCount() + " shout messages");
-                    for (DataSnapshot postSnapshot : snapshot.getChildren()) {
-                        ListItemTutor listItemTutor = new ListItemTutor(postSnapshot.child("nama").getValue().toString(),
-                                postSnapshot.child("tanggallahir").getValue().toString(),
-                                postSnapshot.child("img").getValue().toString(),
-                                postSnapshot.child("lokasi").getValue().toString(),
-                                postSnapshot.child("kontak").getValue().toString(),
-                                postSnapshot.child("deskripsi").getValue().toString(),
-                                postSnapshot.child("linkcv").getValue().toString());
-                       // mListItemTutors.add(listItemTutor);
+                System.out.println("There are " + snapshot.getChildrenCount() + " shout messages");
+                for (DataSnapshot postSnapshot : snapshot.getChildren()) {
+                    ListItemTutor listItemTutor = new ListItemTutor(postSnapshot.child("nama").getValue().toString(),
+                            postSnapshot.child("tanggallahir").getValue().toString(),
+                            postSnapshot.child("img").getValue().toString(),
+                            postSnapshot.child("lokasi").getValue().toString(),
+                            postSnapshot.child("kontak").getValue().toString(),
+                            postSnapshot.child("deskripsi").getValue().toString(),
+                            postSnapshot.child("linkcv").getValue().toString());
+                    // mListItemTutors.add(listItemTutor);
 //                    System.out.println(i + " " + post.getTitle() + " - " + post.getUsername());
 //                    post.getDate();
 //                    post.getTime();
@@ -117,43 +121,32 @@ public class IsiTutor extends AppCompatActivity implements View.OnClickListener{
 //                    post.getPhone();
 
 
-                        if (i == posisiItemRecycler) {
+                    if (i == posisiItemRecycler) {
 
 //
 
-                            TVisieventnama.setText(listItemTutor.getNama());
-                            TVisieventasal.setText(listItemTutor.getAsal());
-                            TVisieventlahir.setText(listItemTutor.getTanggallahir());
-                            TVisieventdesc.setText(listItemTutor.getDeskripsi());
-                            TVisieventkontak.setText(listItemTutor.getNohp());
-                            Picasso.with(getApplicationContext())
-                                    .load(listItemTutor.getImageUrl())
-                                    .into(IVisievent);
-                            CV = listItemTutor.getLinkcv().toString();
+                        TVisieventnama.setText(listItemTutor.getNama());
+                        TVisieventasal.setText(listItemTutor.getAsal());
+                        TVisieventlahir.setText(listItemTutor.getTanggallahir());
+                        TVisieventdesc.setText(listItemTutor.getDeskripsi());
+                        TVisieventkontak.setText(listItemTutor.getNohp());
+                        Picasso.with(getApplicationContext())
+                                .load(listItemTutor.getImageUrl())
+                                .into(IVisievent);
+                        CV = listItemTutor.getLinkcv().toString();
 
 
-
-
-
-                        }
-
-                        i++;
                     }
-                }
 
-                @Override
-                public void onCancelled(DatabaseError firebaseError) {
-                    System.out.println("The read failed: " + firebaseError.getMessage());
+                    i++;
                 }
-            });
-        }
+            }
 
-    @Override
-    public void onClick(View v) {
-        if(v == BTgetcv) {
-           Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(CV));
-            startActivity(intent);
-        }
+            @Override
+            public void onCancelled(DatabaseError firebaseError) {
+                System.out.println("The read failed: " + firebaseError.getMessage());
+            }
+        });
     }
 }
 
