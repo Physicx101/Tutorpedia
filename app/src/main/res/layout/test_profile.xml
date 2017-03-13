@@ -55,10 +55,7 @@
 
     </RelativeLayout>
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="#FFCCCCCC" />
+   <include layout="@layout/item_divider" />
 
     <ListView
         android:layout_width="match_parent"
