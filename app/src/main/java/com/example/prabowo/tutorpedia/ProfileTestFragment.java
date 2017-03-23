@@ -82,12 +82,13 @@ public class ProfileTestFragment extends Fragment implements View.OnClickListene
         firebaseAuth = FirebaseAuth.getInstance();
         FirebaseUser user = firebaseAuth.getCurrentUser();
 
+
         if (user == null) {
             getActivity().finish();
             startActivity(new Intent(this.getActivity(),LoginActivity.class));
         }
 
-        userEmail = (TextView) view.findViewById(R.id.user_email);
+        userEmail = (TextView) getActivity().findViewById(R.id.email_user);
         userEmail.setText(user.getEmail());
         userName = (TextView) getActivity().findViewById(R.id.user_profile_name);
         BTfoto = (ImageView) getActivity().findViewById(R.id.user_profile_photo);
