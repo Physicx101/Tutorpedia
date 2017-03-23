@@ -21,6 +21,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.SimpleAdapter;
 import android.widget.TextView;
 
@@ -65,13 +66,8 @@ public class ProfileTestFragment extends Fragment implements View.OnClickListene
     private ImageView fotoProfil;
     private String nama;
     private ImageView BTfoto;
+    private RelativeLayout ringkasan,riwayat,bantuan;
     DatabaseReference mRootref = FirebaseDatabase.getInstance().getReference();
-
-    String[] titleprofile = new String[]{"Ringkasan Akun", "Riwayat Tes", "Bantuan"};
-
-    int[] imageprofile = new int[]{R.drawable.ic_account_circle_black_24dp, R.drawable.ic_class_black_24dp
-            , R.drawable.ic_help_black_24dp};
-
 
 
     @Override
@@ -96,28 +92,17 @@ public class ProfileTestFragment extends Fragment implements View.OnClickListene
         userName = (TextView) getActivity().findViewById(R.id.user_profile_name);
         BTfoto = (ImageView) getActivity().findViewById(R.id.user_profile_photo);
         BTfoto.setOnClickListener(this);
+        ringkasan = (RelativeLayout) getActivity().findViewById(R.id.ringkasanAkun);
+        ringkasan.setOnClickListener(this);
+        riwayat = (RelativeLayout) getActivity().findViewById(R.id.riwayatTes);
+        riwayat.setOnClickListener(this);
+        bantuan = (RelativeLayout) getActivity().findViewById(R.id.bantuan);
+        bantuan.setOnClickListener(this);
 
 
 
 
         Toolbar toolbar = (Toolbar) getActivity().findViewById(R.id.toolbar);
-
-
-        List<HashMap<String, String>> list = new ArrayList<HashMap<String, String>>();
-
-        for (int i = 0; i < 3; i++) {
-            HashMap<String, String> hm = new HashMap<String, String>();
-            hm.put("listview_title", titleprofile[i]);
-            hm.put("listview_image", Integer.toString(imageprofile[i]));
-            list.add(hm);
-        }
-
-        String[] from = {"listview_image", "listview_title"};
-        int[] to = {R.id.profile_item_icon, R.id.profile_item_title};
-
-        SimpleAdapter simpleAdapter = new SimpleAdapter(getActivity().getBaseContext(), list, R.layout.profile_item, from, to);
-        ListView listView = (ListView) view.findViewById(R.id.listprofile);
-        listView.setAdapter(simpleAdapter);
 
         BTlogout = (Button) view.findViewById(R.id.BTlogout);
 
@@ -203,6 +188,7 @@ public class ProfileTestFragment extends Fragment implements View.OnClickListene
 
             builder.show();
         }
+
     }
 
 

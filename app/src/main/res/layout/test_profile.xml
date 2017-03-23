@@ -1,15 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
               xmlns:app="http://schemas.android.com/apk/res-auto"
               android:layout_width="match_parent"
-              android:layout_height="match_parent"
-              android:orientation="vertical"
-              android:weightSum="1">
+              android:layout_height="match_parent">
     <include
         android:id="@+id/toolbar"
         layout="@layout/toolbar_main"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
+
+    <LinearLayout
+        android:layout_below="@id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentBottom="true"
+        android:weightSum="1">
 
     <RelativeLayout
         android:id="@+id/profile_layout"
@@ -57,22 +64,117 @@
 
    <include layout="@layout/item_divider" />
 
-    <ListView
+    <RelativeLayout
+        android:id="@+id/ringkasanAkun"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/listprofile"
-        android:layout_weight="0.45"
-        android:layout_marginTop="8dp">
-    </ListView>
+        android:background="?attr/selectableItemBackground"
+        android:clickable="true"
+        android:padding="@dimen/activity_horizontal_margin">
 
-    <Button
-        android:textColor="#ffffff"
-        android:background="#DC143C"
-        android:text="Keluar"
-        android:layout_width="150dp"
-        android:layout_gravity="center"
+        <ImageView
+            android:id="@+id/icon_akun"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="@dimen/activity_horizontal_margin"
+            android:src="@drawable/ic_account_circle_black_24dp"
+            android:tint="@color/colorPrimary"/>
+
+        <TextView
+            android:id="@+id/TV_akun"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/activity_horizontal_margin"
+            android:layout_toEndOf="@id/icon_akun"
+            android:text="Ringkasan Akun"
+            android:textAppearance="@style/TextAppearance.AppCompat.Menu"
+            android:textColor="#212121"/>
+
+    </RelativeLayout>
+
+    <include layout="@layout/item_divider"/>
+
+    <RelativeLayout
+        android:id="@+id/riwayatTes"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textAppearance="@style/Base.TextAppearance.AppCompat.Button"
-        android:id="@+id/BTlogout"
-        android:layout_weight="0.05"/>
-</LinearLayout>
+        android:background="?attr/selectableItemBackground"
+        android:clickable="true"
+        android:padding="@dimen/activity_horizontal_margin">
+
+        <ImageView
+            android:id="@+id/icon_tes"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="@dimen/activity_horizontal_margin"
+            android:src="@drawable/ic_class_black_24dp"
+            android:tint="@color/colorPrimary"/>
+
+        <TextView
+            android:id="@+id/TV_riwayat"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/activity_horizontal_margin"
+            android:layout_toEndOf="@id/icon_tes"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:text="Riwayat Tes"
+            android:textAppearance="@style/TextAppearance.AppCompat.Menu"
+            android:textColor="#212121"/>
+
+    </RelativeLayout>
+
+    <include layout="@layout/item_divider"/>
+
+    <RelativeLayout
+        android:id="@+id/bantuan"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?attr/selectableItemBackground"
+        android:clickable="true"
+        android:padding="@dimen/activity_horizontal_margin">
+
+        <ImageView
+            android:id="@+id/icon_help"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="@dimen/activity_horizontal_margin"
+            android:src="@drawable/ic_help_black_24dp"
+            android:tint="@color/colorPrimary"/>
+
+        <TextView
+            android:id="@+id/TV_help"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/activity_horizontal_margin"
+            android:layout_toEndOf="@id/icon_help"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:text="Bantuan"
+            android:textAppearance="@style/TextAppearance.AppCompat.Menu"
+            android:textColor="#212121"/>
+
+    </RelativeLayout>
+
+    <include layout="@layout/item_divider"/>
+
+        <Button
+            android:layout_marginTop="200dp"
+            android:id="@+id/BTlogout"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_gravity="bottom|center"
+            android:background="#DC143C"
+            android:text="Keluar"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Button"
+            android:textColor="#ffffff"/>
+
+    </LinearLayout>
+
+
+</RelativeLayout>
