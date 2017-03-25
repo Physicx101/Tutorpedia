@@ -10,8 +10,13 @@ import android.view.MenuItem;
 import android.view.View;
 
 import com.example.prabowo.tutorpedia.EventFragment;
+import com.example.prabowo.tutorpedia.MainActivity;
 import com.example.prabowo.tutorpedia.R;
 import com.example.prabowo.tutorpedia.Soal;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,6 +27,8 @@ public class CekSoal extends AppCompatActivity {
     public static double score = 0;
     public static  int selesai = 0;
     public static String NilaiAkhir;
+    private FirebaseAuth firebaseAuth;
+    private DatabaseReference databaseReference;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -91,11 +98,17 @@ public class CekSoal extends AppCompatActivity {
         score = score*2.5;
         selesai = 1;
         NilaiAkhir = String.valueOf(score);
-        Intent i = new Intent(this, EventFragment.class);
-
+        Intent i = new Intent(this, MainActivity.class);
         startActivity(i);
+
+        firebaseAuth = FirebaseAuth.getInstance();
+        FirebaseUser user = firebaseAuth.getCurrentUser();
+        System.out.print(user.getUid());
+        databaseReference = FirebaseDatabase.getInstance().getReference();
+        databaseReference.child("User").child(user.getUid()).child("Tes").child("Tes 1").setValue(NilaiAkhir);
+        databaseReference.child("Tes 1").child(user.getUid()).setValue(1);
+    }
 
     }
 
 
-}
