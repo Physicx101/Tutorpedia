@@ -12,8 +12,12 @@ import android.widget.Toast;
 
 import com.example.prabowo.tutorpedia.CekSoal.CekSoal;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
@@ -74,6 +78,8 @@ public class AdapterEvent extends RecyclerView.Adapter<AdapterEvent.ViewHolder> 
             public ImageView IVgambareventBeneran;
             private TextView WaktuMengerjakan;
             private TextView NilaiAkhir;
+            private String status;
+            private FirebaseAuth firebaseAuth;
 
 
             public ViewHolder(View itemView) {
@@ -89,11 +95,30 @@ public class AdapterEvent extends RecyclerView.Adapter<AdapterEvent.ViewHolder> 
             }
 
             public void onClick(final View v) {
+                firebaseAuth = FirebaseAuth.getInstance();
+                FirebaseUser user = firebaseAuth.getCurrentUser();
+                DatabaseReference ref = mRootref.child("Tes").child("Tes 1").child(user.getUid());
+                ref.addValueEventListener(new ValueEventListener() {
+
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        status = dataSnapshot.getValue().toString();
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+
+                    }
+                });
+                System.out.print("Tezzz : " + status);
+
+
+                //System.out.print("Tezzzzzzzzzzzz : "+ CekSoal);
                 int recyclerItemPosition;
-                if (CekSoal.selesai==1){
-                Toast.makeText(v.getContext(), "Soal Sudah Dikerjakan", Toast.LENGTH_SHORT).show();}
+                if (status=="1"){
+                    Toast.makeText(v.getContext(), "Soal Sudah Dikerjakan", Toast.LENGTH_SHORT).show();}
                 final Intent intent;
-                if (CekSoal.selesai==0) {
+                if (status=="0") {
                     switch (getAdapterPosition()) {
                         default:
                             recyclerItemPosition = getAdapterPosition();

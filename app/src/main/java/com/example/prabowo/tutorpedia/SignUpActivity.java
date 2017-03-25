@@ -19,13 +19,17 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 public class SignUpActivity extends AppCompatActivity implements View.OnClickListener {
 
     private Button BTregister;
-    private EditText ETemail;
+    private EditText ETemail,ETnamapengguna;
     private EditText ETpassword;
     private TextView TVsignin;
+    private DatabaseReference databaseReference;
 
     private ProgressDialog progressDialog;
 
@@ -36,11 +40,17 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_signup);
 
+        Window window = this.getWindow();
+        window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+        window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+        window.setStatusBarColor(this.getResources().getColor(R.color.colorPrimaryDark));
+
         firebaseAuth = FirebaseAuth.getInstance();
+        databaseReference = FirebaseDatabase.getInstance().getReference();
 
         if (firebaseAuth.getCurrentUser() != null){
             finish();
-            startActivity(new Intent(getApplicationContext(),ProfileFragment.class));
+            startActivity(new Intent(getApplicationContext(),MainActivity.class));
         }
 
         progressDialog = new ProgressDialog(this);
@@ -48,6 +58,8 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
         BTregister = (Button) findViewById(R.id.BTregister);
         ETemail = (EditText) findViewById(R.id.ETemail);
         ETpassword = (EditText) findViewById(R.id.ETpassword);
+        ETnamapengguna = (EditText) findViewById(R.id.ETnamapengguna);
+
         TVsignin = (TextView) findViewById(R.id.TVsignin);
 
         BTregister.setOnClickListener(this);
@@ -59,6 +71,11 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
 
         String email = ETemail.getText().toString().trim();
         String password = ETpassword.getText().toString().trim();
+        final String namaku = ETnamapengguna.getText().toString().trim();
+        System.out.print("Ini lho :" + namaku);
+
+
+
 
         if (TextUtils.isEmpty(email)) {
             Toast.makeText(this, "Please Enter Email", Toast.LENGTH_SHORT).show();
@@ -76,6 +93,8 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
         progressDialog.setMessage("Creating Account...");
         progressDialog.show();
 
+
+
         firebaseAuth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
@@ -83,7 +102,8 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
                         if (task.isSuccessful()) {
                             Toast.makeText(SignUpActivity.this, "Registered Succesfull", Toast.LENGTH_SHORT).show();
                             finish();
-                            startActivity(new Intent(getApplicationContext(),ProfileFragment.class));
+                            startActivity(new Intent(getApplicationContext(),MainActivity.class).putExtra("namaku",namaku));
+
                         } else {
                             Toast.makeText(SignUpActivity.this, "Registered unsuccesfull", Toast.LENGTH_SHORT).show();
                         }
@@ -91,6 +111,9 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
 
 
                 });
+
+
+
 
     }
 

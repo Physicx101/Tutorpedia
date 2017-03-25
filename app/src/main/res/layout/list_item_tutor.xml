@@ -28,7 +28,8 @@
                 android:background="#000000"
                 android:id="@+id/IVgambar"
                 android:layout_height="match_parent"
-                android:layout_width="match_parent"/>
+                android:layout_width="match_parent"
+                android:scaleType="fitXY"/>
         </LinearLayout>
 
 
@@ -57,7 +58,7 @@
                 android:text="Heading"
                 android:layout_marginBottom="4dp"
                 android:layout_marginLeft="8dp"
-                android:textAppearance="@style/Base.TextAppearance.AppCompat.Title"/>
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"/>
 
             <TextView
                 android:id="@+id/TVdesc"

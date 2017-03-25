@@ -57,7 +57,7 @@ import static android.app.Activity.RESULT_OK;
 public class ProfileTestFragment extends Fragment implements View.OnClickListener {
     private FirebaseAuth firebaseAuth;
     private FirebaseAuth.AuthStateListener mAuthStateListener;
-    private Button BTlogout;
+    private Button BTpoint;
     private DatabaseReference databaseReference;
     private TextView userEmail;
     private TextView userName;
@@ -66,7 +66,7 @@ public class ProfileTestFragment extends Fragment implements View.OnClickListene
     private ImageView fotoProfil;
     private String nama;
     private ImageView BTfoto;
-    private RelativeLayout ringkasan,riwayat,bantuan;
+    private RelativeLayout ringkasan,riwayat,bantuan,keluar;
     DatabaseReference mRootref = FirebaseDatabase.getInstance().getReference();
 
 
@@ -99,15 +99,8 @@ public class ProfileTestFragment extends Fragment implements View.OnClickListene
         riwayat.setOnClickListener(this);
         bantuan = (RelativeLayout) getActivity().findViewById(R.id.bantuan);
         bantuan.setOnClickListener(this);
-
-
-
-
-        Toolbar toolbar = (Toolbar) getActivity().findViewById(R.id.toolbar);
-
-        BTlogout = (Button) view.findViewById(R.id.BTlogout);
-
-        BTlogout.setOnClickListener(new View.OnClickListener() {
+        keluar = (RelativeLayout) getActivity().findViewById(R.id.keluar);
+        keluar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 firebaseAuth.signOut();
@@ -115,6 +108,21 @@ public class ProfileTestFragment extends Fragment implements View.OnClickListene
                 startActivity(new Intent(getActivity(), LoginActivity.class));
             }
         });
+
+
+
+
+        Toolbar toolbar = (Toolbar) getActivity().findViewById(R.id.toolbar);
+
+        BTpoint = (Button) view.findViewById(R.id.BTpoint);
+        BTpoint.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getActivity(), PointActivity.class));
+            }
+        });
+
+
 
 
         DatabaseReference ref = mRootref.child("User").child(user.getUid()).child("nama");
@@ -275,4 +283,4 @@ public class ProfileTestFragment extends Fragment implements View.OnClickListene
         }
     }
 
-    }
+}
