@@ -72,6 +72,7 @@ public class IsiKonsultasi extends AppCompatActivity implements View.OnClickList
             posisiItemRecycler = extras.getInt("PosisiItemRecycler");}
 
         System.out.print("Urutan ke " + posisiItemRecycler);
+
         filter = 1;
         populatekomentarlist();
 
@@ -167,9 +168,10 @@ public class IsiKonsultasi extends AppCompatActivity implements View.OnClickList
             komentar.setText(currentKomentar.getKomen());
 
             ImageView Foto = (ImageView) itemView.findViewById(R.id.reviewAvatar);
+
             storage = FirebaseStorage.getInstance();
             mStorageRef = storage.getReferenceFromUrl("gs://tutorpedia-17ba0.appspot.com/FotoProfil/");
-            StorageReference foto = mStorageRef.child(currentKomentar.getPengirim()+".jpg");
+            StorageReference foto = mStorageRef.child(currentKomentar.getImgkomen()+"PP"+".jpg");
             Glide.with(this.getContext() )
                     .using(new FirebaseImageLoader())
                     .load(foto)
@@ -219,9 +221,15 @@ public class IsiKonsultasi extends AppCompatActivity implements View.OnClickList
 //
                         TVisikonsultasijudul.setText(listItem.getJudulkonsultasi());
                         TVisikonsultasidesc.setText(listItem.getDeskripsikonsultasi());
-                        Picasso.with(getApplicationContext())
-                                .load(listItem.getImageUrlkonsultasi())
+
+                        storage = FirebaseStorage.getInstance();
+                        mStorageRef = storage.getReferenceFromUrl("gs://tutorpedia-17ba0.appspot.com/FotoProfil/");
+                        StorageReference foto = mStorageRef.child(listItem.getImageUrlkonsultasi()+".jpg");
+                        Glide.with(getApplicationContext())
+                                .using(new FirebaseImageLoader())
+                                .load(foto)
                                 .into(IVisikonsultasisoal);
+
 
                     }
 
@@ -240,16 +248,16 @@ public class IsiKonsultasi extends AppCompatActivity implements View.OnClickList
     @Override
     public void onClick(View v) {
         firebaseAuth = FirebaseAuth.getInstance();
-        FirebaseUser user = firebaseAuth.getCurrentUser();
+        final FirebaseUser user = firebaseAuth.getCurrentUser();
         DatabaseReference mRootref = FirebaseDatabase.getInstance().getReference();
-        DatabaseReference ref2 = mRootref.child("User").child(user.getUid()).child("nama");
+        DatabaseReference ref2 = mRootref.child("User").child(user.getUid());
 
         ref2.addValueEventListener(new ValueEventListener() {
 
             @Override
             public void onDataChange(DataSnapshot snapshot) {
 
-                pengirim = snapshot.getValue().toString();
+                pengirim = snapshot.child("nama").getValue().toString();
 
             }
 
@@ -286,7 +294,7 @@ public class IsiKonsultasi extends AppCompatActivity implements View.OnClickList
                                                   databaseReference.child(Jenisdis).child(Matkuldis).child("Post" +(posisiItemRecycler)).
                                                           child("Komentar").child("Komentar"+(jumlah)).child("pengirim").setValue(pengirim);
                                                   databaseReference.child(Jenisdis).child(Matkuldis).child("Post" +(posisiItemRecycler)).
-                                                          child("Komentar").child("Komentar"+(jumlah)).child("img").setValue("xxx");
+                                                          child("Komentar").child("Komentar"+(jumlah)).child("img").setValue(user.getUid().toString());
                                                   langkahkomen++;
                                               }
 

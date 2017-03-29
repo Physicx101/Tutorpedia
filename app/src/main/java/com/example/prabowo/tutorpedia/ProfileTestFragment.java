@@ -5,9 +5,9 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.media.Image;
 import android.net.Uri;
 import android.os.Bundle;
+import android.provider.Contacts;
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
@@ -20,9 +20,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.ListView;
 import android.widget.RelativeLayout;
-import android.widget.SimpleAdapter;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
@@ -40,12 +38,7 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
-import org.w3c.dom.Text;
-
 import java.io.ByteArrayOutputStream;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
 
 import static android.app.Activity.RESULT_OK;
 
@@ -65,6 +58,7 @@ public class ProfileTestFragment extends Fragment implements View.OnClickListene
     private FirebaseStorage storage;
     private ImageView fotoProfil;
     private String nama;
+    private String UID;
     private ImageView BTfoto;
     private RelativeLayout ringkasan,riwayat,bantuan,keluar;
     DatabaseReference mRootref = FirebaseDatabase.getInstance().getReference();
@@ -118,23 +112,26 @@ public class ProfileTestFragment extends Fragment implements View.OnClickListene
         BTpoint.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(getActivity(), PointActivity.class));
+                startActivity(new Intent(getActivity(), ListHadiahPoint.class));
             }
         });
 
 
 
 
-        DatabaseReference ref = mRootref.child("User").child(user.getUid()).child("nama");
+        UID = user.getUid().toString();
+
+        DatabaseReference ref = mRootref.child("User").child(user.getUid());
         ref.addValueEventListener(new ValueEventListener() {
 
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                userName.setText(dataSnapshot.getValue().toString());
-                nama = dataSnapshot.getValue().toString();
+                userName.setText(dataSnapshot.child("nama").getValue().toString());
+                nama = dataSnapshot.child("nama").getValue().toString();
                 storage = FirebaseStorage.getInstance();
+
                 mStorageRef = storage.getReferenceFromUrl("gs://tutorpedia-17ba0.appspot.com/FotoProfil/");
-                StorageReference foto = mStorageRef.child(nama + ".jpg");
+                StorageReference foto = mStorageRef.child(UID + "PP"+".jpg");
                 Glide.with(getContext())
                         .using(new FirebaseImageLoader())
                         .load(foto)
@@ -152,6 +149,15 @@ public class ProfileTestFragment extends Fragment implements View.OnClickListene
 
     @Override
     public void onClick(View view) {
+
+        if(view == riwayat){
+            startActivity(new Intent(this.getActivity(),NilaiActivity.class));
+        }
+
+        if(view == bantuan){
+
+            startActivity(new Intent(this.getActivity(),CreditActivity.class));
+        }
 
         if (view == BTfoto) {
             System.out.println("1");
@@ -217,7 +223,7 @@ public class ProfileTestFragment extends Fragment implements View.OnClickListene
                 byte[] dataimage = baos.toByteArray();
 
 
-                StorageReference foto = mStorageRef.child(nama + ".jpg");
+                StorageReference foto = mStorageRef.child(UID +"PP"+ ".jpg");
 
                 UploadTask uploadTask = foto.putBytes(dataimage);
                 uploadTask.addOnFailureListener(new OnFailureListener() {
@@ -260,7 +266,7 @@ public class ProfileTestFragment extends Fragment implements View.OnClickListene
 
 
 
-                StorageReference foto = mStorageRef.child(nama + ".jpg");
+                StorageReference foto = mStorageRef.child(UID+"PP"+".jpg");
 
                 UploadTask uploadTask = foto.putFile(selectedImage);
                 uploadTask.addOnFailureListener(new OnFailureListener() {

@@ -11,15 +11,27 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.prabowo.tutorpedia.CekSoal.CekSoal;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
 
+import static com.example.prabowo.tutorpedia.CekSoal.CekSoal.score;
+
 public class Soal extends AppCompatActivity {
+    private FirebaseAuth firebaseAuth;
     public static int nomor = 1;
     public static int[] warna = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
     public static int[] soal = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
     public static int paket = 1;
     public static int[] ragu = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
     public static long waktu = 5400000;
+    private static int point;
+    private DatabaseReference databaseReference;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -828,11 +840,59 @@ public class Soal extends AppCompatActivity {
                     TextView waktu = (TextView) findViewById(R.id.Timer);
                     waktu.setText("!! Waktu Telah Habis !!");
                     for (int i=1;i<41;i++){
-                        CekSoal.score = CekSoal.score + Soal.soal[i];
+                        score = score + Soal.soal[i];
                     }
-                    CekSoal.score = CekSoal.score*2.5;
+                    score = score*2.5;
                     CekSoal.selesai = 1;
-                    CekSoal.NilaiAkhir = String.valueOf(CekSoal.score);
+                    CekSoal.NilaiAkhir = String.valueOf(score);
+
+                    firebaseAuth = FirebaseAuth.getInstance();
+                    FirebaseUser user = firebaseAuth.getCurrentUser();
+                    DatabaseReference ref = FirebaseDatabase.getInstance().getReference().child("User").child(user.getUid()).child("Point");
+                    ref.addValueEventListener(new ValueEventListener() {
+
+                        @Override
+                        public void onDataChange(DataSnapshot dataSnapshot) {
+                            point = Integer.parseInt(dataSnapshot.getValue().toString());
+
+                        }
+
+                        @Override
+                        public void onCancelled(DatabaseError databaseError) {
+
+                        }
+                    });
+
+                    databaseReference = FirebaseDatabase.getInstance().getReference();
+                    databaseReference.child("User").child(user.getUid()).child("Tes").child("Tes 1").child("nilai").setValue("Nilai :"+CekSoal.NilaiAkhir);
+                    databaseReference.child("User").child(user.getUid()).child("Tes").child("Tes 1").child("judul").setValue("Matematika");
+                    databaseReference.child("Tes").child("Tes 1").child(user.getUid()).setValue(1);
+                    databaseReference.child("User").child(user.getUid()).child("Point").setValue(point+(score*0.5));
+
+                   /* firebaseAuth = FirebaseAuth.getInstance();
+                    final FirebaseUser user = firebaseAuth.getCurrentUser();
+                    DatabaseReference event = FirebaseDatabase.getInstance().getReference().child("User").child(user.getUid()).child("Tes").child("Tes 2");
+                    event.addValueEventListener(new ValueEventListener() {
+
+                                                    @Override
+                                                    public void onDataChange(DataSnapshot snapshot) {
+                                                        databaseReference.child("User").child(user.getUid()).child("Tes").child("Tes 2").child("judul").setValue("Matematika").toString();
+                                                        databaseReference.child("User").child(user.getUid()).child("Tes").child("Tes 2").child("nilai").setValue(CekSoal.NilaiAkhir).toString();
+
+
+                                                    }
+
+
+                                                    @Override
+                                                    public void onCancelled(DatabaseError databaseError) {
+
+                                                    }
+                                                }
+                    ); */
+
+
+
+
                     Intent i = new Intent(Soal.this, EventFragment.class);
 
                     startActivity(i);

@@ -10,7 +10,8 @@
               android:paddingLeft="@dimen/activity_horizontal_margin"
               android:paddingRight="@dimen/activity_horizontal_margin"
               android:paddingTop="@dimen/activity_vertical_margin"
-              tools:context="com.example.prabowo.tutorpedia.FormTambahKonsultasi">
+              tools:context="com.example.prabowo.tutorpedia.FormTambahKonsultasi"
+    android:weightSum="1">
 
     <android.support.design.widget.TextInputLayout
         android:layout_width="match_parent"
@@ -51,6 +52,21 @@
             android:hint="Img"/>
     </android.support.design.widget.TextInputLayout>
 
+
+    <ImageView
+        android:id="@+id/imageView4"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:layout_weight="0.48"
+        android:scaleType="fitCenter"
+        app:srcCompat="@android:drawable/ic_menu_camera" />
+
+    <Button
+        android:id="@+id/Upload"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="upload"
+        android:text="Upload Gambar" />
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/fabaddkonsul"

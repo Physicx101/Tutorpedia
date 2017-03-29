@@ -4,6 +4,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -20,18 +21,41 @@ import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
+import java.util.Random;
+import java.util.UUID;
+
 public class PointActivity extends AppCompatActivity implements View.OnClickListener {
     private FirebaseAuth firebaseAuth;
     private DatabaseReference databaseReference;
     DatabaseReference mRootref = FirebaseDatabase.getInstance().getReference();
     private static int point;
+
     private static String points;
-    private TextView TVpoint;
+    private TextView TVpoint,TVhargatpoin,TVkodehadiahinfo,TVkodehadiahinfo2,TVkodehadiah,TVkodehadiahuid;
     private Button BTpoint;
+    private String Pointnya,Hadiah;
+    private ImageView IVhadiahpoint;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_point);
+
+        TVkodehadiah = (TextView) findViewById(R.id.TVkodehadiah);
+        TVkodehadiahuid = (TextView) findViewById(R.id.TVkodehadiahuid);
+        TVkodehadiahinfo = (TextView) findViewById(R.id.TVkodehadiahinfo);
+        TVkodehadiahinfo2 = (TextView) findViewById(R.id.TVkodehadiahinfo2);
+
+
+        Bundle extras = getIntent().getExtras();
+        Pointnya = extras.getString("Point");
+        Hadiah = extras.getString("Hadiah");
+        TVhargatpoin = (TextView) findViewById(R.id.TVhargatpoin);
+        TVhargatpoin.setText(Pointnya);
+
+        IVhadiahpoint = (ImageView) findViewById(R.id.IVhadiahpoint);
+        int id = getResources().getIdentifier("com.example.prabowo.tutorpedia:drawable/" + Hadiah, null, null);
+        IVhadiahpoint.setImageResource(id);
+
 
         TVpoint = (TextView) findViewById(R.id.TVpoint);
         BTpoint = (Button) findViewById(R.id.BTtukarpoint);
@@ -58,7 +82,8 @@ public class PointActivity extends AppCompatActivity implements View.OnClickList
 
             }
         });
-
+        points = FirebaseDatabase.getInstance().getReference().child("User").child(user.getUid()).child("Point").getKey();
+        TVpoint.setText(points);
 
     }
 
@@ -72,17 +97,23 @@ public class PointActivity extends AppCompatActivity implements View.OnClickList
 
         if(point>=100){
             databaseReference = FirebaseDatabase.getInstance().getReference();
-            databaseReference.child("User").child(user.getUid()).child("Point").setValue(point-100);}
+            databaseReference.child("User").child(user.getUid()).child("Point").setValue(point-100);
+            String uuid = UUID.randomUUID().toString();
+            TVkodehadiah.setText("Kode hadiah : " + uuid);
+            TVkodehadiahuid.setText("Kode User : "+ user.getUid().toString());
+            TVkodehadiahinfo.setText("SELAMAT ANDA MENDAPAT " + Hadiah.toUpperCase() + " ! ");
+            TVkodehadiahinfo2.setText("Emailen Sak iki");
+        }
 
         if(v == BTpoint){
             if (point< 100){
                 Toast.makeText(this,"Saldo Kurang",Toast.LENGTH_SHORT).show();
             }
 
-            if (point>= 100){
+            /*if (point>= 100){
                 databaseReference.child("User").child(user.getUid()).child("Point").setValue(point-50);
                 //;
-            }
+            }*/
 
 
         }
