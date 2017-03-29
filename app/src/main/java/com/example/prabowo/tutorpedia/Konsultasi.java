@@ -63,7 +63,7 @@ public class Konsultasi extends AppCompatActivity implements View.OnClickListene
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
-        getSupportActionBar().setDisplayShowTitleEnabled(false);
+        getSupportActionBar().setTitle("Konsultasi");
 
 
 

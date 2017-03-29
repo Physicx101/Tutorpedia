@@ -44,7 +44,7 @@ public class Materi extends AppCompatActivity {
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
-        getSupportActionBar().setDisplayShowTitleEnabled(false);
+        getSupportActionBar().setTitle("Materi Tutorial");
 
 
         recyclerView = (RecyclerView) findViewById(R.id.recycleViewMateri);

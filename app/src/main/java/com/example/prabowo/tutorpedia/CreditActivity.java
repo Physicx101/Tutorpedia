@@ -17,7 +17,7 @@ public class CreditActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.kredit_tes);
+        setContentView(R.layout.activity_credit);
 
         fbPrab = (LinearLayout) findViewById(R.id.add_on_facebook_prab);
         fbPrab.setOnClickListener(new View.OnClickListener() {
@@ -105,7 +105,8 @@ public class CreditActivity extends AppCompatActivity {
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
-        getSupportActionBar().setDisplayShowTitleEnabled(false);
+        getSupportActionBar().setTitle("Tentang Kami");
+
 
     }
 
