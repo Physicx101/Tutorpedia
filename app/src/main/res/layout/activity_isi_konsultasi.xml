@@ -44,21 +44,26 @@
                     android:id="@+id/TVisikonsultasijudul"
                     android:text="Soal"
                     android:textSize="30dp"
+                    android:layout_marginLeft="16dp"
                     android:textColor="#000000"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content" />
 
                 <TextView
                     android:layout_weight="4"
                     android:id="@+id/TVisikonsultasidesc"
                     android:text="Soal"
+                    android:layout_marginLeft="16dp"
                     android:textSize="20dp"
                     android:textColor="#000000"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content" />
 
 
             </LinearLayout>
+
+            <include layout="@layout/item_divider" >
+            </include>
 
 
         </LinearLayout>
@@ -79,7 +84,8 @@
                     android:layout_height="match_parent"
                     android:layout_below="@+id/textView"
                     android:layout_alignParentStart="true"
-                    android:layout_marginStart="14dp"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginBottom="4dp"
                     android:divider="@null"
                     android:dividerHeight="0dp"
                     android:id="@+id/komenListView" />

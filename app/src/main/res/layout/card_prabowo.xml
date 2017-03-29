@@ -58,7 +58,7 @@
         </LinearLayout>
 
         <LinearLayout
-            android:id="@+id/add_on_facebook"
+            android:id="@+id/add_on_facebook_prab"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:clickable="true"
@@ -88,7 +88,7 @@
         </LinearLayout>
 
         <LinearLayout
-            android:id="@+id/follow_on_twitter"
+            android:id="@+id/follow_on_ig_prab"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:clickable="true"
@@ -99,10 +99,10 @@
             android:paddingRight="16dp">
 
             <ImageView
-                android:id="@+id/icon_twitter"
+                android:id="@+id/icon_ig"
                 android:layout_width="24dp"
                 android:layout_height="24dp"
-                android:src="@drawable/ic_twitter_white_24dp"
+                android:src="@drawable/ic_instagram_24dp"
                 tools:ignore="ContentDescription,UnusedAttribute" />
 
             <TextView
@@ -112,7 +112,7 @@
                 android:layout_marginStart="32dp"
                 android:paddingBottom="8dp"
                 android:paddingTop="8dp"
-                android:text="Follow on Twitter"
+                android:text="Follow on Instagram"
                 android:textAppearance="@style/TextAppearance.AppCompat.Subhead" />
 
         </LinearLayout>

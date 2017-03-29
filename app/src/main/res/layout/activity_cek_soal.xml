@@ -1,29 +1,36 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
 
 
-    <Button
-        android:text="Kumpulkan"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/kumpul"
-        android:onClick="kumpul"/>
-
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:padding="8dp"
         tools:context=".MainActivity">
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/recycler_view"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:scrollbars="vertical" />
+            android:layout_marginBottom="36dp"
+            android:scrollbars="vertical"/>
+
+        <Button
+            android:id="@+id/kumpul"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_gravity="bottom|center"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Button"
+            android:backgroundTint="@color/colorPrimary"
+            android:textColor="@color/white"
+            android:onClick="kumpul"
+            android:text="Kumpulkan"
+            android:layout_alignParentStart="true"/>
+
 
     </RelativeLayout>
 
-</LinearLayout>
+</RelativeLayout>
