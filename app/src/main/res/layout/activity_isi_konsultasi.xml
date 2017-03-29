@@ -28,6 +28,7 @@
                     android:id="@+id/IVisikonsultasisoal"
                     android:layout_width="match_parent"
                     android:scaleType="centerCrop"
+                    android:adjustViewBounds="true"
                     android:layout_height="match_parent" />
 
             </LinearLayout>

@@ -25,7 +25,6 @@
         app:bb_tabXmlResource="@xml/bottombar_tabs"
         app:bb_inActiveTabColor="@color/colorPrimaryDark"
         app:bb_activeTabColor="@color/white"
-        app:bb_behavior="shy"
         android:layout_gravity="bottom"/>
 </android.support.design.widget.CoordinatorLayout>
 

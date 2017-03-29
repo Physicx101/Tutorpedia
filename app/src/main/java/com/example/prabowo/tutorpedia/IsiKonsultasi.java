@@ -8,6 +8,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -51,6 +52,7 @@ public class IsiKonsultasi extends AppCompatActivity implements View.OnClickList
     private DatabaseReference databaseReference;;
     private StorageReference mStorageRef;
     private FirebaseStorage storage;
+    private Boolean isImageFull;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,6 +67,21 @@ public class IsiKonsultasi extends AppCompatActivity implements View.OnClickList
 
 
         IVisikonsultasisoal = (ImageView) findViewById(R.id.IVisikonsultasisoal);
+        IVisikonsultasisoal.setOnClickListener(new View.OnClickListener() {
+            //Untuk fullscreen
+            @Override
+            public void onClick(View view) {
+                if (isImageFull) {
+                    isImageFull = false;
+                    IVisikonsultasisoal.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT));
+                    IVisikonsultasisoal.setAdjustViewBounds(true);
+                } else {
+                    isImageFull = true;
+                    IVisikonsultasisoal.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT));
+                    IVisikonsultasisoal.setScaleType(ImageView.ScaleType.FIT_XY);
+                }
+            }
+        });
         TVisikonsultasijudul = (TextView) findViewById(R.id.TVisikonsultasijudul);
         TVisikonsultasidesc = (TextView) findViewById(R.id.TVisikonsultasidesc);
         Bundle extras = getIntent().getExtras();
