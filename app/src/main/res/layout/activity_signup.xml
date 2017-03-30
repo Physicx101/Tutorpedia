@@ -23,6 +23,17 @@
             android:id="@+id/imageView"
             android:layout_weight="0.35" />
 
+        <com.github.florent37.materialtextfield.MaterialTextField
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:mtf_image="@drawable/ic_account_circle_black_24dp">
+
+            <EditText android:id="@+id/ETnamapengguna"
+                      android:layout_width="match_parent"
+                      android:layout_height="wrap_content"
+                      android:hint="Nama" />
+        </com.github.florent37.materialtextfield.MaterialTextField>
+
 
         <com.github.florent37.materialtextfield.MaterialTextField
             android:layout_width="match_parent"
@@ -49,16 +60,7 @@
                 android:hint="Password" />
         </com.github.florent37.materialtextfield.MaterialTextField>
 
-        <com.github.florent37.materialtextfield.MaterialTextField
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:mtf_image="@drawable/ic_lock_black_24dp">
 
-            <EditText android:id="@+id/ETnamapengguna"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="Nama Anda" />
-        </com.github.florent37.materialtextfield.MaterialTextField>
 
         <android.support.v7.widget.AppCompatButton
             android:id="@+id/BTregister"

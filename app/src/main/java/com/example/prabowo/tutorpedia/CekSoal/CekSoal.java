@@ -111,7 +111,7 @@ public class CekSoal extends AppCompatActivity {
 
                 @Override
                 public void onDataChange(DataSnapshot dataSnapshot) {
-                    point = Integer.parseInt(dataSnapshot.getValue().toString());
+                    //point = Integer.parseInt(dataSnapshot.getValue().toString());
 
                 }
 

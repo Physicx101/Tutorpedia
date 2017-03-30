@@ -1,216 +1,227 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                xmlns:app="http://schemas.android.com/apk/res-auto"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              xmlns:tools="http://schemas.android.com/tools"
+              android:orientation="vertical">
+
     <include
         android:id="@+id/toolbar"
         layout="@layout/toolbar_main"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
 
-    <LinearLayout
-        android:layout_below="@id/toolbar"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:layout_centerHorizontal="true"
-        android:layout_alignParentBottom="true"
-        android:weightSum="1">
+        android:layout_height="wrap_content"
+        android:layout_below="@id/toolbar"
+        android:clipToPadding="false"
+        android:isScrollContainer="true">
 
-        <RelativeLayout
-            android:id="@+id/profile_layout"
+
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="100dp"
-            android:paddingBottom="8dp"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentStart="true">
-
-
-
-            <de.hdodenhof.circleimageview.CircleImageView
-                xmlns:app="http://schemas.android.com/apk/res-auto"
-                android:id="@+id/user_profile_photo"
-                android:layout_width="80dp"
-                android:layout_height="80dp"
-                android:src="@drawable/avatar"
-                android:layout_marginStart="16dp"
-                android:layout_centerVertical="true"
-                android:layout_alignParentStart="true"/>
-
-            <TextView
-                android:id="@+id/email_user"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="tutorpedia@gmail.com"
-                android:textAppearance="@style/TextAppearance.AppCompat.Small"
-                android:textColor="@color/secondaryText"
-                android:layout_below="@+id/user_profile_name"
-                android:layout_alignStart="@+id/user_profile_name"/>
-
-            <TextView
-                android:id="@+id/user_profile_name"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Nama Pengguna"
-                android:layout_marginTop="18dp"
-                android:textAppearance="@style/TextAppearance.AppCompat.Large"
-                android:textColor="@color/primaryText"
-                android:layout_alignTop="@+id/user_profile_photo"
-                android:layout_toEndOf="@+id/user_profile_photo"
-                android:layout_marginStart="18dp"/>
-
-        </RelativeLayout>
-
-        <include layout="@layout/item_divider" />
-
-        <RelativeLayout
-            android:id="@+id/ringkasanAkun"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="?attr/selectableItemBackground"
-            android:clickable="true"
-            android:padding="@dimen/activity_horizontal_margin">
-
-            <ImageView
-                android:id="@+id/icon_akun"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:layout_marginEnd="@dimen/activity_horizontal_margin"
-                android:src="@drawable/ic_account_circle_black_24dp"
-                android:tint="@color/colorPrimary"/>
-
-            <TextView
-                android:id="@+id/TV_akun"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/activity_horizontal_margin"
-                android:layout_toEndOf="@id/icon_akun"
-                android:text="Ringkasan Akun"
-                android:textAppearance="@style/TextAppearance.AppCompat.Menu"
-                android:textColor="#212121"/>
-
-        </RelativeLayout>
-
-        <include layout="@layout/item_divider"/>
-
-        <RelativeLayout
-            android:id="@+id/riwayatTes"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="?attr/selectableItemBackground"
-            android:clickable="true"
-            android:padding="@dimen/activity_horizontal_margin">
-
-            <ImageView
-                android:id="@+id/icon_tes"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:layout_marginEnd="@dimen/activity_horizontal_margin"
-                android:src="@drawable/ic_class_black_24dp"
-                android:tint="@color/colorPrimary"/>
-
-            <TextView
-                android:id="@+id/TV_riwayat"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/activity_horizontal_margin"
-                android:layout_toEndOf="@id/icon_tes"
-                android:ellipsize="end"
-                android:maxLines="1"
-                android:text="Riwayat Tes"
-                android:textAppearance="@style/TextAppearance.AppCompat.Menu"
-                android:textColor="#212121"/>
-
-        </RelativeLayout>
-
-        <include layout="@layout/item_divider"/>
-
-        <RelativeLayout
-            android:id="@+id/bantuan"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="?attr/selectableItemBackground"
-            android:clickable="true"
-            android:padding="@dimen/activity_horizontal_margin">
-
-            <ImageView
-                android:id="@+id/icon_help"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:layout_marginEnd="@dimen/activity_horizontal_margin"
-                android:src="@drawable/ic_help_black_24dp"
-                android:tint="@color/colorPrimary"/>
-
-            <TextView
-                android:id="@+id/TV_help"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/activity_horizontal_margin"
-                android:layout_toEndOf="@id/icon_help"
-                android:ellipsize="end"
-                android:maxLines="1"
-                android:text="Tentang Kami"
-                android:textAppearance="@style/TextAppearance.AppCompat.Menu"
-                android:textColor="#212121"/>
-
-        </RelativeLayout>
-
-
-        <include layout="@layout/item_divider"/>
-
-        <RelativeLayout
-            android:id="@+id/keluar"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="#DC143C"
-            android:clickable="true"
-            android:padding="@dimen/activity_horizontal_margin">
-
-            <ImageView
-                android:id="@+id/icon_exit"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:layout_marginEnd="@dimen/activity_horizontal_margin"
-                android:src="@drawable/ic_exit_to_app_white_24dp"/>
-
-            <TextView
-                android:id="@+id/TV_exit"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/activity_horizontal_margin"
-                android:layout_toEndOf="@id/icon_exit"
-                android:ellipsize="end"
-                android:maxLines="1"
-                android:text="KELUAR"
-                android:textStyle="bold"
-                android:textAppearance="@style/TextAppearance.AppCompat.Menu"
-                android:textColor="@color/white"/>
-
-        </RelativeLayout>
-
-
-        <include layout="@layout/item_divider"/>
-
-        <Button
-            android:layout_marginTop="120dp"
-            android:id="@+id/BTpoint"
-            android:layout_width="150dp"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_alignParentBottom="true"
-            android:layout_centerHorizontal="true"
-            android:layout_gravity="bottom|center"
-            android:background="#DC143C"
-            android:text="Point"
-            android:textAppearance="@style/Base.TextAppearance.AppCompat.Button"
-            android:textColor="#ffffff"/>
+            android:layout_alignParentStart="true"
+            android:orientation="vertical"
+            android:weightSum="1">
+
+            <RelativeLayout
+                android:id="@+id/profile_layout"
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:paddingBottom="8dp">
 
 
-    </LinearLayout>
+                <de.hdodenhof.circleimageview.CircleImageView
+                    xmlns:app="http://schemas.android.com/apk/res-auto"
+                    android:id="@+id/user_profile_photo"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:layout_alignParentStart="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="16dp"
+                    android:src="@drawable/avatar"/>
+
+                <TextView
+                    android:id="@+id/email_user"
+                    android:paddingTop="8dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignStart="@+id/user_profile_name"
+                    android:layout_below="@+id/user_profile_name"
+                    android:text="tutorpedia@gmail.com"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                    android:textColor="@color/secondaryText"/>
+
+                <TextView
+                    android:id="@+id/user_profile_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignTop="@+id/user_profile_photo"
+                    android:layout_marginStart="18dp"
+                    android:layout_marginTop="18dp"
+                    android:layout_toEndOf="@+id/user_profile_photo"
+                    android:text="Nama Pengguna"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                    android:textColor="@color/primaryText"/>
+
+            </RelativeLayout>
+
+            <include layout="@layout/item_divider"/>
+
+            <RelativeLayout
+                android:id="@+id/ringkasanAkun"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="?attr/selectableItemBackground"
+                android:clickable="true"
+                android:padding="@dimen/activity_horizontal_margin">
+
+                <ImageView
+                    android:id="@+id/icon_akun"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_centerVertical="true"
+                    android:layout_marginEnd="@dimen/activity_horizontal_margin"
+                    android:src="@drawable/ic_person"
+
+                    tools:ignore="ContentDescription,UnusedAttribute"/>
+
+                <TextView
+                    android:id="@+id/TV_akun"
+                    android:paddingTop="4dp"
+                    android:paddingBottom="4dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/activity_horizontal_margin"
+                    android:layout_toEndOf="@id/icon_akun"
+                    android:text="Ringkasan Akun"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Subhead"/>
+
+            </RelativeLayout>
+
+            <include layout="@layout/item_divider"/>
+
+            <RelativeLayout
+                android:id="@+id/riwayatTes"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="?attr/selectableItemBackground"
+                android:clickable="true"
+                android:padding="@dimen/activity_horizontal_margin">
+
+                <ImageView
+                    android:id="@+id/icon_tes"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_centerVertical="true"
+                    android:layout_marginEnd="@dimen/activity_horizontal_margin"
+                    android:src="@drawable/ic_file"
+                    tools:ignore="ContentDescription,UnusedAttribute"/>
+
+                <TextView
+                    android:id="@+id/TV_riwayat"
+                    android:paddingTop="4dp"
+                    android:paddingBottom="4dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/activity_horizontal_margin"
+                    android:layout_toEndOf="@id/icon_tes"
+                    android:text="Riwayat Tes"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Subhead"/>
+
+            </RelativeLayout>
+
+            <include layout="@layout/item_divider"/>
+
+            <RelativeLayout
+                android:id="@+id/bantuan"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="?attr/selectableItemBackground"
+                android:clickable="true"
+                android:padding="@dimen/activity_horizontal_margin">
+
+                <ImageView
+                    android:id="@+id/icon_help"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginEnd="@dimen/activity_horizontal_margin"
+                    android:src="@drawable/ic_help_circle"
+                    tools:ignore="ContentDescription,UnusedAttribute"/>
+
+                <TextView
+                    android:id="@+id/TV_help"
+                    android:paddingTop="4dp"
+                    android:paddingBottom="4dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/activity_horizontal_margin"
+                    android:layout_toEndOf="@id/icon_help"
+                    android:text="Tentang Kami"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Subhead"/>
+
+            </RelativeLayout>
 
 
-</RelativeLayout>
+            <include layout="@layout/item_divider"/>
+
+            <RelativeLayout
+                android:id="@+id/keluar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#DC143C"
+                android:clickable="true"
+                android:padding="@dimen/activity_horizontal_margin">
+
+                <ImageView
+                    android:id="@+id/icon_exit"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_centerVertical="true"
+                    android:layout_marginEnd="@dimen/activity_horizontal_margin"
+                    android:src="@drawable/ic_exit"
+                    tools:ignore="ContentDescription,UnusedAttribute"/>
+
+                <TextView
+                    android:id="@+id/TV_exit"
+                    android:paddingTop="4dp"
+                    android:paddingBottom="4dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/activity_horizontal_margin"
+                    android:layout_toEndOf="@id/icon_exit"
+                    android:text="KELUAR"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
+                    android:textColor="@color/white"/>
+
+            </RelativeLayout>
+
+
+            <include layout="@layout/item_divider"/>
+
+            <Button
+                android:id="@+id/BTpoint"
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_centerHorizontal="true"
+                android:layout_gravity="bottom|center"
+                android:layout_marginTop="64dp"
+                android:background="#DC143C"
+                android:text="Point"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Button"
+                android:textColor="#ffffff"/>
+
+
+        </LinearLayout>
+    </ScrollView>
+
+
+</LinearLayout>
