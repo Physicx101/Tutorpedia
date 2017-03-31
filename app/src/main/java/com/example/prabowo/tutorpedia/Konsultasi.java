@@ -68,7 +68,7 @@ public class Konsultasi extends AppCompatActivity implements View.OnClickListene
 
 
 
-        Bundle extras = getIntent().getExtras();
+       Bundle extras = getIntent().getExtras();
         Bundle extras2=getIntent().getExtras();
 
 
@@ -83,6 +83,8 @@ public class Konsultasi extends AppCompatActivity implements View.OnClickListene
         linearLayoutManager.setReverseLayout(true);
 
         listItems = new ArrayList<>();
+
+
 
         fab = (FloatingActionButton) findViewById(R.id.fabkonsul);
         fab.setOnClickListener(this);
