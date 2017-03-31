@@ -182,9 +182,6 @@ public class IsiKonsultasi extends AppCompatActivity implements View.OnClickList
         recyclerView.setLayoutManager(linearLayoutManager);
         recyclerView.setAdapter(adapter);
 
-        DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(recyclerView.getContext(),
-                linearLayoutManager.getOrientation());
-        recyclerView.addItemDecoration(dividerItemDecoration);
 
         /*ArrayAdapter<Komentar> adapter = new MyListAdapter();
         ListView list = (ListView) findViewById(R.id.komenListView);
