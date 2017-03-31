@@ -65,7 +65,7 @@ public class FormTambahKonsultasi extends AppCompatActivity implements View.OnCl
 
         ETtambahjudul = (EditText) findViewById(R.id.ETtambahjudulkonsul);
         ETtambahdesc = (EditText) findViewById(R.id.ETtambahdesckonsul);
-        ETtambahimg = (EditText)findViewById(R.id.ETtambahimgkonsul);
+        //ETtambahimg = (EditText)findViewById(R.id.ETtambahimgkonsul);
 
         databaseReference = FirebaseDatabase.getInstance().getReference();
 

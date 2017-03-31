@@ -60,7 +60,7 @@ public class IsiKonsultasi extends AppCompatActivity implements View.OnClickList
     private DatabaseReference databaseReference;;
     private StorageReference mStorageRef;
     private FirebaseStorage storage;
-    private Boolean isImageFull;
+    private boolean isImageFull;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

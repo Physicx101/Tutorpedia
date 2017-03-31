@@ -79,7 +79,6 @@ public class Konsultasi extends AppCompatActivity implements View.OnClickListene
         recyclerView.setHasFixedSize(true);
         linearLayoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(linearLayoutManager);
-        linear = (LinearLayout) findViewById(R.id.LLayoutkonsultasi);
         linearLayoutManager.setStackFromEnd(true);
         linearLayoutManager.setReverseLayout(true);
 
