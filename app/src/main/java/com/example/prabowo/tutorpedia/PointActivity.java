@@ -28,9 +28,9 @@ public class PointActivity extends AppCompatActivity implements View.OnClickList
     private FirebaseAuth firebaseAuth;
     private DatabaseReference databaseReference;
     DatabaseReference mRootref = FirebaseDatabase.getInstance().getReference();
-    private static int point;
+    public static int points;
 
-    private static String points;
+    private static String pointss;
     private TextView TVpoint,TVhargatpoin,TVkodehadiahinfo,TVkodehadiahinfo2,TVkodehadiah,TVkodehadiahuid;
     private Button BTpoint;
     private String Pointnya,Hadiah;
@@ -72,8 +72,8 @@ public class PointActivity extends AppCompatActivity implements View.OnClickList
 
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                point = Integer.parseInt(dataSnapshot.getValue().toString());
-                TVpoint.setText(dataSnapshot.getValue().toString());
+                points = dataSnapshot.getValue().hashCode();
+//                TVpoint.setText(dataSnapshot.getValue().toString());
 
             }
 
@@ -82,8 +82,10 @@ public class PointActivity extends AppCompatActivity implements View.OnClickList
 
             }
         });
-        points = FirebaseDatabase.getInstance().getReference().child("User").child(user.getUid()).child("Point").getKey();
-        TVpoint.setText(points);
+//        points = FirebaseDatabase.getInstance().getReference().child("User").child(user.getUid()).child("Point").getKey();
+//        point = Integer.parseInt(points);
+        pointss = String.valueOf(points);
+        TVpoint.setText(pointss);
 
     }
 
@@ -95,9 +97,9 @@ public class PointActivity extends AppCompatActivity implements View.OnClickList
         firebaseAuth = FirebaseAuth.getInstance();
         FirebaseUser user = firebaseAuth.getCurrentUser();
 
-        if(point>=100){
+        if(points>=100){
             databaseReference = FirebaseDatabase.getInstance().getReference();
-            databaseReference.child("User").child(user.getUid()).child("Point").setValue(point-100);
+            databaseReference.child("User").child(user.getUid()).child("Point").setValue(points-100);
             String uuid = UUID.randomUUID().toString();
             TVkodehadiah.setText("Kode hadiah : " + uuid);
             TVkodehadiahuid.setText("Kode User : "+ user.getUid().toString());
@@ -106,7 +108,7 @@ public class PointActivity extends AppCompatActivity implements View.OnClickList
         }
 
         if(v == BTpoint){
-            if (point< 100){
+            if (points< 100){
                 Toast.makeText(this,"Saldo Kurang",Toast.LENGTH_SHORT).show();
             }
 

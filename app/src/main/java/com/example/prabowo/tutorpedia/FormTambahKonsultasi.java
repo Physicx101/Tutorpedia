@@ -33,6 +33,7 @@ import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
 import java.io.ByteArrayOutputStream;
+import java.util.Random;
 
 import static com.example.prabowo.tutorpedia.IsiKonsultasi.jumlah;
 
@@ -50,11 +51,15 @@ public class FormTambahKonsultasi extends AppCompatActivity implements View.OnCl
     private StorageReference mStorageRef;
     private FirebaseAuth firebaseAuth;
     private FirebaseAuth.AuthStateListener mAuthStateListener;
+    Random rand = new Random();
+    long  random = rand.nextLong();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_form_tambah_konsultasi);
+
+
 
 
 
@@ -73,6 +78,7 @@ public class FormTambahKonsultasi extends AppCompatActivity implements View.OnCl
     public void onClick(final View v) {
 
         if (v == fab){
+
             langkah = 1;
             Bundle extras = getIntent().getExtras();
             Matkul = extras.getString("Matkul");
@@ -90,7 +96,7 @@ public class FormTambahKonsultasi extends AppCompatActivity implements View.OnCl
 
                                                   databaseReference.child("Konsultasi").child(Matkul).child("Post" + jumlah).child("judul").setValue(ETtambahjudul.getText().toString());
                                                   databaseReference.child("Konsultasi").child(Matkul).child("Post" + jumlah).child("deskripsi").setValue(ETtambahdesc.getText().toString());
-                                                  databaseReference.child("Konsultasi").child(Matkul).child("Post" + jumlah).child("img").setValue(ETtambahimg.getText().toString());
+                                                  databaseReference.child("Konsultasi").child(Matkul).child("Post" + jumlah).child("img").setValue(random);
                                                   databaseReference.child("Konsultasi").child(Matkul).child("Post" + jumlah).child("Komentar")
                                                           .child("Komentar0").child("pengirim").setValue("Admin");
                                                   databaseReference.child("Konsultasi").child(Matkul).child("Post" + jumlah).child("Komentar")
@@ -192,7 +198,7 @@ public class FormTambahKonsultasi extends AppCompatActivity implements View.OnCl
                 byte[] dataimage = baos.toByteArray();
 
 
-                StorageReference foto = mStorageRef.child(ETtambahimg.getText()+".jpg");
+                StorageReference foto = mStorageRef.child(random+"Konsultasi.jpg");
 
                 UploadTask uploadTask = foto.putBytes(dataimage);
                 uploadTask.addOnFailureListener(new OnFailureListener() {
@@ -236,7 +242,7 @@ public class FormTambahKonsultasi extends AppCompatActivity implements View.OnCl
 
 
 
-                StorageReference foto = mStorageRef.child(ETtambahimg.getText()+".jpg");
+                StorageReference foto = mStorageRef.child(random+"Konsultasi.jpg");
 
                 UploadTask uploadTask = foto.putFile(selectedImage);
                 uploadTask.addOnFailureListener(new OnFailureListener() {

@@ -279,7 +279,7 @@ public class IsiKonsultasi extends AppCompatActivity implements View.OnClickList
 
                         storage = FirebaseStorage.getInstance();
                         mStorageRef = storage.getReferenceFromUrl("gs://tutorpedia-17ba0.appspot.com/FotoProfil/");
-                        StorageReference foto = mStorageRef.child(listItem.getImageUrlkonsultasi()+".jpg");
+                        StorageReference foto = mStorageRef.child(listItem.getImageUrlkonsultasi()+"Konsultasi.jpg");
                         Glide.with(getApplicationContext())
                                 .using(new FirebaseImageLoader())
                                 .load(foto)
