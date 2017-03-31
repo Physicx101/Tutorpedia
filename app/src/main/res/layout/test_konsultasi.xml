@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                                                 xmlns:app="http://schemas.android.com/apk/res-auto"
+                                                 android:id="@+id/main_content"
+                                                 android:layout_width="match_parent"
+                                                 android:layout_height="match_parent"
+                                                 android:fitsSystemWindows="true">
+
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <include
+        android:id="@+id/toolbar"
+        layout="@layout/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/toolbar">
+
+        <include layout="@layout/konsul_isi"
+                 android:layout_width="match_parent"
+                 android:layout_height="match_parent"
+                 android:layout_above="@+id/tambah_komentar"/>
+
+        <LinearLayout
+            android:id="@+id/tambah_komentar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            app:layout_anchorGravity="bottom|right|end"
+            android:orientation="horizontal">
+
+
+            <EditText
+                android:id="@+id/ETtambahkomentar"
+                android:layout_width="0dp"
+                android:layout_height="fill_parent"
+                android:layout_gravity="center_vertical|center_horizontal"
+                android:layout_weight="5"
+                android:background="#E8EAF6"
+                android:gravity="center|left"
+                android:hint="Tuliskan Komentar"
+                android:inputType="textMultiLine|textCapSentences"
+                android:maxLines="5"
+                android:minLines="3"
+                android:paddingLeft="16dp"
+                android:scrollHorizontally="false"
+                android:textColor="@color/primaryText"/>
+
+
+            <Button
+                android:id="@+id/BTmasukkankomentar"
+                style="@style/TextAppearance.AppCompat.Button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical|center_horizontal"
+                android:background="@color/colorPrimary"
+                android:gravity="center"
+                android:text="KIRIM"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:textColor="@color/white"/>
+
+
+
+        </LinearLayout>
+    </RelativeLayout>
+</RelativeLayout>
+
+
+
+
+
+
+</android.support.design.widget.CoordinatorLayout>

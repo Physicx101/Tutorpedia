@@ -2,10 +2,15 @@ package com.example.prabowo.tutorpedia;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.DividerItemDecoration;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -16,6 +21,7 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.example.prabowo.tutorpedia.CekSoal.FirebaseImageLoader;
+import com.example.prabowo.tutorpedia.CekSoal.RecyclerViewAdapter;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -34,12 +40,14 @@ import java.util.List;
 public class IsiKonsultasi extends AppCompatActivity implements View.OnClickListener{
     private ImageView IVisikonsultasisoal;
     private static int posisiItemRecycler;
-    private List<ListItemTutor> mListItemTutors;
+    private List<Komentar> mListItemKomen = new ArrayList<>();
     private TextView TVisikonsultasijudul;
     private TextView TVisikonsultasidesc;
     private EditText ETtambahkomentar;
-    private ImageView BTtambahkomentar;
+    private Button BTtambahkomentar;
     private FirebaseAuth firebaseAuth;
+    private LinearLayoutManager linearLayoutManager;
+    private RecyclerView recyclerView;
     public static long jumlah;
     private static int filter;
     String Matkuldis,Jenisdis;
@@ -48,7 +56,7 @@ public class IsiKonsultasi extends AppCompatActivity implements View.OnClickList
     String CV;
     int i = 0;
     DatabaseReference mRootref = FirebaseDatabase.getInstance().getReference();
-    private List<Komentar> komenku = new ArrayList<Komentar>();
+   //private List<Komentar> komenku = new ArrayList<Komentar>();
     private DatabaseReference databaseReference;;
     private StorageReference mStorageRef;
     private FirebaseStorage storage;
@@ -57,12 +65,22 @@ public class IsiKonsultasi extends AppCompatActivity implements View.OnClickList
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_isi_konsultasi);
+        setContentView(R.layout.test_konsultasi);
+
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        getSupportActionBar().setTitle("Konsultasi");
+
 
         databaseReference = FirebaseDatabase.getInstance().getReference();
 
+
+
         ETtambahkomentar = (EditText) findViewById(R.id.ETtambahkomentar);
-        BTtambahkomentar = (ImageView) findViewById(R.id.BTmasukkankomentar);
+        BTtambahkomentar = (Button) findViewById(R.id.BTmasukkankomentar);
         BTtambahkomentar.setOnClickListener(this);
 
 
@@ -93,24 +111,30 @@ public class IsiKonsultasi extends AppCompatActivity implements View.OnClickList
         filter = 1;
         populatekomentarlist();
 
-        registerClickCallBack();
+        //registerClickCallBack();
 
     }
 
-    private void registerClickCallBack() {
+    @Override
+    public boolean onSupportNavigateUp() {
+        onBackPressed();
+        return true;
+    }
+
+    /*private void registerClickCallBack() {
         ListView list = (ListView) findViewById(R.id.komenListView);
         list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View viewClicked, int position, long id) {
 
-                Komentar klikkomen = komenku.get(position);
+                Komentar klikkomen = mListItemKomen.get(position);
                 String Message = " Ini posisi " + position + klikkomen.getKomen();
                 Toast.makeText(IsiKonsultasi.this,Message,Toast.LENGTH_LONG).show();
 
             }
         });
 
-    }
+    }*/
 
 
 
@@ -134,7 +158,7 @@ public class IsiKonsultasi extends AppCompatActivity implements View.OnClickList
             public void onDataChange(DataSnapshot snapshot) {
                 if (filter == 1){
                     for (DataSnapshot postSnapshot : snapshot.getChildren()) {
-                        komenku.add(new Komentar(postSnapshot.child("pengirim").getValue().toString(),
+                        mListItemKomen.add(new Komentar(postSnapshot.child("pengirim").getValue().toString(),
                                 postSnapshot.child("desc").getValue().toString(),
                                 postSnapshot.child("img").getValue().toString()));
 
@@ -155,13 +179,27 @@ public class IsiKonsultasi extends AppCompatActivity implements View.OnClickList
     }
 
     private void populatelistview() {
-        ArrayAdapter<Komentar> adapter = new MyListAdapter();
+        RecyclerView.Adapter<AdapterKomen.ViewHolder> adapter = new AdapterKomen(mListItemKomen, this);
+        linearLayoutManager = new LinearLayoutManager(this);
+        linearLayoutManager.setStackFromEnd(true);
+        linearLayoutManager.setReverseLayout(true);
+
+        recyclerView = (RecyclerView) findViewById(R.id.komenListView);
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setLayoutManager(linearLayoutManager);
+        recyclerView.setAdapter(adapter);
+
+        DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(recyclerView.getContext(),
+                linearLayoutManager.getOrientation());
+        recyclerView.addItemDecoration(dividerItemDecoration);
+
+        /*ArrayAdapter<Komentar> adapter = new MyListAdapter();
         ListView list = (ListView) findViewById(R.id.komenListView);
-        list.setAdapter(adapter);
+        list.setAdapter(adapter);*/
 
     }
 
-    private class MyListAdapter extends ArrayAdapter<Komentar> {
+    /*private class MyListAdapter extends ArrayAdapter<Komentar> {
 
         public MyListAdapter() {
             super(IsiKonsultasi.this, R.layout.item_komentar, komenku);
@@ -175,8 +213,8 @@ public class IsiKonsultasi extends AppCompatActivity implements View.OnClickList
                 itemView = getLayoutInflater().inflate(R.layout.item_komentar,parent,false);
             }
             Komentar currentKomentar = komenku.get(position);
-            /*ImageView gambarkomen = (ImageView) itemView.findViewById(R.id.IVkomen);
-            gambarkomen.setImageURI(Uri.parse("https://openclipart.org/download/10941/TzeenieWheenie-red-green-OK-not-OK-Icons-1.svg"));*/
+            //ImageView gambarkomen = (ImageView) itemView.findViewById(R.id.IVkomen);
+            //gambarkomen.setImageURI(Uri.parse("https://openclipart.org/download/10941/TzeenieWheenie-red-green-OK-not-OK-Icons-1.svg"));
 
             TextView pengirim = (TextView) itemView.findViewById(R.id.TVpengirimkomen);
             pengirim.setText(currentKomentar.getPengirim());
@@ -200,7 +238,7 @@ public class IsiKonsultasi extends AppCompatActivity implements View.OnClickList
 
 
 
-    }
+    }*/
 
 
     @Override
