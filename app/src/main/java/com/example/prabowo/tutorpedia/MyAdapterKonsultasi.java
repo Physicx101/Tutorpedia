@@ -10,9 +10,13 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+import com.example.prabowo.tutorpedia.CekSoal.FirebaseImageLoader;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
@@ -24,6 +28,9 @@ import java.util.List;
 public class MyAdapterKonsultasi extends RecyclerView.Adapter<MyAdapterKonsultasi.ViewHolder> {
 
     private FirebaseAuth firebaseAuth;
+    private DatabaseReference databaseReference;;
+    private StorageReference mStorageRef;
+    private FirebaseStorage storage;
 
     DatabaseReference mRootref = FirebaseDatabase.getInstance().getReference();
 
@@ -52,10 +59,13 @@ public class MyAdapterKonsultasi extends RecyclerView.Adapter<MyAdapterKonsultas
 
         holder.TVheadkonsultasi.setText(listItem.getJudulkonsultasi());
         holder.TVdesckonsultasi.setText(listItem.getDeskripsikonsultasi());
-        /*Picasso.with(context)
-                .load(listItem.getImageUrlkonsultasi())
-                .into(holder.IVgambarkonsultasi);*/
-
+        storage = FirebaseStorage.getInstance();
+        mStorageRef = storage.getReferenceFromUrl("gs://tutorpedia-17ba0.appspot.com/FotoProfil/");
+        StorageReference foto = mStorageRef.child(listItem.getImageUrlkonsultasi()+"Konsultasi.jpg");
+        Glide.with(context)
+                .using(new FirebaseImageLoader())
+                .load(foto)
+                .into(holder.IVgambarkonsultasi);
     }
 
     @Override
