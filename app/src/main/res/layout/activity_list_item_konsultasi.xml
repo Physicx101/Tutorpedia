@@ -38,6 +38,7 @@
                 android:layout_marginStart="8dp"
                 android:layout_toEndOf="@+id/user_image"
                 android:text="Ahmad Fauzi Wibowo"
+                android:textStyle="bold"
                 android:textAppearance="@style/TextAppearance.AppCompat.Subhead"/>
         </RelativeLayout>
 
