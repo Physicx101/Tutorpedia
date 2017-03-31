@@ -105,7 +105,7 @@ public class FormTambahKonsultasi extends AppCompatActivity implements View.OnCl
                                                           .child("Komentar0").child("img").setValue("Random");
                                                   databaseReference.child("JumlahKomentarBenar").child(Matkul).child("Post" + jumlah).setValue(1);
 
-                                                  Toast.makeText(getApplicationContext(),"Konsultasi anda telah ter upload ", Toast.LENGTH_LONG).show();
+                                                  Toast.makeText(getApplicationContext(),"Konsultasi Sudah Terupload ", Toast.LENGTH_LONG).show();
 
                                               }
                                               langkah++;
@@ -125,6 +125,7 @@ public class FormTambahKonsultasi extends AppCompatActivity implements View.OnCl
 
 
         }
+        finish();
 
     }
 
