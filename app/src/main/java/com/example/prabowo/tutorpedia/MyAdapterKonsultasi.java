@@ -59,13 +59,19 @@ public class MyAdapterKonsultasi extends RecyclerView.Adapter<MyAdapterKonsultas
 
         holder.TVheadkonsultasi.setText(listItem.getJudulkonsultasi());
         holder.TVdesckonsultasi.setText(listItem.getDeskripsikonsultasi());
+        holder.TVnamaposter.setText(listItem.getPosterName());
         storage = FirebaseStorage.getInstance();
         mStorageRef = storage.getReferenceFromUrl("gs://tutorpedia-17ba0.appspot.com/FotoProfil/");
         StorageReference foto = mStorageRef.child(listItem.getImageUrlkonsultasi()+"Konsultasi.jpg");
+        StorageReference fotoposter = mStorageRef.child(listItem.getPosterImage() + "PP" + ".jpg");
         Glide.with(context)
                 .using(new FirebaseImageLoader())
                 .load(foto)
                 .into(holder.IVgambarkonsultasi);
+        Glide.with(context)
+                .using(new FirebaseImageLoader())
+                .load(fotoposter)
+                .into(holder.IVfotoposter);
     }
 
     @Override
@@ -81,6 +87,8 @@ public class MyAdapterKonsultasi extends RecyclerView.Adapter<MyAdapterKonsultas
         private TextView TVheadkonsultasi;
         private TextView TVdesckonsultasi;
         public ImageView IVgambarkonsultasi;
+        private TextView TVnamaposter;
+        private ImageView IVfotoposter;
 
 
         public ViewHolder(View itemView) {
@@ -89,6 +97,8 @@ public class MyAdapterKonsultasi extends RecyclerView.Adapter<MyAdapterKonsultas
             TVheadkonsultasi = (TextView) itemView.findViewById(R.id.TVheadkonsultasi);
             TVdesckonsultasi = (TextView) itemView.findViewById(R.id.TVdesckonsultasi);
             IVgambarkonsultasi = (ImageView) itemView.findViewById(R.id.IVgambarkonsultasi);
+            TVnamaposter = (TextView) itemView.findViewById(R.id.user_name_konsul);
+            IVfotoposter = (ImageView) itemView.findViewById(R.id.user_image_konsul);
             itemView.setClickable(true);
             itemView.setOnClickListener(this);
 

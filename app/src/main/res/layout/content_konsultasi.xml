@@ -38,19 +38,19 @@
 
             <de.hdodenhof.circleimageview.CircleImageView
                 xmlns:app="http://schemas.android.com/apk/res-auto"
-                android:id="@+id/user_image"
+                android:id="@+id/user_image_isi_konsul"
                 android:layout_width="42dp"
                 android:layout_height="42dp"
                 android:src="@drawable/bogi"/>
 
 
             <TextView
-                android:id="@+id/user_name"
+                android:id="@+id/user_name_isi_konsul"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
                 android:layout_marginStart="16dp"
-                android:layout_toEndOf="@+id/user_image"
+                android:layout_toEndOf="@+id/user_image_isi_konsul"
                 android:text="Ahmad Fauzi Wibowo"
                 android:textStyle="bold"
                 android:textAppearance="@style/TextAppearance.AppCompat.Subhead"/>

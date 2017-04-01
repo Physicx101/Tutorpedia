@@ -32,10 +32,12 @@ import java.util.List;
 
 public class IsiKonsultasi extends AppCompatActivity implements View.OnClickListener{
     private ImageView IVisikonsultasisoal;
+    private ImageView IVfotoposter;
     private static int posisiItemRecycler;
     private List<Komentar> mListItemKomen = new ArrayList<>();
     private TextView TVisikonsultasijudul;
     private TextView TVisikonsultasidesc;
+    private TextView TVnamaposter;
     private EditText ETtambahkomentar;
     private Button BTtambahkomentar;
     private FirebaseAuth firebaseAuth;
@@ -77,6 +79,7 @@ public class IsiKonsultasi extends AppCompatActivity implements View.OnClickList
         BTtambahkomentar.setOnClickListener(this);
 
 
+
         IVisikonsultasisoal = (ImageView) findViewById(R.id.IVisikonsultasisoal);
         IVisikonsultasisoal.setOnClickListener(new View.OnClickListener() {
             //Untuk fullscreen
@@ -95,7 +98,9 @@ public class IsiKonsultasi extends AppCompatActivity implements View.OnClickList
         });
         TVisikonsultasijudul = (TextView) findViewById(R.id.TVisikonsultasijudul);
         TVisikonsultasidesc = (TextView) findViewById(R.id.TVisikonsultasidesc);
-        Bundle extras = getIntent().getExtras();
+        TVnamaposter = (TextView) findViewById(R.id.user_name_isi_konsul);
+        IVfotoposter = (ImageView) findViewById(R.id.user_image_isi_konsul);
+                Bundle extras = getIntent().getExtras();
         if (extras != null) {
             posisiItemRecycler = extras.getInt("PosisiItemRecycler");}
 
@@ -257,7 +262,9 @@ public class IsiKonsultasi extends AppCompatActivity implements View.OnClickList
                 for (DataSnapshot postSnapshot : snapshot.getChildren()) {
                     ListItemKonsultasi listItem = new ListItemKonsultasi(postSnapshot.child("judul").getValue().toString(),
                             postSnapshot.child("img").getValue().toString(),
-                            postSnapshot.child("deskripsi").getValue().toString());
+                            postSnapshot.child("deskripsi").getValue().toString(),
+                            postSnapshot.child("foto").getValue().toString(),
+                            postSnapshot.child("poster").getValue().toString());
 
 
 
@@ -266,14 +273,21 @@ public class IsiKonsultasi extends AppCompatActivity implements View.OnClickList
 //
                         TVisikonsultasijudul.setText(listItem.getJudulkonsultasi());
                         TVisikonsultasidesc.setText(listItem.getDeskripsikonsultasi());
+                        TVnamaposter.setText(listItem.getPosterName());
+
 
                         storage = FirebaseStorage.getInstance();
                         mStorageRef = storage.getReferenceFromUrl("gs://tutorpedia-17ba0.appspot.com/FotoProfil/");
                         StorageReference foto = mStorageRef.child(listItem.getImageUrlkonsultasi()+"Konsultasi.jpg");
+                        StorageReference fotoposter = mStorageRef.child(listItem.getPosterImage() + "PP" + ".jpg");
                         Glide.with(getApplicationContext())
                                 .using(new FirebaseImageLoader())
                                 .load(foto)
                                 .into(IVisikonsultasisoal);
+                        Glide.with(getApplicationContext())
+                                .using(new FirebaseImageLoader())
+                                .load(fotoposter)
+                                .into(IVfotoposter);
 
 
                     }

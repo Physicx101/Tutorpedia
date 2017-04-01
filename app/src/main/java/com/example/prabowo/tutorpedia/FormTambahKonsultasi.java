@@ -23,6 +23,7 @@ import android.widget.Toast;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -53,6 +54,7 @@ public class FormTambahKonsultasi extends AppCompatActivity implements View.OnCl
     private FirebaseAuth.AuthStateListener mAuthStateListener;
     Random rand = new Random();
     long  random = rand.nextLong();
+    private String poster;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -76,6 +78,27 @@ public class FormTambahKonsultasi extends AppCompatActivity implements View.OnCl
 
     @Override
     public void onClick(final View v) {
+        firebaseAuth = FirebaseAuth.getInstance();
+        final FirebaseUser user = firebaseAuth.getCurrentUser();
+        DatabaseReference mRootref = FirebaseDatabase.getInstance().getReference();
+        DatabaseReference ref2 = mRootref.child("User").child(user.getUid());
+
+        ref2.addValueEventListener(new ValueEventListener() {
+
+            @Override
+            public void onDataChange(DataSnapshot snapshot) {
+
+                poster = snapshot.child("nama").getValue().toString();
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+
+
+        });
 
         if (v == fab){
 
@@ -97,6 +120,8 @@ public class FormTambahKonsultasi extends AppCompatActivity implements View.OnCl
                                                   databaseReference.child("Konsultasi").child(Matkul).child("Post" + jumlah).child("judul").setValue(ETtambahjudul.getText().toString());
                                                   databaseReference.child("Konsultasi").child(Matkul).child("Post" + jumlah).child("deskripsi").setValue(ETtambahdesc.getText().toString());
                                                   databaseReference.child("Konsultasi").child(Matkul).child("Post" + jumlah).child("img").setValue(random);
+                                                  databaseReference.child("Konsultasi").child(Matkul).child("Post" + jumlah).child("foto").setValue(user.getUid().toString());
+                                                  databaseReference.child("Konsultasi").child(Matkul).child("Post" + jumlah).child("poster").setValue(poster);
                                                   databaseReference.child("Konsultasi").child(Matkul).child("Post" + jumlah).child("Komentar")
                                                           .child("Komentar0").child("pengirim").setValue("Admin");
                                                   databaseReference.child("Konsultasi").child(Matkul).child("Post" + jumlah).child("Komentar")

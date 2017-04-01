@@ -120,7 +120,9 @@ public class Konsultasi extends AppCompatActivity implements View.OnClickListene
                     //for(int i = 1; i<=max ; i++){
                     ListItemKonsultasi listItem = new ListItemKonsultasi(postSnapshot.child("judul").getValue().toString(),
                             postSnapshot.child("img").getValue().toString(),
-                            postSnapshot.child("deskripsi").getValue().toString());
+                            postSnapshot.child("deskripsi").getValue().toString(),
+                            postSnapshot.child("foto").getValue().toString(),
+                            postSnapshot.child("poster").getValue().toString());
                     listItems.add(listItem);
 
 
