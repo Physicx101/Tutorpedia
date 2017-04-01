@@ -11,6 +11,7 @@ import android.view.View;
 
 import com.example.prabowo.tutorpedia.EventFragment;
 import com.example.prabowo.tutorpedia.MainActivity;
+import com.example.prabowo.tutorpedia.PointActivity;
 import com.example.prabowo.tutorpedia.R;
 import com.example.prabowo.tutorpedia.Soal;
 import com.google.firebase.auth.FirebaseAuth;
@@ -32,7 +33,9 @@ public class CekSoal extends AppCompatActivity {
     public static String NilaiAkhir;
     private FirebaseAuth firebaseAuth;
     private DatabaseReference databaseReference;
+    private static String points;
     private static int point;
+    private static int nilai;
     DatabaseReference mRootref = FirebaseDatabase.getInstance().getReference();
 
     @Override
@@ -51,6 +54,24 @@ public class CekSoal extends AppCompatActivity {
 
         RecyclerViewAdapter rcAdapter = new RecyclerViewAdapter(CekSoal.this, rowListItem);
         rView.setAdapter(rcAdapter);
+
+        firebaseAuth = FirebaseAuth.getInstance();
+        FirebaseUser user = firebaseAuth.getCurrentUser();
+        DatabaseReference ref = mRootref.child("User").child(user.getUid()).child("Point");
+        ref.addValueEventListener(new ValueEventListener() {
+
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                point = dataSnapshot.getValue().hashCode();
+
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
     }
 
     @Override
@@ -96,47 +117,32 @@ public class CekSoal extends AppCompatActivity {
         return allItems;
     }
 
-    public void kumpul (View v) throws RuntimeException {
-        try {
+    public void kumpul (View v){
 
 
             for (int i = 1; i < 41; i++) {
                 score = score + Soal.soal[i];
             }
 
-            firebaseAuth = FirebaseAuth.getInstance();
-            FirebaseUser user = firebaseAuth.getCurrentUser();
-            DatabaseReference ref = mRootref.child("User").child(user.getUid()).child("Point");
-            ref.addValueEventListener(new ValueEventListener() {
 
-                @Override
-                public void onDataChange(DataSnapshot dataSnapshot) {
-                    //point = Integer.parseInt(dataSnapshot.getValue().toString());
-
-                }
-
-                @Override
-                public void onCancelled(DatabaseError databaseError) {
-
-                }
-            });
             score = score * 2.5;
-            selesai = 1;
             NilaiAkhir = String.valueOf(score);
+        score = score*0.5;
+        nilai = (int) score;
+        point = point + nilai;
 
+        firebaseAuth = FirebaseAuth.getInstance();
+        FirebaseUser user = firebaseAuth.getCurrentUser();
 
             databaseReference = FirebaseDatabase.getInstance().getReference();
             databaseReference.child("User").child(user.getUid()).child("Tes").child("Tes 1").child("nilai").setValue("Nilai :" + NilaiAkhir);
             databaseReference.child("User").child(user.getUid()).child("Tes").child("Tes 1").child("judul").setValue("Matematika");
             databaseReference.child("Tes").child("Tes 1").child(user.getUid()).setValue(1);
-            databaseReference.child("User").child(user.getUid()).child("Point").setValue(point + (score * 0.5));
+            databaseReference.child("User").child(user.getUid()).child("Point").setValue(point);
 
             Intent i = new Intent(this, MainActivity.class);
             startActivity(i);
-        } catch (RuntimeException e){
-            Intent i = new Intent(this, MainActivity.class);
-            startActivity(i);
-        }
+
     }
 
     }

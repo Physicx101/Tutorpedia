@@ -8,10 +8,21 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 
 import com.example.prabowo.tutorpedia.R;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import static com.example.prabowo.tutorpedia.R.id.IVbio;
 
 public class ListHadiahPoint extends AppCompatActivity {
+
+    private FirebaseAuth firebaseAuth;
+    private DatabaseReference databaseReference;
+    DatabaseReference mRootref = FirebaseDatabase.getInstance().getReference();
 
     private ImageView IVhadiah1, IVhadiah2, IVhadiah3, IVhadiah4;
 
@@ -19,6 +30,27 @@ public class ListHadiahPoint extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list_hadiah_point);
+
+        firebaseAuth = FirebaseAuth.getInstance();
+        FirebaseUser user = firebaseAuth.getCurrentUser();
+
+
+        DatabaseReference ref = mRootref.child("User").child(user.getUid()).child("Point");
+        ref.addValueEventListener(new ValueEventListener() {
+
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                PointActivity.points = dataSnapshot.getValue().hashCode();
+//                TVpoint.setText(dataSnapshot.getValue().toString());
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
 
         IVhadiah1 = (ImageView) findViewById(R.id.IVhadiah1);
         IVhadiah1.setOnClickListener(new View.OnClickListener() {
@@ -66,6 +98,7 @@ public class ListHadiahPoint extends AppCompatActivity {
 
             }
         });
+
 
 
     }

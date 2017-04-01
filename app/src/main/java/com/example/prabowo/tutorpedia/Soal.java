@@ -26,7 +26,7 @@ public class Soal extends AppCompatActivity {
     private FirebaseAuth firebaseAuth;
     public static int nomor = 1;
     public static int[] warna = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
-    public static int[] soal = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+    public static int[] soal = new int[41];
     public static int paket = 1;
     public static int[] ragu = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
     public static long waktu = 5400000;
@@ -40,6 +40,16 @@ public class Soal extends AppCompatActivity {
 
 
         run.run();
+
+        if (paket == 1) {
+            for (int i = 0; i < 41; i++) {
+                soal[i]=0;
+
+            }
+        }
+        paket=2;
+
+
 
 
 
