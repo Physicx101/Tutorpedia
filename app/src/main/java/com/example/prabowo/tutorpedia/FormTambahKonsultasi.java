@@ -122,13 +122,13 @@ public class FormTambahKonsultasi extends AppCompatActivity implements View.OnCl
                                                   databaseReference.child("Konsultasi").child(Matkul).child("Post" + jumlah).child("img").setValue(random);
                                                   databaseReference.child("Konsultasi").child(Matkul).child("Post" + jumlah).child("foto").setValue(user.getUid().toString());
                                                   databaseReference.child("Konsultasi").child(Matkul).child("Post" + jumlah).child("poster").setValue(poster);
-                                                  databaseReference.child("Konsultasi").child(Matkul).child("Post" + jumlah).child("Komentar")
+                                                  /*databaseReference.child("Konsultasi").child(Matkul).child("Post" + jumlah).child("Komentar")
                                                           .child("Komentar0").child("pengirim").setValue("Admin");
                                                   databaseReference.child("Konsultasi").child(Matkul).child("Post" + jumlah).child("Komentar")
                                                           .child("Komentar0").child("desc").setValue("Pertamax Gan");
                                                   databaseReference.child("Konsultasi").child(Matkul).child("Post" + jumlah).child("Komentar")
-                                                          .child("Komentar0").child("img").setValue("Random");
-                                                  databaseReference.child("JumlahKomentarBenar").child(Matkul).child("Post" + jumlah).setValue(1);
+                                                          .child("Komentar0").child("img").setValue("Random");*/
+                                                  databaseReference.child("JumlahKomentarBenar").child(Matkul).child("Post" + jumlah).setValue(0);
 
                                                   Toast.makeText(getApplicationContext(),"Konsultasi Sudah Terupload ", Toast.LENGTH_LONG).show();
 
