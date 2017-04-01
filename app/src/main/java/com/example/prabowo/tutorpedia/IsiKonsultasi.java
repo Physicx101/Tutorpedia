@@ -138,7 +138,6 @@ public class IsiKonsultasi extends AppCompatActivity implements View.OnClickList
 
     private void populatekomentarlist() {
 
-
         Bundle extras3 = getIntent().getExtras();
         Matkuldis = extras3.getString("Matkuldis");
         Bundle extras4 = getIntent().getExtras();

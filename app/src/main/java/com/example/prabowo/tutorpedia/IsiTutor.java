@@ -11,6 +11,8 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -21,19 +23,21 @@ import com.squareup.picasso.Picasso;
 import java.util.List;
 
 
-public class IsiTutor extends AppCompatActivity {
-    private ImageView IVisievent;
+public class IsiTutor extends AppCompatActivity implements View.OnClickListener {
+    private ImageView IVfototutor;
     int posisiItemRecycler;
     private List<ListItemTutor> mListItemTutors;
-    private TextView TVisieventnama;
+    private TextView TVnamatutor;
     private TextView TVisievent;
-    private TextView TVisieventdesc;
-    private TextView TVisieventlahir;
+    private TextView TVdesctutor;
+    private TextView TVemailtutor;
     private TextView TVisieventagama;
-    private TextView TVisieventkontak;
-    private TextView TVisieventasal;
+    private TextView TVnomortutor;
+    private TextView TVasaltutor;
     private Button BTgetcv;
     private FloatingActionButton fab;
+    private FirebaseAuth firebaseAuth;
+    private String nomorTutor;
     String CV;
     int i = 0;
     DatabaseReference mRootref = FirebaseDatabase.getInstance().getReference();
@@ -51,12 +55,12 @@ public class IsiTutor extends AppCompatActivity {
         getSupportActionBar().setDisplayShowTitleEnabled(false);
 
 
-        IVisievent = (ImageView) findViewById(R.id.IVisievent);
-        TVisieventnama = (TextView) findViewById(R.id.TVisieventnama);
-        TVisieventdesc = (TextView) findViewById(R.id.TVisieventdesc);
-        TVisieventlahir = (TextView) findViewById(R.id.TVisieventlahir);
-        TVisieventasal = (TextView) findViewById(R.id.TVisieventasal);
-        TVisieventkontak = (TextView) findViewById(R.id.TVisieventkontak);
+        IVfototutor = (ImageView) findViewById(R.id.IVisievent);
+        TVnamatutor = (TextView) findViewById(R.id.TVnamatutor);
+        TVdesctutor = (TextView) findViewById(R.id.TVdesctutor);
+        TVemailtutor = (TextView) findViewById(R.id.TV_email_tutor);
+        TVasaltutor = (TextView) findViewById(R.id.TV_asal_tutor);
+        TVnomortutor = (TextView) findViewById(R.id.TV_nomor_tutor);
         BTgetcv = (Button) findViewById(R.id.BTgetcv);
         fab = (FloatingActionButton) findViewById(R.id.floatingActionButton);
         Bundle extras = getIntent().getExtras();
@@ -71,14 +75,12 @@ public class IsiTutor extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent sendIntent = new Intent(Intent.ACTION_VIEW);
+        fab.setOnClickListener(this);
+
+                /*Intent sendIntent = new Intent(Intent.ACTION_VIEW);
                 sendIntent.setData(Uri.parse("sms:"));
-                startActivity(sendIntent);
-            }
-        });
+                startActivity(sendIntent);*/
+
 
     }
 
@@ -95,7 +97,19 @@ public class IsiTutor extends AppCompatActivity {
 
 
         DatabaseReference ref = mRootref.child("Mentor");
+        DatabaseReference ref2 = mRootref.child("Mentor").child("Guru" + (posisiItemRecycler + 1));
 
+        ref2.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                nomorTutor = dataSnapshot.child("kontak").getValue().toString();
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
         ref.addValueEventListener(new ValueEventListener() {
 
 
@@ -105,7 +119,7 @@ public class IsiTutor extends AppCompatActivity {
                 System.out.println("There are " + snapshot.getChildrenCount() + " shout messages");
                 for (DataSnapshot postSnapshot : snapshot.getChildren()) {
                     ListItemTutor listItemTutor = new ListItemTutor(postSnapshot.child("nama").getValue().toString(),
-                            postSnapshot.child("tanggallahir").getValue().toString(),
+                            postSnapshot.child("email").getValue().toString(),
                             postSnapshot.child("img").getValue().toString(),
                             postSnapshot.child("lokasi").getValue().toString(),
                             postSnapshot.child("kontak").getValue().toString(),
@@ -125,16 +139,15 @@ public class IsiTutor extends AppCompatActivity {
 
 //
 
-                        TVisieventnama.setText(listItemTutor.getNama());
-                        TVisieventasal.setText(listItemTutor.getAsal());
-                        TVisieventlahir.setText(listItemTutor.getTanggallahir());
-                        TVisieventdesc.setText(listItemTutor.getDeskripsi());
-                        TVisieventkontak.setText(listItemTutor.getNohp());
+                        TVnamatutor.setText(listItemTutor.getNama());
+                        TVasaltutor.setText(listItemTutor.getAsal());
+                        TVemailtutor.setText(listItemTutor.getEmail());
+                        TVdesctutor.setText(listItemTutor.getDeskripsi());
+                        TVnomortutor.setText(listItemTutor.getNohp());
                         Picasso.with(getApplicationContext())
                                 .load(listItemTutor.getImageUrl())
-                                .into(IVisievent);
+                                .into(IVfototutor);
                         CV = listItemTutor.getLinkcv().toString();
-
 
 
                     }
@@ -148,6 +161,16 @@ public class IsiTutor extends AppCompatActivity {
                 System.out.println("The read failed: " + firebaseError.getMessage());
             }
         });
+    }
+
+    @Override
+    public void onClick(View view) {
+
+        if (view == fab) {
+            Intent sendIntent = new Intent(Intent.ACTION_VIEW);
+            sendIntent.setData(Uri.parse("sms:" + nomorTutor));
+            startActivity(sendIntent);
+        }
     }
 }
 

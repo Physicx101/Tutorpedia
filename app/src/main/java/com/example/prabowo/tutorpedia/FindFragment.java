@@ -58,6 +58,8 @@ public class FindFragment extends Fragment implements View.OnClickListener {
         recyclerView.setLayoutManager(linearLayoutManager);
 
 
+
+
         mListItemTutors = new ArrayList<>();
         tambahInfo();
 
@@ -65,6 +67,7 @@ public class FindFragment extends Fragment implements View.OnClickListener {
 
     @Override
     public void onClick(View v) {
+
 
     }
 
@@ -83,7 +86,7 @@ public class FindFragment extends Fragment implements View.OnClickListener {
                     //long max = dataSnapshot.getChildrenCount();
                     //for(int i = 1; i<=max ; i++){
                     ListItemTutor listItemTutor = new ListItemTutor(postSnapshot.child("nama").getValue().toString(),
-                            postSnapshot.child("tanggallahir").getValue().toString(),
+                            postSnapshot.child("email").getValue().toString(),
                             postSnapshot.child("img").getValue().toString(),
                             postSnapshot.child("lokasi").getValue().toString(),
                             postSnapshot.child("kontak").getValue().toString(),

@@ -7,7 +7,7 @@ package com.example.prabowo.tutorpedia;
 public class ListItemTutor {
 
     private String nama;
-    private String tanggallahir;
+    private String email;
     private String imageUrl;
     private String asal;
     private String nohp;
@@ -15,9 +15,9 @@ public class ListItemTutor {
     private String linkcv;
 
 
-    public ListItemTutor(String nama, String tanggallahir, String imageUrl, String asal, String nohp, String deskripsi, String linkcv ) {
+    public ListItemTutor(String nama, String email, String imageUrl, String asal, String nohp, String deskripsi, String linkcv ) {
         this.nama = nama;
-        this.tanggallahir = tanggallahir;
+        this.email = email;
         this.imageUrl = imageUrl;
         this.asal = asal;
         this.nohp = nohp;
@@ -29,8 +29,8 @@ public class ListItemTutor {
         return nama;
     }
 
-    public String getTanggallahir() {
-        return tanggallahir;
+    public String getEmail() {
+        return email;
     }
 
     public String getImageUrl() {

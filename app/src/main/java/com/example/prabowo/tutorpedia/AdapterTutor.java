@@ -47,9 +47,9 @@ public class AdapterTutor extends RecyclerView.Adapter<AdapterTutor.ViewHolder> 
 
         ListItemTutor listItemTutor = mListItemTutors.get(position);
 
-        holder.TVhead.setText(listItemTutor.getNama());
-        holder.TVdesc.setText(listItemTutor.getTanggallahir());
-        holder.TVtanggal.setText(listItemTutor.getAsal());
+        holder.TVasal.setText(listItemTutor.getNama());
+        holder.TVnama.setText(listItemTutor.getEmail());
+        holder.TVemail.setText(listItemTutor.getAsal());
         holder.TVnohp.setText(listItemTutor.getNohp());
         Picasso.with(context)
                 .load(listItemTutor.getImageUrl())
@@ -67,21 +67,21 @@ public class AdapterTutor extends RecyclerView.Adapter<AdapterTutor.ViewHolder> 
 
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
 
-        private TextView TVhead;
-        private TextView TVdesc;
+        private TextView TVasal;
+        private TextView TVnama;
         public ImageView IVgambar;
-        private TextView TVtanggal;
+        private TextView TVemail;
         private TextView TVnohp;
 
 
         public ViewHolder(View itemView) {
             super(itemView);
 
-            TVtanggal = (TextView) itemView.findViewById(R.id.TVdate);
-            TVhead = (TextView) itemView.findViewById(R.id.TVhead);
-            TVdesc = (TextView) itemView.findViewById(R.id.TVdesc);
+            TVemail = (TextView) itemView.findViewById(R.id.TV_asal);
+            TVasal = (TextView) itemView.findViewById(R.id.TV_nama);
+            TVnama = (TextView) itemView.findViewById(R.id.TV_email);
             IVgambar = (ImageView) itemView.findViewById(R.id.IVgambar);
-            TVnohp = (TextView) itemView.findViewById(R.id.TVnohp);
+            TVnohp = (TextView) itemView.findViewById(R.id.TV_nomor);
             itemView.setClickable(true);
             itemView.setOnClickListener(this);
         }

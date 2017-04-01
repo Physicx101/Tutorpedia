@@ -42,39 +42,39 @@
             android:padding="@dimen/activity_horizontal_margin">
 
             <TextView
-                android:id="@+id/TVdate"
+                android:id="@+id/TV_asal"
                 android:layout_height="wrap_content"
                 android:layout_width="match_parent"
-                android:text="Hari"
+                android:text="Asal"
                 android:layout_marginBottom="4dp"
                 android:layout_marginLeft="8dp"
                 android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"/>
 
 
             <TextView
-                android:id="@+id/TVhead"
+                android:id="@+id/TV_nama"
                 android:layout_height="wrap_content"
                 android:layout_width="match_parent"
-                android:text="Heading"
+                android:text="Nama"
                 android:layout_marginBottom="4dp"
                 android:layout_marginLeft="8dp"
                 android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"/>
 
             <TextView
-                android:id="@+id/TVdesc"
+                android:id="@+id/TV_email"
                 android:layout_height="wrap_content"
                 android:layout_width="match_parent"
                 android:layout_marginBottom="4dp"
                 android:layout_marginLeft="8dp"
-                android:text="Description"
+                android:text="Email"
                 android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"/>
 
             <TextView
-                android:id="@+id/TVnohp"
+                android:id="@+id/TV_nomor"
                 android:layout_height="wrap_content"
                 android:layout_width="wrap_content"
                 android:layout_marginLeft="8dp"
-                android:text="No HP"/>
+                android:text="Nomor HP"/>
 
 
 
