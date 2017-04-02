@@ -50,17 +50,19 @@ import static android.app.Activity.RESULT_OK;
 public class ProfileTestFragment extends Fragment implements View.OnClickListener {
     private FirebaseAuth firebaseAuth;
     private FirebaseAuth.AuthStateListener mAuthStateListener;
-    private Button BTpoint;
     private DatabaseReference databaseReference;
     private TextView userEmail;
     private TextView userName;
+    private TextView userPoint;
     private StorageReference mStorageRef;
     private FirebaseStorage storage;
     private ImageView fotoProfil;
     private String nama;
     private String UID;
     private ImageView BTfoto;
-    private RelativeLayout ringkasan,riwayat,bantuan,keluar;
+    public static int points;
+    private static String pointuser;
+    private RelativeLayout ringkasan,riwayat,bantuan,keluar,tpoin;
     DatabaseReference mRootref = FirebaseDatabase.getInstance().getReference();
 
 
@@ -87,6 +89,14 @@ public class ProfileTestFragment extends Fragment implements View.OnClickListene
         userName = (TextView) getActivity().findViewById(R.id.user_profile_name);
         BTfoto = (ImageView) getActivity().findViewById(R.id.user_profile_photo);
         BTfoto.setOnClickListener(this);
+        tpoin = (RelativeLayout) getActivity().findViewById(R.id.point_user);
+        tpoin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getActivity(), ListHadiahPoint.class));
+            }
+        });
+        userPoint = (TextView) getActivity().findViewById(R.id.TV_point);
         ringkasan = (RelativeLayout) getActivity().findViewById(R.id.ringkasanAkun);
         ringkasan.setOnClickListener(this);
         riwayat = (RelativeLayout) getActivity().findViewById(R.id.riwayatTes);
@@ -108,18 +118,30 @@ public class ProfileTestFragment extends Fragment implements View.OnClickListene
 
         Toolbar toolbar = (Toolbar) getActivity().findViewById(R.id.toolbar);
 
-        BTpoint = (Button) view.findViewById(R.id.BTpoint);
-        BTpoint.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(getActivity(), ListHadiahPoint.class));
-            }
-        });
+
+
+
 
 
 
 
         UID = user.getUid().toString();
+
+        DatabaseReference refpoin = mRootref.child("User").child(user.getUid()).child("Point");
+        refpoin.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                points = dataSnapshot.getValue().hashCode();
+                pointuser = String.valueOf(points);
+                userPoint.setText(pointuser);
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
 
         DatabaseReference ref = mRootref.child("User").child(user.getUid());
         ref.addValueEventListener(new ValueEventListener() {

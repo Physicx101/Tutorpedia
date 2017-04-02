@@ -76,6 +76,56 @@
             <include layout="@layout/item_divider"/>
 
             <RelativeLayout
+                android:id="@+id/point_user"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="?attr/selectableItemBackground"
+                android:clickable="true"
+                android:padding="@dimen/activity_horizontal_margin">
+
+                <ImageView
+                    android:id="@+id/icon_point"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_centerVertical="true"
+                    android:layout_marginEnd="@dimen/activity_horizontal_margin"
+                    android:src="@drawable/tpstorelogo"
+                    tools:ignore="ContentDescription,UnusedAttribute"/>
+
+                <TextView
+                    android:id="@+id/TV_point"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/activity_horizontal_margin"
+                    android:layout_toEndOf="@id/icon_point"
+                    android:paddingBottom="4dp"
+                    android:paddingTop="4dp"
+                    android:text="1500"
+                    android:textSize="24sp"
+                    android:textColor="@color/colorPrimary"
+                    android:textStyle="bold"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Subhead"/>
+
+                <TextView
+                    android:id="@+id/TPoin"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="4dp"
+                    android:layout_toEndOf="@id/TV_point"
+                    android:paddingBottom="4dp"
+                    android:paddingTop="4dp"
+                    android:text="TPoin"
+                    android:textSize="24sp"
+                    android:textColor="@color/colorPrimary"
+                    android:textStyle="bold"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Subhead"/>
+
+            </RelativeLayout>
+
+
+            <include layout="@layout/item_divider"/>
+
+            <RelativeLayout
                 android:id="@+id/ringkasanAkun"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -205,19 +255,7 @@
             </RelativeLayout>
 
 
-            <include layout="@layout/item_divider"/>
 
-            <Button
-                android:id="@+id/BTpoint"
-                android:layout_width="150dp"
-                android:layout_height="wrap_content"
-                android:layout_centerHorizontal="true"
-                android:layout_gravity="bottom|center"
-                android:layout_marginTop="64dp"
-                android:background="#DC143C"
-                android:text="Point"
-                android:textAppearance="@style/Base.TextAppearance.AppCompat.Button"
-                android:textColor="#ffffff"/>
 
 
         </LinearLayout>
