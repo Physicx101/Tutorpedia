@@ -118,7 +118,7 @@ public class AdapterEvent extends RecyclerView.Adapter<AdapterEvent.ViewHolder> 
                 if (status=="1"){
                     Toast.makeText(v.getContext(), "Soal Sudah Dikerjakan", Toast.LENGTH_SHORT).show();}
                 final Intent intent;
-                if (getAdapterPosition()==2) {
+                if (getAdapterPosition()==0) {
                     switch (getAdapterPosition()) {
                         default:
                             recyclerItemPosition = getAdapterPosition();

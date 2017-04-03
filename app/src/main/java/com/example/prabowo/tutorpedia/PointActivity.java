@@ -1,5 +1,7 @@
 package com.example.prabowo.tutorpedia;
 
+import android.content.DialogInterface;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -24,6 +26,8 @@ import com.google.firebase.storage.StorageReference;
 import java.util.Random;
 import java.util.UUID;
 
+import static com.example.prabowo.tutorpedia.CekSoal.RecyclerViewAdapter.context;
+
 public class PointActivity extends AppCompatActivity implements View.OnClickListener {
     private FirebaseAuth firebaseAuth;
     private DatabaseReference databaseReference;
@@ -33,7 +37,7 @@ public class PointActivity extends AppCompatActivity implements View.OnClickList
     private static String pointss;
     private TextView TVpoint,TVhargatpoin,TVkodehadiahinfo,TVkodehadiahinfo2,TVkodehadiah,TVkodehadiahuid;
     private Button BTpoint;
-    private String Pointnya,Hadiah;
+    private static String Pointnya,Hadiah;
     private ImageView IVhadiahpoint;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -92,23 +96,42 @@ public class PointActivity extends AppCompatActivity implements View.OnClickList
     @Override
     public void onClick(View v) {
 
-
+        int hargahadiah = Integer.parseInt(Pointnya);
 
         firebaseAuth = FirebaseAuth.getInstance();
         FirebaseUser user = firebaseAuth.getCurrentUser();
 
-        if(points>=100){
-            databaseReference = FirebaseDatabase.getInstance().getReference();
-            databaseReference.child("User").child(user.getUid()).child("Point").setValue(points-100);
-            String uuid = UUID.randomUUID().toString();
-            TVkodehadiah.setText("Kode hadiah : " + uuid);
-            TVkodehadiahuid.setText("Kode User : "+ user.getUid().toString());
-            TVkodehadiahinfo.setText("SELAMAT ANDA MENDAPAT " + Hadiah.toUpperCase() + " ! ");
-            TVkodehadiahinfo2.setText("Emailen Sak iki");
+        databaseReference = FirebaseDatabase.getInstance().getReference();
+        databaseReference.child("User").child(user.getUid()).child("Point").setValue(points-hargahadiah);
+        String uuid = UUID.randomUUID().toString();
+
+        String alert1 = "SELAMAT ANDA MENDAPAT " + Hadiah.toUpperCase() + " !";
+        String alert2 = "Kode hadiah: " + uuid;
+        String alert3 = "Kode user: " + user.getUid().toString();
+        String alert4 = "Email identitas dan bukti ini ke: tutorpedia@gmail.com";
+        /*TVkodehadiah.setText("Kode hadiah : " + uuid);
+        TVkodehadiahuid.setText("Kode User : "+ user.getUid().toString());
+        TVkodehadiahinfo.setText("SELAMAT ANDA MENDAPAT " + Hadiah.toUpperCase() + " ! ");
+        TVkodehadiahinfo2.setText("Email identitas dan bukti ini ke : tutorpedia@gmail.com");*/
+
+        if(points>=hargahadiah){
+            AlertDialog.Builder builder1 = new AlertDialog.Builder(this);
+            builder1.setMessage(alert1 +"\n"+"\n" + alert2 +"\n"+"\n" + alert3 +"\n"+"\n" + alert4);
+            builder1.setCancelable(true);
+
+            builder1.setPositiveButton(
+                    "OK",
+                    new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int id) {
+                            dialog.cancel();
+                        }
+                    });
+            AlertDialog alert11 = builder1.create();
+            alert11.show();
         }
 
         if(v == BTpoint){
-            if (points< 100){
+            if (points< hargahadiah){
                 Toast.makeText(this,"Saldo Kurang",Toast.LENGTH_SHORT).show();
             }
 

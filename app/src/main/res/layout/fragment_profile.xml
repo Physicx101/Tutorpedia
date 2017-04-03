@@ -24,13 +24,7 @@
         android:layout_alignParentTop="true"
         android:layout_alignParentStart="true">
 
-        <Button
-            android:textSize="5pt"
-            android:textStyle="bold"
-            android:layout_marginTop="68dp"
-            android:text="Pilih"
-            android:layout_width="50dp"
-            android:layout_height="30dp" />
+
     </LinearLayout>
 
     <LinearLayout
@@ -50,60 +44,48 @@
             android:gravity="center"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
             android:id="@+id/TVuseremail"
             android:layout_marginBottom="30dp"/>
 
-
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="textPersonName"
-            android:hint="Name"
+            android:hint="Ganti Nama"
             android:textColorHint="#1A9FE0"
             android:textColor="#1A9FE0"
             android:ems="10"
             android:id="@+id/ETnama" />
 
-        <EditText
-            android:textColor="#1A9FE0"
-            android:textColorHint="#1A9FE0"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:inputType="textPersonName"
-            android:hint="Alamat"
-            android:ems="10"
-            android:id="@+id/ETalamat" />
 
         <Button
-            android:layout_marginTop="110dp"
-            android:text="Save Information"
-            android:background="#1A9FE0"
-            android:textColor="#ffffff"
-            android:textStyle="bold"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
             android:id="@+id/BTsave"
-            android:layout_marginBottom="10dp"/>
-
-        <Button
-            android:textColor="#ffffff"
-            android:background="#DC143C"
-            android:textStyle="bold"
-            android:text="Logout"
+            android:layout_below="@id/ETnama"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/BTlogout" />
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="10dp"
+            android:background="#1A9FE0"
+            android:text="Save Information"
+            android:textColor="#ffffff"
+            android:textStyle="bold"/>
+        </RelativeLayout>
+
+
     </LinearLayout>
 
     <ImageView
         android:src="@drawable/login"
         android:id="@+id/IVprofile"
+        android:layout_centerHorizontal="true"
         android:layout_width="95dp"
         android:layout_height="95dp"
-        android:layout_marginTop="18dp"
-        android:layout_below="@+id/toolbar"
-        android:layout_alignParentStart="true"/>
+        android:layout_marginTop="24dp"
+        android:layout_below="@+id/toolbar"/>
 
 
 </RelativeLayout>

@@ -50,6 +50,7 @@
         <activity android:name=".NilaiActivity" />
         <activity android:name=".ListItemNilai" />
         <activity android:name=".PointActivity" />
+        <activity android:name=".Ringkasan" />
         <activity android:name=".ListHadiahPoint" />
         <activity android:name=".CreditActivity"
                   android:theme="@style/AppTheme.NoActionBar">

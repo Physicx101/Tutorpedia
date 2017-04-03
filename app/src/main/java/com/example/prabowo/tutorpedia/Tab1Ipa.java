@@ -32,6 +32,8 @@ import java.util.List;
 public class Tab1Ipa extends Fragment implements View.OnClickListener {
     private ImageView IVmatipa;
     private ImageView IVbio;
+    private ImageView IVkim;
+    private ImageView IVfis;
 
 
 
@@ -60,6 +62,26 @@ public class Tab1Ipa extends Fragment implements View.OnClickListener {
             public void onClick(View view) {
                 Intent intent = new Intent(getActivity().getApplicationContext(), Transisi.class);
                 intent.putExtra("Matkul", "Biologi");
+                startActivity(intent);
+            }
+        });
+
+        IVkim = (ImageView) view.findViewById(R.id.IVkimia);
+        IVkim.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getActivity().getApplicationContext(), Transisi.class);
+                intent.putExtra("Matkul", "Kimia");
+                startActivity(intent);
+            }
+        });
+
+        IVfis = (ImageView) view.findViewById(R.id.IVfisika);
+        IVfis.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getActivity().getApplicationContext(), Transisi.class);
+                intent.putExtra("Matkul", "Fisika");
                 startActivity(intent);
             }
         });

@@ -97,8 +97,8 @@ public class ProfileTestFragment extends Fragment implements View.OnClickListene
             }
         });
         userPoint = (TextView) getActivity().findViewById(R.id.TV_point);
-        ringkasan = (RelativeLayout) getActivity().findViewById(R.id.ringkasanAkun);
-        ringkasan.setOnClickListener(this);
+        //ringkasan = (RelativeLayout) getActivity().findViewById(R.id.ringkasanAkun);
+        //ringkasan.setOnClickListener(this);
         riwayat = (RelativeLayout) getActivity().findViewById(R.id.riwayatTes);
         riwayat.setOnClickListener(this);
         bantuan = (RelativeLayout) getActivity().findViewById(R.id.bantuan);
@@ -179,6 +179,10 @@ public class ProfileTestFragment extends Fragment implements View.OnClickListene
         if(view == bantuan){
 
             startActivity(new Intent(this.getActivity(),CreditActivity.class));
+        }
+
+        if(view == ringkasan) {
+            startActivity(new Intent(this.getActivity(),Ringkasan.class));
         }
 
         if (view == BTfoto) {

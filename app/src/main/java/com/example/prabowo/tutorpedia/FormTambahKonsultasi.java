@@ -114,7 +114,7 @@ public class FormTambahKonsultasi extends AppCompatActivity implements View.OnCl
                                           public void onDataChange(DataSnapshot snapshot) {
                                               if (langkah == 1) {
                                                   Integer jumlah = Integer.parseInt(snapshot.getValue().toString());
-                                                  databaseReference.child("JumlahKomentar").child("Matematika").setValue(jumlah+1);
+                                                  databaseReference.child("JumlahKomentar").child(Matkul).setValue(jumlah+1);
                                                   System.out.println("Jumlah komen baru: " + jumlah);
 
                                                   databaseReference.child("Konsultasi").child(Matkul).child("Post" + jumlah).child("judul").setValue(ETtambahjudul.getText().toString());
@@ -122,10 +122,10 @@ public class FormTambahKonsultasi extends AppCompatActivity implements View.OnCl
                                                   databaseReference.child("Konsultasi").child(Matkul).child("Post" + jumlah).child("img").setValue(random);
                                                   databaseReference.child("Konsultasi").child(Matkul).child("Post" + jumlah).child("foto").setValue(user.getUid().toString());
                                                   databaseReference.child("Konsultasi").child(Matkul).child("Post" + jumlah).child("poster").setValue(poster);
-                                                  /*databaseReference.child("Konsultasi").child(Matkul).child("Post" + jumlah).child("Komentar")
+                                                 /* databaseReference.child("Konsultasi").child(Matkul).child("Post" + jumlah).child("Komentar")
                                                           .child("Komentar0").child("pengirim").setValue("Admin");
                                                   databaseReference.child("Konsultasi").child(Matkul).child("Post" + jumlah).child("Komentar")
-                                                          .child("Komentar0").child("desc").setValue("Pertamax Gan");
+                                                          .child("Komentar0").child("desc").setValue("Selamat Datang");
                                                   databaseReference.child("Konsultasi").child(Matkul).child("Post" + jumlah).child("Komentar")
                                                           .child("Komentar0").child("img").setValue("Random");*/
                                                   databaseReference.child("JumlahKomentarBenar").child(Matkul).child("Post" + jumlah).setValue(0);
@@ -151,6 +151,8 @@ public class FormTambahKonsultasi extends AppCompatActivity implements View.OnCl
 
         }
         finish();
+        startActivity(new Intent(getApplicationContext(), Transisi.class));
+
 
     }
 
