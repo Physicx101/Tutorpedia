@@ -151,7 +151,7 @@ public class FormTambahKonsultasi extends AppCompatActivity implements View.OnCl
 
         }
         finish();
-        startActivity(new Intent(getApplicationContext(), Transisi.class));
+        startActivity(new Intent(getApplicationContext(), MainActivity.class));
 
 
     }

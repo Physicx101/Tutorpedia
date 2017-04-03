@@ -5,6 +5,11 @@ public class ListItemNilai {
     private String judulnilai;
     private String nilai;
 
+    public ListItemNilai (){
+
+    }
+
+
 
 
     public ListItemNilai(String judulnilai,String nilai) {
