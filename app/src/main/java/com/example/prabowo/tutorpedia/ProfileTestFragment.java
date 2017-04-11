@@ -1,5 +1,6 @@
 package com.example.prabowo.tutorpedia;
 
+import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
@@ -75,6 +76,8 @@ public class ProfileTestFragment extends Fragment implements View.OnClickListene
 
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState){
+
+
         firebaseAuth = FirebaseAuth.getInstance();
         FirebaseUser user = firebaseAuth.getCurrentUser();
 
@@ -143,6 +146,9 @@ public class ProfileTestFragment extends Fragment implements View.OnClickListene
         });
 
 
+        final ProgressDialog Dialog = new ProgressDialog(getActivity());
+        Dialog.setMessage("Loading Data .... ");
+        Dialog.show();
         DatabaseReference ref = mRootref.child("User").child(user.getUid());
         ref.addValueEventListener(new ValueEventListener() {
 
@@ -158,6 +164,7 @@ public class ProfileTestFragment extends Fragment implements View.OnClickListene
                         .using(new FirebaseImageLoader())
                         .load(foto)
                         .into(BTfoto);
+                Dialog.hide();
             }
 
             @Override

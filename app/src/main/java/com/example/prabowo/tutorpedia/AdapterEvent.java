@@ -52,6 +52,7 @@ public class AdapterEvent extends RecyclerView.Adapter<AdapterEvent.ViewHolder> 
         @Override
         public void onBindViewHolder(AdapterEvent.ViewHolder holder, int position) {
 
+
             ListEventItemBeneran listItem = listItems.get(position);
 
             holder.TVheadeventBeneran.setText(listItem.getJuduleventbeneran());
@@ -85,6 +86,7 @@ public class AdapterEvent extends RecyclerView.Adapter<AdapterEvent.ViewHolder> 
             public ViewHolder(View itemView) {
                 super(itemView);
 
+
                 TVheadeventBeneran = (TextView) itemView.findViewById(R.id.TVheadeventBeneran);
                 TVdesceventBeneran = (TextView) itemView.findViewById(R.id.TVdesceventBeneran);
                 IVgambareventBeneran = (ImageView) itemView.findViewById(R.id.IVgambareventBeneran);
@@ -95,6 +97,7 @@ public class AdapterEvent extends RecyclerView.Adapter<AdapterEvent.ViewHolder> 
             }
 
             public void onClick(final View v) {
+
                 firebaseAuth = FirebaseAuth.getInstance();
                 FirebaseUser user = firebaseAuth.getCurrentUser();
                 DatabaseReference ref = mRootref.child("Tes").child("Tes 1").child(user.getUid());
@@ -111,6 +114,7 @@ public class AdapterEvent extends RecyclerView.Adapter<AdapterEvent.ViewHolder> 
                     }
                 });
                 System.out.print("Tezzz : " + status);
+
 
 
                 //System.out.print("Tezzzzzzzzzzzz : "+ CekSoal);

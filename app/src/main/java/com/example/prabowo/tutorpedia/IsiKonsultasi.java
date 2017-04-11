@@ -12,6 +12,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 
 import com.bumptech.glide.Glide;
@@ -33,7 +34,7 @@ import java.util.List;
 public class IsiKonsultasi extends AppCompatActivity implements View.OnClickListener{
     private ImageView IVisikonsultasisoal;
     private ImageView IVfotoposter;
-    private static int posisiItemRecycler;
+    public static int posisiItemRecycler;
     private List<Komentar> mListItemKomen = new ArrayList<>();
     private TextView TVisikonsultasijudul;
     private TextView TVisikonsultasidesc;
@@ -43,11 +44,12 @@ public class IsiKonsultasi extends AppCompatActivity implements View.OnClickList
     private FirebaseAuth firebaseAuth;
     private LinearLayoutManager linearLayoutManager;
     private RecyclerView recyclerView;
+    private Button BTmantap;
     public static long jumlah;
     private static int filter;
-    String Matkuldis,Jenisdis;
     public static int langkahkomen = 1;
     public static String pengirim;
+    private static int pointsa;
     String CV;
     int i = 0;
     DatabaseReference mRootref = FirebaseDatabase.getInstance().getReference();
@@ -56,6 +58,7 @@ public class IsiKonsultasi extends AppCompatActivity implements View.OnClickList
     private StorageReference mStorageRef;
     private FirebaseStorage storage;
     private boolean isImageFull;
+    public static String Matkuldis,Jenisdis;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -77,6 +80,7 @@ public class IsiKonsultasi extends AppCompatActivity implements View.OnClickList
         ETtambahkomentar = (EditText) findViewById(R.id.ETtambahkomentar);
         BTtambahkomentar = (Button) findViewById(R.id.BTmasukkankomentar);
         BTtambahkomentar.setOnClickListener(this);
+
 
 
 
@@ -144,9 +148,6 @@ public class IsiKonsultasi extends AppCompatActivity implements View.OnClickList
         Jenisdis = extras4.getString("Jenisdis");
 
 
-
-
-
         DatabaseReference ref = mRootref.child(Jenisdis).child(Matkuldis).child("Post" +(posisiItemRecycler)).child("Komentar");
 
         ref.addValueEventListener(new ValueEventListener() {
@@ -157,7 +158,9 @@ public class IsiKonsultasi extends AppCompatActivity implements View.OnClickList
                     for (DataSnapshot postSnapshot : snapshot.getChildren()) {
                         mListItemKomen.add(new Komentar(postSnapshot.child("pengirim").getValue().toString(),
                                 postSnapshot.child("desc").getValue().toString(),
+                                postSnapshot.child("counter").getValue().toString(),
                                 postSnapshot.child("img").getValue().toString()));
+
 
                     }}
 
@@ -239,17 +242,21 @@ public class IsiKonsultasi extends AppCompatActivity implements View.OnClickList
     protected void onStart() {
         super.onStart();
 
+
+
+
+
         Bundle extras3 = getIntent().getExtras();
         Matkuldis = extras3.getString("Matkuldis");
         Bundle extras4=getIntent().getExtras();
         Jenisdis = extras4.getString("Jenisdis");
 
         System.out.print("Dis : " + Matkuldis + Jenisdis );
-        DatabaseReference ref = mRootref.child(Jenisdis).child(Matkuldis);
+        DatabaseReference reff = mRootref.child(Jenisdis).child(Matkuldis);
 
 
 
-        ref.addValueEventListener(new ValueEventListener() {
+        reff.addValueEventListener(new ValueEventListener() {
 
 
 
@@ -303,8 +310,13 @@ public class IsiKonsultasi extends AppCompatActivity implements View.OnClickList
     }
 
 
+
+
     @Override
     public void onClick(View v) {
+
+
+
         firebaseAuth = FirebaseAuth.getInstance();
         final FirebaseUser user = firebaseAuth.getCurrentUser();
         DatabaseReference mRootref = FirebaseDatabase.getInstance().getReference();
@@ -353,6 +365,8 @@ public class IsiKonsultasi extends AppCompatActivity implements View.OnClickList
                                                           child("Komentar").child("Komentar"+(jumlah)).child("pengirim").setValue(pengirim);
                                                   databaseReference.child(Jenisdis).child(Matkuldis).child("Post" +(posisiItemRecycler)).
                                                           child("Komentar").child("Komentar"+(jumlah)).child("img").setValue(user.getUid().toString());
+                                                  databaseReference.child(Jenisdis).child(Matkuldis).child("Post" +(posisiItemRecycler)).
+                                                          child("Komentar").child("Komentar"+(jumlah)).child("counter").setValue(0);
                                                   langkahkomen++;
                                               }
 

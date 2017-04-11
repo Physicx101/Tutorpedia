@@ -17,7 +17,7 @@
             android:layout_width="300dp"
             android:layout_height="50dp"
             android:src="@drawable/tpstore"
-            android:layout_marginBottom="10dp"/>
+            android:layout_marginBottom="40dp"/>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -32,7 +32,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:paddingRight="4dp"
-                android:src="@drawable/adidas"/>
+                android:src="@drawable/hood"/>
 
 
             <ImageView
@@ -41,7 +41,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:paddingLeft="4dp"
-                android:src="@drawable/adidas" />
+                android:src="@drawable/mouse" />
 
 
 
@@ -59,7 +59,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:paddingRight="4dp"
-                android:src="@drawable/powerbank"/>
+                android:src="@drawable/shirt"/>
 
             <ImageView
                 android:id="@+id/IVhadiah4"
@@ -67,7 +67,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:paddingLeft="4dp"
-                android:src="@drawable/powerbank"/>
+                android:src="@drawable/fd"/>
         </LinearLayout>
     </LinearLayout>
 

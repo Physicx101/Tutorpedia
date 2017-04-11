@@ -115,7 +115,7 @@ public class MyAdapterKonsultasi extends RecyclerView.Adapter<MyAdapterKonsultas
 
             final Intent intent;
             Konsultasi datah=new Konsultasi();
-            System.out.print("Tes 2" + datah.a + datah.b);
+            //System.out.print("Tes 2" + datah.a + datah.b);
             switch (getAdapterPosition()){
                 default:
 

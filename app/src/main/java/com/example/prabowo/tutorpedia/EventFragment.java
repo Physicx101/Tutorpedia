@@ -1,5 +1,6 @@
 package com.example.prabowo.tutorpedia;
 
+import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -72,6 +73,10 @@ public class EventFragment extends Fragment {
 
 
     public void tambahInfo() {
+        //for(int i = 1; i<=max ; i++){
+        final ProgressDialog Dialog = new ProgressDialog(getActivity());
+        Dialog.setMessage("Fetching file .... ");
+        Dialog.show();
 
 
         DatabaseReference event =mRootref.child("Event");
@@ -82,7 +87,7 @@ public class EventFragment extends Fragment {
             public void onDataChange(DataSnapshot dataSnapshot) {
                 for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
                     //long max = dataSnapshot.getChildrenCount();
-                    //for(int i = 1; i<=max ; i++){
+
                     ListEventItemBeneran listItem = new ListEventItemBeneran(postSnapshot.child("head").getValue().toString(),
                             postSnapshot.child("img").getValue().toString(),
                             postSnapshot.child("desc").getValue().toString(),
@@ -92,6 +97,7 @@ public class EventFragment extends Fragment {
 
                     adapter = new AdapterEvent(listItems, getActivity());
                     recyclerView.setAdapter(adapter);
+                    Dialog.hide();
 
                 }
             }

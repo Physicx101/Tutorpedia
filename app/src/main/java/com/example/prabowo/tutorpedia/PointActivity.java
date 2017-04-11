@@ -1,6 +1,8 @@
 package com.example.prabowo.tutorpedia;
 
 import android.content.DialogInterface;
+import android.content.Intent;
+import android.net.Uri;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -101,29 +103,37 @@ public class PointActivity extends AppCompatActivity implements View.OnClickList
         firebaseAuth = FirebaseAuth.getInstance();
         FirebaseUser user = firebaseAuth.getCurrentUser();
 
-        databaseReference = FirebaseDatabase.getInstance().getReference();
-        databaseReference.child("User").child(user.getUid()).child("Point").setValue(points-hargahadiah);
-        String uuid = UUID.randomUUID().toString();
-
-        String alert1 = "SELAMAT ANDA MENDAPAT " + Hadiah.toUpperCase() + " !";
-        String alert2 = "Kode hadiah: " + uuid;
-        String alert3 = "Kode user: " + user.getUid().toString();
-        String alert4 = "Email identitas dan bukti ini ke: tutorpedia@gmail.com";
         /*TVkodehadiah.setText("Kode hadiah : " + uuid);
         TVkodehadiahuid.setText("Kode User : "+ user.getUid().toString());
         TVkodehadiahinfo.setText("SELAMAT ANDA MENDAPAT " + Hadiah.toUpperCase() + " ! ");
         TVkodehadiahinfo2.setText("Email identitas dan bukti ini ke : tutorpedia@gmail.com");*/
 
         if(points>=hargahadiah){
+
+
+            databaseReference = FirebaseDatabase.getInstance().getReference();
+            databaseReference.child("User").child(user.getUid()).child("Point").setValue(points-hargahadiah);
+            final String uuid = UUID.randomUUID().toString();
+
+            String alert1 = "SELAMAT ANDA MENDAPAT " + Hadiah.toUpperCase() + " !";
+            String alert2 = "Kode hadiah: " + uuid;
+            //String alert3 = "Kode user: " + user.getUid().toString();
+            String alert4 = "Isi IDENTITAS ANDA dan BUKTI ini, dengan klik KIRIM";
+
             AlertDialog.Builder builder1 = new AlertDialog.Builder(this);
-            builder1.setMessage(alert1 +"\n"+"\n" + alert2 +"\n"+"\n" + alert3 +"\n"+"\n" + alert4);
+            builder1.setMessage(alert1 +"\n"+"\n" + alert2  +"\n"+"\n" + alert4);
             builder1.setCancelable(true);
 
             builder1.setPositiveButton(
-                    "OK",
+                    "KIRIM",
                     new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int id) {
-                            dialog.cancel();
+                            Intent emailIntent = new Intent(Intent.ACTION_SENDTO, Uri.fromParts(
+                                    "mailto","tutorpedia@gmail.com", null));
+                            emailIntent.putExtra(Intent.EXTRA_SUBJECT, "Hadiah Tutorpedia");
+                            //emailIntent.putExtra(Intent.EXTRA_TEXT, "Hadiah yang didapat :"+Hadiah);
+                            emailIntent.putExtra(Intent.EXTRA_TEXT, "Hadiah yang didapatkan "+ Hadiah.toUpperCase()+ "\n" +"Kode hadiah :"+uuid);
+                            startActivity(Intent.createChooser(emailIntent, "Send email..."));
                         }
                     });
             AlertDialog alert11 = builder1.create();

@@ -9,11 +9,14 @@ public class Komentar {
     private String pengirim;
     private String komen;
     private String imgkomen;
+    private String counter;
 
-    public Komentar(String pengirim, String komen, String imgkomen){
+
+    public Komentar(String pengirim, String komen,String counter, String imgkomen){
         this.pengirim = pengirim;
         this.komen=komen;
         this.imgkomen=imgkomen;
+        this.counter=counter;
     }
 
     public String getImgkomen() {
@@ -26,5 +29,9 @@ public class Komentar {
 
     public String getPengirim() {
         return pengirim;
+    }
+
+    public String getCounter() {
+        return counter;
     }
 }

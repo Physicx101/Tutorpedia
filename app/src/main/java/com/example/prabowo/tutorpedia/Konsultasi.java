@@ -1,5 +1,6 @@
 package com.example.prabowo.tutorpedia;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
@@ -104,11 +105,16 @@ public class Konsultasi extends AppCompatActivity implements View.OnClickListene
     public void tambahInfo() {
 
 
+
+
         Bundle extras = getIntent().getExtras();
         Matkul = extras.getString("Matkul");
         Bundle extras2=getIntent().getExtras();
         Jenis = extras2.getString("Jenis");
 
+        final ProgressDialog Dialog = new ProgressDialog(Konsultasi.this);
+        Dialog.setMessage("Fetching file .... ");
+        Dialog.show();
         DatabaseReference event = mRootref.child(Jenis).child(Matkul);
         event.addListenerForSingleValueEvent(new ValueEventListener() {
 
@@ -124,9 +130,11 @@ public class Konsultasi extends AppCompatActivity implements View.OnClickListene
                             postSnapshot.child("foto").getValue().toString(),
                             postSnapshot.child("poster").getValue().toString());
                     listItems.add(listItem);
+                    Dialog.hide();
 
 
                 }
+
 
                 adapter = new MyAdapterKonsultasi(listItems, getApplicationContext());
                 recyclerView.setAdapter(adapter);
@@ -140,6 +148,7 @@ public class Konsultasi extends AppCompatActivity implements View.OnClickListene
             }
 
         });
+
 
     }
 

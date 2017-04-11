@@ -1,5 +1,6 @@
 package com.example.prabowo.tutorpedia;
 
+import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
@@ -30,6 +31,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
@@ -120,6 +122,8 @@ public class FormTambahKonsultasi extends AppCompatActivity implements View.OnCl
                                                   databaseReference.child("Konsultasi").child(Matkul).child("Post" + jumlah).child("judul").setValue(ETtambahjudul.getText().toString());
                                                   databaseReference.child("Konsultasi").child(Matkul).child("Post" + jumlah).child("deskripsi").setValue(ETtambahdesc.getText().toString());
                                                   databaseReference.child("Konsultasi").child(Matkul).child("Post" + jumlah).child("img").setValue(random);
+                                                  databaseReference.child("Konsultasi").child(Matkul).child("Post" + jumlah).child("img").setValue(random);
+
                                                   databaseReference.child("Konsultasi").child(Matkul).child("Post" + jumlah).child("foto").setValue(user.getUid().toString());
                                                   databaseReference.child("Konsultasi").child(Matkul).child("Post" + jumlah).child("poster").setValue(poster);
                                                  /* databaseReference.child("Konsultasi").child(Matkul).child("Post" + jumlah).child("Komentar")
@@ -193,6 +197,7 @@ public class FormTambahKonsultasi extends AppCompatActivity implements View.OnCl
                         startActivityForResult(intent, 2);
 
 
+
                     } else if (options[item].equals("Kembali")) {
 
                         dialog.dismiss();
@@ -216,6 +221,8 @@ public class FormTambahKonsultasi extends AppCompatActivity implements View.OnCl
         if (resultCode == RESULT_OK) {
 
             if (requestCode == 1) {
+
+
 
                 Bitmap mphoto = (Bitmap) data.getExtras().get("data");
                 foto.setImageBitmap(mphoto);
@@ -241,6 +248,8 @@ public class FormTambahKonsultasi extends AppCompatActivity implements View.OnCl
 
                     }
                 });
+
+
 
             } else if (requestCode == 2) {
 
@@ -285,6 +294,22 @@ public class FormTambahKonsultasi extends AppCompatActivity implements View.OnCl
 
                     }
                 });
+                final ProgressDialog progressDialog = new ProgressDialog(this);
+                progressDialog.setTitle("Uploading...");
+                progressDialog.show();
+
+                uploadTask.addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
+                    @Override
+                    public void onProgress(UploadTask.TaskSnapshot taskSnapshot) {
+                        double progress = (100.0 * taskSnapshot.getBytesTransferred())/taskSnapshot.getTotalByteCount();
+                        progressDialog.setMessage(((int) progress ) + "% Uploaded .... ");
+
+                        if(progress==100){
+                            progressDialog.hide();
+                        }
+                    }
+                })
+                ;
 
 
             }

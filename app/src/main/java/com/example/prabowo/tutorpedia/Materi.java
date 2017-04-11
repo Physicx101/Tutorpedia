@@ -1,5 +1,6 @@
 package com.example.prabowo.tutorpedia;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
@@ -68,14 +69,20 @@ public class Materi extends AppCompatActivity {
 
     public void tambahInfo() {
 
+        final ProgressDialog Dialog = new ProgressDialog(Materi.this);
+        Dialog.setMessage("Fetching file .... ");
+        Dialog.show();
+
         Bundle extras = getIntent().getExtras();
         Matkul = extras.getString("Matkul");
         Bundle extras2 = getIntent().getExtras();
         Jenis = extras2.getString("Jenis");
 
 
+
         DatabaseReference event = mRootref.child(Jenis).child(Matkul);
         event.addListenerForSingleValueEvent(new ValueEventListener() {
+
 
 
             @Override
@@ -88,6 +95,7 @@ public class Materi extends AppCompatActivity {
                             postSnapshot.child("deskripsi").getValue().toString(),
                             postSnapshot.child("link").getValue().toString());
                     listItems.add(listItem);
+                    Dialog.hide();
 
 
                 }

@@ -1,5 +1,6 @@
 package com.example.prabowo.tutorpedia;
 
+import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.ActionBarActivity;
@@ -76,7 +77,10 @@ public class FindFragment extends Fragment implements View.OnClickListener {
 
     public void tambahInfo() {
 
-
+        //for(int i = 1; i<=max ; i++){
+        final ProgressDialog Dialog = new ProgressDialog(getActivity());
+        Dialog.setMessage("Fetching file .... ");
+        Dialog.show();
         DatabaseReference event =mRootref.child("Mentor");
         event.addListenerForSingleValueEvent(new ValueEventListener() {
 
@@ -97,6 +101,7 @@ public class FindFragment extends Fragment implements View.OnClickListener {
 
                     adapter = new AdapterTutor(mListItemTutors, getActivity());
                     recyclerView.setAdapter(adapter);
+                    Dialog.hide();
 
                 }
             }

@@ -58,7 +58,7 @@ public class ListHadiahPoint extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = new Intent(ListHadiahPoint.this, PointActivity.class);
                 intent.putExtra("Point", "1500");
-                intent.putExtra("Hadiah", "adidas");
+                intent.putExtra("Hadiah", "hood");
                 startActivity(intent);
             }
         });
@@ -69,7 +69,7 @@ public class ListHadiahPoint extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = new Intent(ListHadiahPoint.this, PointActivity.class);
                 intent.putExtra("Point", "1400");
-                intent.putExtra("Hadiah", "adidas");
+                intent.putExtra("Hadiah", "mouse");
                 startActivity(intent);
 
     }
@@ -81,7 +81,7 @@ public class ListHadiahPoint extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = new Intent(ListHadiahPoint.this, PointActivity.class);
                 intent.putExtra("Point", "1300");
-                intent.putExtra("Hadiah", "powerbank");
+                intent.putExtra("Hadiah", "shirt");
                 startActivity(intent);
 
             }
@@ -93,7 +93,7 @@ public class ListHadiahPoint extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = new Intent(ListHadiahPoint.this, PointActivity.class);
                 intent.putExtra("Point", "1200");
-                intent.putExtra("Hadiah", "powerbank");
+                intent.putExtra("Hadiah", "fd");
                 startActivity(intent);
 
             }
