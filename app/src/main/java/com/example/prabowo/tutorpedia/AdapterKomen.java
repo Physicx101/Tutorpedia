@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -40,7 +41,7 @@ public class AdapterKomen extends RecyclerView.Adapter<AdapterKomen.ViewHolder> 
     private StorageReference mStorageRef;
     private FirebaseStorage storage;
     private FirebaseAuth firebaseAuth;
-    private Button BTmantap;
+    private ImageButton BTmantap;
     public static int pointsa,posisi,pointsi;
     private static String matkul,jenis;
     public   static String uidtarget;
@@ -109,7 +110,7 @@ public class AdapterKomen extends RecyclerView.Adapter<AdapterKomen.ViewHolder> 
             komentar = (TextView) itemView.findViewById(R.id.TVisikomen);
             Foto = (ImageView) itemView.findViewById(R.id.reviewAvatar);
             counter = (TextView) itemView.findViewById(R.id.TVcommentcounter);
-            BTmantap = (Button) itemView.findViewById(R.id.BTmantap);
+            BTmantap = (ImageButton) itemView.findViewById(R.id.BTmantap);
             BTmantap.setOnClickListener(this);
             itemView.setClickable(true);
             itemView.setOnClickListener(this);
