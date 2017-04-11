@@ -4,9 +4,7 @@
     android:id="@+id/LLayoutmateri"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    app:cardCornerRadius="2dp"
     app:cardPreventCornerOverlap="false"
-    app:cardUseCompatPadding="true"
     app:elevation="4dp">
 
     <include layout="@layout/item_divider" >

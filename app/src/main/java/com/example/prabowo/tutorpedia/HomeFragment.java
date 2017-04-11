@@ -68,4 +68,9 @@ public class HomeFragment extends android.support.v4.app.Fragment implements Tab
     public void onTabReselected(TabLayout.Tab tab) {
 
     }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+    }
 }
