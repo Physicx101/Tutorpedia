@@ -192,6 +192,7 @@ public class IsiKonsultasi extends AppCompatActivity implements View.OnClickList
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(linearLayoutManager);
         recyclerView.setAdapter(adapter);
+        recyclerView.addItemDecoration(new DividerItemDecoration(recyclerView.getContext(), linearLayoutManager.getOrientation()));
 
 
         /*ArrayAdapter<Komentar> adapter = new MyListAdapter();
