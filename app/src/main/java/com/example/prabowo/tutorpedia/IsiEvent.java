@@ -1,9 +1,11 @@
 package com.example.prabowo.tutorpedia;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
@@ -140,6 +142,17 @@ public class IsiEvent extends AppCompatActivity implements View.OnClickListener{
            Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(CV));
             startActivity(intent);
         }
+    }
+    public void onBackPressed() {
+        new AlertDialog.Builder(this)
+                .setMessage("Apa anda ingin keluar ?")
+                .setCancelable(false)
+                .setPositiveButton("Iya", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) { finish(); System.exit(0);
+                    }
+                })
+                .setNegativeButton("Enggak", null)
+                .show();
     }
 }
 

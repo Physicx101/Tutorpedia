@@ -1,8 +1,10 @@
 package com.example.prabowo.tutorpedia;
 
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
@@ -24,7 +26,7 @@ import java.util.List;
  * Created by Bogi on 19-Feb-17.
  */
 
-public class EventFragment extends Fragment {
+public class EventFragment extends Fragment{
 
     private FirebaseDatabase eventfirebasedatabase;
     private RecyclerView recyclerView;
@@ -97,7 +99,7 @@ public class EventFragment extends Fragment {
                             postSnapshot.child("img").getValue().toString(),
                             postSnapshot.child("desc").getValue().toString(),
                             postSnapshot.child("nomor").getValue().toString(),
-                            postSnapshot.child("waktu").getValue().toString());
+                            postSnapshot.child("waktu").getValue().toString(),postSnapshot.child("poin").getValue().toString());
                     listItems.add(listItem);
 
                     adapter = new AdapterEvent(listItems, getActivity());
@@ -115,4 +117,6 @@ public class EventFragment extends Fragment {
         });
 
     }
+
+
 }

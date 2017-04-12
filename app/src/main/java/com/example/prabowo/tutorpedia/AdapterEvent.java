@@ -55,6 +55,8 @@ public class AdapterEvent extends RecyclerView.Adapter<AdapterEvent.ViewHolder> 
 
             ListEventItemBeneran listItem = listItems.get(position);
 
+            holder.PoinBobot.setText(listItem.getPoin());
+
             holder.TVheadeventBeneran.setText(listItem.getJuduleventbeneran());
             holder.TVdesceventBeneran.setText(listItem.getDeskripsieventbeneran());
             holder.NilaiAkhir.setText(listItem.getNilai());
@@ -79,6 +81,7 @@ public class AdapterEvent extends RecyclerView.Adapter<AdapterEvent.ViewHolder> 
             public ImageView IVgambareventBeneran;
             private TextView WaktuMengerjakan;
             private TextView NilaiAkhir;
+            private TextView PoinBobot;
             private String status;
             private FirebaseAuth firebaseAuth;
 
@@ -92,6 +95,7 @@ public class AdapterEvent extends RecyclerView.Adapter<AdapterEvent.ViewHolder> 
                 IVgambareventBeneran = (ImageView) itemView.findViewById(R.id.IVgambareventBeneran);
                 WaktuMengerjakan = (TextView) itemView.findViewById(R.id.WaktuMengerjakan);
                 NilaiAkhir = (TextView) itemView.findViewById(R.id.NilaiAkhir);
+                PoinBobot = (TextView) itemView.findViewById(R.id.Poin);
                 itemView.setClickable(true);
                 itemView.setOnClickListener(this);
             }

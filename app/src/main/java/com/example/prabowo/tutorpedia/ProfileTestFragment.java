@@ -184,16 +184,16 @@ public class ProfileTestFragment extends Fragment implements View.OnClickListene
     @Override
     public void onClick(View view) {
 
-        if(view == riwayat){
+        if(view == riwayat){getActivity().finishAffinity();
             startActivity(new Intent(this.getActivity(),NilaiActivity.class));
         }
 
         if(view == bantuan){
-
+            getActivity().finishAffinity();
             startActivity(new Intent(this.getActivity(),CreditActivity.class));
         }
 
-        if(view == ringkasan) {
+        if(view == ringkasan) {getActivity().finishAffinity();
             startActivity(new Intent(this.getActivity(),Ringkasan.class));
         }
 
@@ -325,6 +325,17 @@ public class ProfileTestFragment extends Fragment implements View.OnClickListene
 
 
         }
+    }
+    public void onBackPressed() {
+        new AlertDialog.Builder(getActivity())
+                .setMessage("Apa anda ingin keluar ?")
+                .setCancelable(false)
+                .setPositiveButton("Iya", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {  getActivity().finish(); System.exit(0);
+                    }
+                })
+                .setNegativeButton("Enggak", null)
+                .show();
     }
 
 }

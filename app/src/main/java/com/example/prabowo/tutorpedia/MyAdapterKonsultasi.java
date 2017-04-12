@@ -1,5 +1,6 @@
 package com.example.prabowo.tutorpedia;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -128,6 +129,8 @@ public class MyAdapterKonsultasi extends RecyclerView.Adapter<MyAdapterKonsultas
                     break;
             }
             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            Activity activity = (Activity) context;
+            activity.finishAffinity();
             context.startActivity(intent);
 
 

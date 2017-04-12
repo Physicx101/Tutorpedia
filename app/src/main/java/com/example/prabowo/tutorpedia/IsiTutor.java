@@ -1,9 +1,11 @@
 package com.example.prabowo.tutorpedia;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
@@ -86,7 +88,8 @@ public class IsiTutor extends AppCompatActivity implements View.OnClickListener 
 
     @Override
     public boolean onSupportNavigateUp() {
-        onBackPressed();
+        finishAffinity();
+        startActivity(new Intent(this, MainActivity.class));
         return true;
     }
 
@@ -172,7 +175,19 @@ public class IsiTutor extends AppCompatActivity implements View.OnClickListener 
             startActivity(sendIntent);
         }
     }
-}
 
+
+    public void onBackPressed() {
+        new AlertDialog.Builder(this)
+                .setMessage("Apa anda ingin keluar ?")
+                .setCancelable(false)
+                .setPositiveButton("Iya", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {moveTaskToBack(true);
+                         finish();  System.exit(0); System.exit(0);
+                    }
+                })
+                .setNegativeButton("Enggak", null)
+                .show();
+    }}
 
 

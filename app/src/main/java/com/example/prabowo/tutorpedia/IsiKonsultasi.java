@@ -1,6 +1,9 @@
 package com.example.prabowo.tutorpedia;
 
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
@@ -119,7 +122,8 @@ public class IsiKonsultasi extends AppCompatActivity implements View.OnClickList
 
     @Override
     public boolean onSupportNavigateUp() {
-        onBackPressed();
+        finishAffinity();
+        startActivity(new Intent(this, MainActivity.class));
         return true;
     }
 
@@ -391,6 +395,17 @@ public class IsiKonsultasi extends AppCompatActivity implements View.OnClickList
 
         }
 
+    }
+    public void onBackPressed() {
+        new AlertDialog.Builder(this)
+                .setMessage("Apa anda ingin keluar ?")
+                .setCancelable(false)
+                .setPositiveButton("Iya", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {  finishAffinity(); System.exit(0);
+                    }
+                })
+                .setNegativeButton("Enggak", null)
+                .show();
     }
 }
 

@@ -10,14 +10,16 @@ public class ListEventItemBeneran {
     private String deskripsieventbeneran;
     private String nilai;
     private String time;
+    private String poin;
 
 
-    public ListEventItemBeneran(String judulevent, String imageUrlevent, String deskripsievent,String nilai,String time) {
+    public ListEventItemBeneran(String judulevent, String imageUrlevent, String deskripsievent,String nilai,String time,String poin) {
         this.juduleventbeneran = judulevent;
         this.imageUrleventbeneran = imageUrlevent;
         this.deskripsieventbeneran = deskripsievent;
         this.nilai = nilai;
         this.time = time;
+        this.poin = poin;
     }
 
     public String getDeskripsieventbeneran() {
@@ -35,4 +37,8 @@ public class ListEventItemBeneran {
     public String getNilai(){return  time;}
 
     public String getTime(){return nilai;}
+
+    public String getPoin() {
+        return poin;
+    }
 }

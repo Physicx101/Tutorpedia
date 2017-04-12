@@ -1,10 +1,12 @@
 package com.example.prabowo.tutorpedia;
 
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -98,7 +100,8 @@ public class Konsultasi extends AppCompatActivity implements View.OnClickListene
 
     @Override
     public boolean onSupportNavigateUp() {
-        onBackPressed();
+        finishAffinity();
+        startActivity(new Intent(this, MainActivity.class));
         return true;
     }
 
@@ -158,7 +161,6 @@ public class Konsultasi extends AppCompatActivity implements View.OnClickListene
         if(v == fab){
             Bundle extras = getIntent().getExtras();
             Matkul = extras.getString("Matkul");
-
             Intent intent = new Intent(Konsultasi.this,FormTambahKonsultasi.class);
             intent.putExtra("Matkul",Matkul);
             startActivity(intent);
@@ -166,6 +168,17 @@ public class Konsultasi extends AppCompatActivity implements View.OnClickListene
 
         }
 
+    }
+    public void onBackPressed() {
+        new AlertDialog.Builder(this)
+                .setMessage("Apa anda ingin keluar ?")
+                .setCancelable(false)
+                .setPositiveButton("Iya", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) { finishAffinity(); System.exit(0);
+                    }
+                })
+                .setNegativeButton("Enggak", null)
+                .show();
     }
 }
 

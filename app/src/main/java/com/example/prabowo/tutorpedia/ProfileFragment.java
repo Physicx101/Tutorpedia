@@ -86,7 +86,7 @@ public class ProfileFragment extends android.support.v4.app.Fragment implements 
             startActivity(new Intent(this.getActivity(),LoginActivity.class));}
 
         if(v == BTsave){
-            saveUserInfo();
+            saveUserInfo();getActivity().finishAffinity();
             startActivity(new Intent(this.getActivity(),MainActivity.class));
         }
 

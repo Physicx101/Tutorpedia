@@ -1,7 +1,10 @@
 package com.example.prabowo.tutorpedia;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -93,16 +96,21 @@ public class AdapterTutor extends RecyclerView.Adapter<AdapterTutor.ViewHolder> 
             switch (getAdapterPosition()){
                 default:
                  recyclerItemPosition = getAdapterPosition();
+
                 intent = new Intent(context,IsiTutor.class);
                 intent.putExtra("PosisiItemRecycler",recyclerItemPosition);
                 break;
             }
             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            Activity activity = (Activity) context;
+            activity.finishAffinity();
             context.startActivity(intent);
 
 
             }
         }
+
+
     }
 
 

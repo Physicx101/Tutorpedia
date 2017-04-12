@@ -42,7 +42,7 @@ public class RecyclerViewHolders extends RecyclerView.ViewHolder implements View
                 intent = new Intent(context,Soal.class);
                 break;
         }
-        NomorSoal.setBackgroundColor(context.getColor(R.color.cardview_dark_background));
+
 
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         context.startActivity(intent);

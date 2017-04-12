@@ -1,6 +1,8 @@
 package com.example.prabowo.tutorpedia;
 
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -56,6 +58,7 @@ public class ListHadiahPoint extends AppCompatActivity {
         IVhadiah1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                finishAffinity();
                 Intent intent = new Intent(ListHadiahPoint.this, PointActivity.class);
                 intent.putExtra("Point", "1500");
                 intent.putExtra("Hadiah", "hood");
@@ -67,6 +70,7 @@ public class ListHadiahPoint extends AppCompatActivity {
         IVhadiah2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                finishAffinity();
                 Intent intent = new Intent(ListHadiahPoint.this, PointActivity.class);
                 intent.putExtra("Point", "1400");
                 intent.putExtra("Hadiah", "mouse");
@@ -79,6 +83,7 @@ public class ListHadiahPoint extends AppCompatActivity {
         IVhadiah3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                finishAffinity();
                 Intent intent = new Intent(ListHadiahPoint.this, PointActivity.class);
                 intent.putExtra("Point", "1300");
                 intent.putExtra("Hadiah", "shirt");
@@ -91,6 +96,7 @@ public class ListHadiahPoint extends AppCompatActivity {
         IVhadiah4.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                finishAffinity();
                 Intent intent = new Intent(ListHadiahPoint.this, PointActivity.class);
                 intent.putExtra("Point", "1200");
                 intent.putExtra("Hadiah", "fd");
@@ -102,6 +108,18 @@ public class ListHadiahPoint extends AppCompatActivity {
 
 
     }
+    public void onBackPressed() {
+        new AlertDialog.Builder(this)
+                .setMessage("Apa anda ingin keluar ?")
+                .setCancelable(false)
+                .setPositiveButton("Iya", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {  finish(); System.exit(0);
+                    }
+                })
+                .setNegativeButton("Enggak", null)
+                .show();
+    }
+
 }
 
 

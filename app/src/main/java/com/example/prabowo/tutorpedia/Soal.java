@@ -1,9 +1,11 @@
 package com.example.prabowo.tutorpedia;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
@@ -89,29 +91,29 @@ public class Soal extends AppCompatActivity {
         } else {
             if (warna[nomor] == 1) {
                 img1.setBackgroundColor(Color.parseColor("#00FF00"));
-                img2.setBackgroundColor(Color.parseColor("#aaaaaa"));
-                img3.setBackgroundColor(Color.parseColor("#aaaaaa"));
-                img4.setBackgroundColor(Color.parseColor("#aaaaaa"));
+                img2.setBackgroundColor(Color.parseColor("#6666cb"));
+                img3.setBackgroundColor(Color.parseColor("#6666cb"));
+                img4.setBackgroundColor(Color.parseColor("#6666cb"));
             } else if (warna[nomor] == 2) {
-                img1.setBackgroundColor(Color.parseColor("#aaaaaa"));
+                img1.setBackgroundColor(Color.parseColor("#6666cb"));
                 img2.setBackgroundColor(Color.parseColor("#00FF00"));
-                img3.setBackgroundColor(Color.parseColor("#aaaaaa"));
-                img4.setBackgroundColor(Color.parseColor("#aaaaaa"));
+                img3.setBackgroundColor(Color.parseColor("#6666cb"));
+                img4.setBackgroundColor(Color.parseColor("#6666cb"));
             } else if (warna[nomor] == 3) {
-                img1.setBackgroundColor(Color.parseColor("#aaaaaa"));
-                img2.setBackgroundColor(Color.parseColor("#aaaaaa"));
+                img1.setBackgroundColor(Color.parseColor("#6666cb"));
+                img2.setBackgroundColor(Color.parseColor("#6666cb"));
                 img3.setBackgroundColor(Color.parseColor("#00FF00"));
-                img4.setBackgroundColor(Color.parseColor("#aaaaaa"));
+                img4.setBackgroundColor(Color.parseColor("#6666cb"));
             } else if (warna[nomor] == 4) {
-                img1.setBackgroundColor(Color.parseColor("#aaaaaa"));
-                img2.setBackgroundColor(Color.parseColor("#aaaaaa"));
-                img3.setBackgroundColor(Color.parseColor("#aaaaaa"));
+                img1.setBackgroundColor(Color.parseColor("#6666cb"));
+                img2.setBackgroundColor(Color.parseColor("#6666cb"));
+                img3.setBackgroundColor(Color.parseColor("#6666cb"));
                 img4.setBackgroundColor(Color.parseColor("#00FF00"));
             } else if (warna[nomor] == 5) {
-                img1.setBackgroundColor(Color.parseColor("#aaaaaa"));
-                img2.setBackgroundColor(Color.parseColor("#aaaaaa"));
-                img3.setBackgroundColor(Color.parseColor("#aaaaaa"));
-                img4.setBackgroundColor(Color.parseColor("#aaaaaa"));
+                img1.setBackgroundColor(Color.parseColor("#6666cb"));
+                img2.setBackgroundColor(Color.parseColor("#6666cb"));
+                img3.setBackgroundColor(Color.parseColor("#6666cb"));
+                img4.setBackgroundColor(Color.parseColor("#6666cb"));
             }
         }
 
@@ -592,14 +594,14 @@ public class Soal extends AppCompatActivity {
 
 
         }
-        if (nomor == 40) {
+        if (nomor == 40) {finishAffinity();
             Intent i = new Intent(this, CekSoal.class);
 
             startActivity(i);
         } else {
             nomor = nomor + 1;
 
-
+            finishAffinity();
             Intent i = new Intent(this, Soal.class);
 
             startActivity(i);
@@ -656,12 +658,12 @@ public class Soal extends AppCompatActivity {
                 break;
 
         }
-        if (nomor == 40) {
+        if (nomor == 40) {finishAffinity();
             Intent i = new Intent(this, CekSoal.class);
 
             startActivity(i);
         } else {
-            nomor = nomor + 1;
+            nomor = nomor + 1;finishAffinity();
             Intent i = new Intent(this, Soal.class);
 
             startActivity(i);
@@ -717,12 +719,12 @@ public class Soal extends AppCompatActivity {
         }
         if (nomor == 40) {
             Intent i = new Intent(this, CekSoal.class);
-
+            finishAffinity();
             startActivity(i);
         } else {
             nomor = nomor + 1;
             Intent i = new Intent(this, Soal.class);
-
+            finishAffinity();
             startActivity(i);
         }
     }
@@ -777,19 +779,19 @@ public class Soal extends AppCompatActivity {
         }
         if (nomor == 40) {
             Intent i = new Intent(this, CekSoal.class);
-
+            finishAffinity();
             startActivity(i);
         } else {
             nomor = nomor + 1;
             Intent i = new Intent(this, Soal.class);
-
+            finishAffinity();
             startActivity(i);
         }
     }
 
 
     public void Akhir(View v) {
-
+        finishAffinity();
         Intent i = new Intent(this, CekSoal.class);
 
         startActivity(i);
@@ -808,10 +810,10 @@ public class Soal extends AppCompatActivity {
             img4.setBackgroundColor(Color.parseColor("#FF9BA2"));
             ragu[nomor] = 1;
         } else {
-            img1.setBackgroundColor(Color.parseColor("#aaaaaa"));
-            img2.setBackgroundColor(Color.parseColor("#aaaaaa"));
-            img3.setBackgroundColor(Color.parseColor("#aaaaaa"));
-            img4.setBackgroundColor(Color.parseColor("#aaaaaa"));
+            img1.setBackgroundColor(Color.parseColor("#6666cb"));
+            img2.setBackgroundColor(Color.parseColor("#6666cb"));
+            img3.setBackgroundColor(Color.parseColor("#6666cb"));
+            img4.setBackgroundColor(Color.parseColor("#6666cb"));
             ragu[nomor] = 0;
         }
     }
@@ -819,11 +821,13 @@ public class Soal extends AppCompatActivity {
 
     public void next(View v) {
         if (nomor == 40) {
+            finishAffinity();
             Intent i = new Intent(this, CekSoal.class);
 
             startActivity(i);
         } else {
             nomor = nomor + 1;
+            finishAffinity();
             Intent i = new Intent(this, Soal.class);
 
             startActivity(i);
@@ -902,7 +906,7 @@ public class Soal extends AppCompatActivity {
 
 
 
-
+                    finishAffinity();
                     Intent i = new Intent(Soal.this, EventFragment.class);
 
                     startActivity(i);
@@ -910,5 +914,17 @@ public class Soal extends AppCompatActivity {
             }.start();
         }
     };
+    public void onBackPressed() {
+        new AlertDialog.Builder(this)
+                .setMessage("Apa anda ingin keluar ?")
+                .setCancelable(false)
+                .setPositiveButton("Iya", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {  finish(); System.exit(0);
+                    }
+                })
+                .setNegativeButton("Enggak", null)
+                .show();
+    }
+
 }
 

@@ -1,7 +1,9 @@
 package com.example.prabowo.tutorpedia.CekSoal;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -140,9 +142,21 @@ public class CekSoal extends AppCompatActivity {
             databaseReference.child("Tes").child("Tes 1").child(user.getUid()).setValue(1);
             databaseReference.child("User").child(user.getUid()).child("Point").setValue(point);
 
+            finishAffinity();
             Intent i = new Intent(this, MainActivity.class);
             startActivity(i);
 
+    }
+    public void onBackPressed() {
+        new AlertDialog.Builder(this)
+                .setMessage("Apa anda ingin keluar ?")
+                .setCancelable(false)
+                .setPositiveButton("Iya", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) { finish(); System.exit(0);
+                    }
+                })
+                .setNegativeButton("Enggak", null)
+                .show();
     }
 
     }
