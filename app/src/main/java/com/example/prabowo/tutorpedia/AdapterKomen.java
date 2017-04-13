@@ -2,10 +2,8 @@ package com.example.prabowo.tutorpedia;
 
 import android.app.Activity;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.design.widget.Snackbar;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -44,7 +42,7 @@ public class AdapterKomen extends RecyclerView.Adapter<AdapterKomen.ViewHolder> 
     private FirebaseStorage storage;
     private FirebaseAuth firebaseAuth;
     private ImageButton BTmantap;
-    public static int pointsa,posisi,pointsi;
+    public static int pointsa,posisi,pointsi,pointspang;
     private static String matkul,jenis;
     public   static String uidtarget;
     public static int counters;
@@ -142,6 +140,8 @@ public class AdapterKomen extends RecyclerView.Adapter<AdapterKomen.ViewHolder> 
 
 
 
+
+
 //        points = FirebaseDatabase.getInstance().getReference().child("User").child(user.getUid()).child("Point").getKey();
 //        point = Integer.parseInt(points);
 
@@ -178,7 +178,28 @@ public class AdapterKomen extends RecyclerView.Adapter<AdapterKomen.ViewHolder> 
 
                             if(uidtarget.toString().equals(user.getUid().toString())|| pointsa<20) {
                                 Toast.makeText(context,"Point Kurang atau Tidak Bisa Klik Komentar Sendiri",Toast.LENGTH_SHORT).show();}
-                            else { // databaseReference.child("User").child(user.getUid()).child("Point").setValue(pointsa-20);
+                            else {
+                                DatabaseReference refv = mRootref.child("User").child(uidtarget).child("Pangkat");
+                                refv.addValueEventListener(new ValueEventListener() {
+
+                                    int ag=0;
+                                    @Override
+                                    public void onDataChange(DataSnapshot dataSnapshot) {
+                                        pointspang = dataSnapshot.getValue().hashCode();
+                                        if(ag<1) {
+                                            databaseReference.child("User").child(uidtarget).child("Pangkat").setValue(pointspang + 20);
+//                TVpoint.setText(dataSnapshot.getValue().toString());
+                                            ag++;
+                                        }
+                                    }
+
+                                    @Override
+                                    public void onCancelled(DatabaseError databaseError) {
+
+                                    }
+                                });
+
+                                // databaseReference.child("User").child(user.getUid()).child("Point").setValue(pointsa-20);
                             DatabaseReference refc = mRootref.child("User").child(String.valueOf(uidtarget)).child("Point");
                             refc.addValueEventListener(new ValueEventListener() {
 
@@ -186,7 +207,8 @@ public class AdapterKomen extends RecyclerView.Adapter<AdapterKomen.ViewHolder> 
                                 public void onDataChange(DataSnapshot dataSnapshot) {
                                     pointsi = dataSnapshot.getValue().hashCode();
                                     if(ag<1) {
-                                        databaseReference.child("User").child(uidtarget).child("Point").setValue(pointsi + 20);//yang komennya di like nambah 20
+                                        databaseReference.child("User").child(uidtarget).child("Point").setValue(pointsi + 20);
+                                        //yang komennya di like nambah 20
                                         databaseReference.child("User").child(user.getUid()).child("Point").setValue(pointsa - 20);
                                     ag++;
                                     }
@@ -241,6 +263,8 @@ public class AdapterKomen extends RecyclerView.Adapter<AdapterKomen.ViewHolder> 
 
 
 
+
+
                         @Override
                         public void onCancelled(DatabaseError databaseError) {
 
@@ -254,8 +278,6 @@ public class AdapterKomen extends RecyclerView.Adapter<AdapterKomen.ViewHolder> 
 
         }
     }
-
-
 }
 
 

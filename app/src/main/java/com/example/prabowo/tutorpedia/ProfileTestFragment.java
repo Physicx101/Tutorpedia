@@ -21,6 +21,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -60,8 +61,10 @@ public class ProfileTestFragment extends Fragment implements View.OnClickListene
     private ImageView fotoProfil;
     private String nama;
     private String UID;
+    private TextView TVpangkat;
     private ImageView BTfoto;
-    public static int points;
+    private ProgressBar pangkat;
+    public static int points,pangkats;
     private static String pointuser;
     private RelativeLayout ringkasan,riwayat,bantuan,keluar,tpoin;
     DatabaseReference mRootref = FirebaseDatabase.getInstance().getReference();
@@ -86,7 +89,8 @@ public class ProfileTestFragment extends Fragment implements View.OnClickListene
             getActivity().finish();
             startActivity(new Intent(this.getActivity(),LoginActivity.class));
         }
-
+        pangkat = (ProgressBar) getActivity().findViewById(R.id.PBpangkat);
+        TVpangkat = (TextView) getActivity().findViewById(R.id.TVpangkat);
         userEmail = (TextView) getActivity().findViewById(R.id.email_user);
         userEmail.setText(user.getEmail());
         userName = (TextView) getActivity().findViewById(R.id.user_profile_name);
@@ -137,6 +141,34 @@ public class ProfileTestFragment extends Fragment implements View.OnClickListene
                 points = dataSnapshot.getValue().hashCode();
                 pointuser = String.valueOf(points);
                 userPoint.setText(pointuser);
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
+
+        DatabaseReference refpangkat = mRootref.child("User").child(user.getUid()).child("Pangkat");
+        refpangkat.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                pangkats = dataSnapshot.getValue().hashCode();
+
+                if(pangkats<100){
+                    TVpangkat.setText("Pendatang Baru");
+                    float total = 100;
+                    float aa = (pangkats/total);
+                    int bb=Math.round(aa*100);
+                    pangkat.setProgress(bb);}
+                if (pangkats>100){
+                    TVpangkat.setText("Pejuang");
+                    float total = 250;
+                    float aa = (pangkats/total);
+                    int bb=Math.round(aa*100);
+                    pangkat.setProgress(bb);
+                }
             }
 
             @Override
