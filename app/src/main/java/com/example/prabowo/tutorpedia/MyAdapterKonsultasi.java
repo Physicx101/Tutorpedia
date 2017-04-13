@@ -14,8 +14,11 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.example.prabowo.tutorpedia.CekSoal.FirebaseImageLoader;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.squareup.picasso.Picasso;
@@ -32,8 +35,13 @@ public class MyAdapterKonsultasi extends RecyclerView.Adapter<MyAdapterKonsultas
     private DatabaseReference databaseReference;;
     private StorageReference mStorageRef;
     private FirebaseStorage storage;
+    public static String a;
+
+
+
 
     DatabaseReference mRootref = FirebaseDatabase.getInstance().getReference();
+
 
     private List<ListItemKonsultasi> listItems;
     private Context context;
@@ -57,6 +65,20 @@ public class MyAdapterKonsultasi extends RecyclerView.Adapter<MyAdapterKonsultas
     public void onBindViewHolder(MyAdapterKonsultasi.ViewHolder holder, int position) {
 
         ListItemKonsultasi listItem = listItems.get(position);
+        /*DatabaseReference komentar = mRootref.child("JumlahKomentarBenar").child(Matkul).child("Post" + posisiItemRecycler);
+        komentar.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                num = dataSnapshot.getValue().hashCode();
+                //String jumlahKomen = String.valueOf(num);
+                TVjumlahkomen.setText(num + " Komentar");
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });*/
 
         holder.TVheadkonsultasi.setText(listItem.getJudulkonsultasi());
         holder.TVdesckonsultasi.setText(listItem.getDeskripsikonsultasi());
@@ -90,21 +112,31 @@ public class MyAdapterKonsultasi extends RecyclerView.Adapter<MyAdapterKonsultas
         public ImageView IVgambarkonsultasi;
         private TextView TVnamaposter;
         private ImageView IVfotoposter;
+        private ImageView IVkomentar;
+        private TextView TVjumlahkomen;
 
 
         public ViewHolder(View itemView) {
             super(itemView);
+
+
 
             TVheadkonsultasi = (TextView) itemView.findViewById(R.id.TVheadkonsultasi);
             TVdesckonsultasi = (TextView) itemView.findViewById(R.id.TVdesckonsultasi);
             IVgambarkonsultasi = (ImageView) itemView.findViewById(R.id.IVgambarkonsultasi);
             TVnamaposter = (TextView) itemView.findViewById(R.id.user_name_konsul);
             IVfotoposter = (ImageView) itemView.findViewById(R.id.user_image_konsul);
+            IVkomentar = (ImageView) itemView.findViewById(R.id.iv_komentar);
+            TVjumlahkomen = (TextView) itemView.findViewById(R.id.tv_komentar);
+
+
             itemView.setClickable(true);
             itemView.setOnClickListener(this);
 
 
         }
+
+
 
 
 

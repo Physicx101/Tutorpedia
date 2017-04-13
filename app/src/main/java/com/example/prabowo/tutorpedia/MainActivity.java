@@ -85,6 +85,17 @@ public class MainActivity extends AppCompatActivity {
             });
         }
     }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+    }
+
+    @Override
+    protected void onResumeFragments() {
+        super.onResumeFragments();
+    }
+
     public void onBackPressed() {
         new AlertDialog.Builder(this)
                 .setMessage("Apa anda ingin keluar ?")

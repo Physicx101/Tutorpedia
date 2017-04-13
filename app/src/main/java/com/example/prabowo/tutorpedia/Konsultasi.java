@@ -16,6 +16,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -31,6 +32,8 @@ public class Konsultasi extends AppCompatActivity implements View.OnClickListene
     public String Matkul;
     public String Jenis;
     public static String a,b;
+    int posisiItemRecycler;
+    TextView TVjumlahkomen;
 
     private FirebaseDatabase eventfirebasedatabase;
     private RecyclerView recyclerView;
@@ -38,6 +41,8 @@ public class Konsultasi extends AppCompatActivity implements View.OnClickListene
     private LinearLayout linear;
     private LinearLayoutManager linearLayoutManager;
     private FloatingActionButton fab;
+    private static int num;
+
 
 
 
@@ -73,6 +78,7 @@ public class Konsultasi extends AppCompatActivity implements View.OnClickListene
 
        Bundle extras = getIntent().getExtras();
         Bundle extras2=getIntent().getExtras();
+        posisiItemRecycler = extras.getInt("PosisiItemRecycler");
 
 
         a = extras.getString("Matkul");
@@ -86,6 +92,7 @@ public class Konsultasi extends AppCompatActivity implements View.OnClickListene
         linearLayoutManager.setReverseLayout(true);
 
         listItems = new ArrayList<>();
+        TVjumlahkomen = (TextView) findViewById(R.id.tv_komentar);
 
 
 
@@ -119,6 +126,7 @@ public class Konsultasi extends AppCompatActivity implements View.OnClickListene
         Dialog.setMessage("Fetching file .... ");
         Dialog.show();
         DatabaseReference event = mRootref.child(Jenis).child(Matkul);
+
         event.addListenerForSingleValueEvent(new ValueEventListener() {
 
 
