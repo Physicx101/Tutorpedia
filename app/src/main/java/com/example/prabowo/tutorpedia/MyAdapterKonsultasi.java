@@ -126,8 +126,8 @@ public class MyAdapterKonsultasi extends RecyclerView.Adapter<MyAdapterKonsultas
             IVgambarkonsultasi = (ImageView) itemView.findViewById(R.id.IVgambarkonsultasi);
             TVnamaposter = (TextView) itemView.findViewById(R.id.user_name_konsul);
             IVfotoposter = (ImageView) itemView.findViewById(R.id.user_image_konsul);
-            IVkomentar = (ImageView) itemView.findViewById(R.id.iv_komentar);
-            TVjumlahkomen = (TextView) itemView.findViewById(R.id.tv_komentar);
+            //IVkomentar = (ImageView) itemView.findViewById(R.id.iv_komentar);
+            //TVjumlahkomen = (TextView) itemView.findViewById(R.id.tv_komentar);
 
 
             itemView.setClickable(true);

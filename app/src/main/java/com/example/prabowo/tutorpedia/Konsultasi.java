@@ -92,7 +92,7 @@ public class Konsultasi extends AppCompatActivity implements View.OnClickListene
         linearLayoutManager.setReverseLayout(true);
 
         listItems = new ArrayList<>();
-        TVjumlahkomen = (TextView) findViewById(R.id.tv_komentar);
+        //TVjumlahkomen = (TextView) findViewById(R.id.tv_komentar);
 
 
 
