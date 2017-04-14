@@ -137,11 +137,11 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
         new AlertDialog.Builder(this)
                 .setMessage("Apa anda ingin keluar ?")
                 .setCancelable(false)
-                .setPositiveButton("Iya", new DialogInterface.OnClickListener() {
+                .setPositiveButton("Ya", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {  finish(); System.exit(0);
                     }
                 })
-                .setNegativeButton("Enggak", null)
+                .setNegativeButton("Tidak", null)
                 .show();
     }
 

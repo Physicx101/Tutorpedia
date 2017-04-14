@@ -24,6 +24,7 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.signature.StringSignature;
@@ -38,6 +39,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
@@ -108,9 +110,19 @@ public class ProfileTestFragment extends Fragment implements View.OnClickListene
         //ringkasan = (RelativeLayout) getActivity().findViewById(R.id.ringkasanAkun);
         //ringkasan.setOnClickListener(this);
         riwayat = (RelativeLayout) getActivity().findViewById(R.id.riwayatTes);
-        riwayat.setOnClickListener(this);
+        riwayat.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getActivity(),NilaiActivity.class));
+            }
+        });
         bantuan = (RelativeLayout) getActivity().findViewById(R.id.bantuan);
-        bantuan.setOnClickListener(this);
+        bantuan.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getActivity(),CreditActivity.class));
+            }
+        });
         keluar = (RelativeLayout) getActivity().findViewById(R.id.keluar);
         keluar.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -179,7 +191,7 @@ public class ProfileTestFragment extends Fragment implements View.OnClickListene
         });
 
 
-        final ProgressDialog Dialog = new ProgressDialog(getActivity());
+        final ProgressDialog Dialog = new ProgressDialog(getActivity(), R.style.AppTheme_Dark_Dialog);
         Dialog.setMessage("Loading Data .... ");
         Dialog.show();
         DatabaseReference ref = mRootref.child("User").child(user.getUid());
@@ -219,18 +231,6 @@ public class ProfileTestFragment extends Fragment implements View.OnClickListene
     @Override
     public void onClick(View view) {
 
-        if(view == riwayat){getActivity().finishAffinity();
-            startActivity(new Intent(this.getActivity(),NilaiActivity.class));
-        }
-
-        if(view == bantuan){
-            getActivity().finishAffinity();
-            startActivity(new Intent(this.getActivity(),CreditActivity.class));
-        }
-
-        if(view == ringkasan) {getActivity().finishAffinity();
-            startActivity(new Intent(this.getActivity(),Ringkasan.class));
-        }
 
         if (view == BTfoto) {
             System.out.println("1");
@@ -311,6 +311,22 @@ public class ProfileTestFragment extends Fragment implements View.OnClickListene
 
                     }
                 });
+                final ProgressDialog progressDialog = new ProgressDialog(getContext());
+                progressDialog.setTitle("Uploading...");
+                progressDialog.show();
+
+                uploadTask.addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
+                    @Override
+                    public void onProgress(UploadTask.TaskSnapshot taskSnapshot) {
+                        double progress = (100.0 * taskSnapshot.getBytesTransferred())/taskSnapshot.getTotalByteCount();
+                        progressDialog.setMessage(((int) progress ) + "% Uploaded .... ");
+
+                        if(progress==100){
+                            progressDialog.hide();
+                        }
+                    }
+                })
+                ;
 
             } else if (requestCode == 2) {
 
@@ -350,10 +366,27 @@ public class ProfileTestFragment extends Fragment implements View.OnClickListene
                 }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                     @Override
                     public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                        // taskSnapshot.getMetadata() contains file metadata such as size, content-type, and download URL.
+                        Toast.makeText(getContext(),"Upload Sukses",Toast.LENGTH_SHORT).show();      // taskSnapshot.getMetadata() contains file metadata such as size, content-type, and download URL.
 
                     }
                 });
+
+                final ProgressDialog progressDialog = new ProgressDialog(getContext());
+                progressDialog.setTitle("Uploading...");
+                progressDialog.show();
+
+                uploadTask.addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
+                    @Override
+                    public void onProgress(UploadTask.TaskSnapshot taskSnapshot) {
+                        double progress = (100.0 * taskSnapshot.getBytesTransferred())/taskSnapshot.getTotalByteCount();
+                        progressDialog.setMessage(((int) progress ) + "% Uploaded .... ");
+
+                        if(progress==100){
+                            progressDialog.hide();
+                        }
+                    }
+                })
+                ;
 
 
             }

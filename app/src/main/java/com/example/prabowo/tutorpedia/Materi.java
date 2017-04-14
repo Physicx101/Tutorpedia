@@ -71,7 +71,7 @@ public class Materi extends AppCompatActivity {
 
     public void tambahInfo() {
 
-        final ProgressDialog Dialog = new ProgressDialog(Materi.this);
+        final ProgressDialog Dialog = new ProgressDialog(Materi.this, R.style.AppTheme_Dark_Dialog);
         Dialog.setMessage("Fetching file .... ");
         Dialog.show();
 

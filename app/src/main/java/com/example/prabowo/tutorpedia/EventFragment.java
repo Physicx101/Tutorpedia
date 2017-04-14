@@ -81,7 +81,7 @@ public class EventFragment extends Fragment{
 
     public void tambahInfo() {
         //for(int i = 1; i<=max ; i++){
-        final ProgressDialog Dialog = new ProgressDialog(getActivity());
+        final ProgressDialog Dialog = new ProgressDialog(getActivity(), R.style.AppTheme_Dark_Dialog);
         Dialog.setMessage("Fetching file .... ");
         Dialog.show();
 

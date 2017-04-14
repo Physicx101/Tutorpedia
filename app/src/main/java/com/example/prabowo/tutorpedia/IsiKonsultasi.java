@@ -1,9 +1,6 @@
 package com.example.prabowo.tutorpedia;
 
-import android.content.DialogInterface;
-import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
@@ -19,7 +16,6 @@ import android.widget.Toast;
 
 
 import com.bumptech.glide.Glide;
-import com.bumptech.glide.signature.StringSignature;
 import com.example.prabowo.tutorpedia.CekSoal.FirebaseImageLoader;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -57,7 +53,7 @@ public class IsiKonsultasi extends AppCompatActivity implements View.OnClickList
     String CV;
     int i = 0;
     DatabaseReference mRootref = FirebaseDatabase.getInstance().getReference();
-   //private List<Komentar> komenku = new ArrayList<Komentar>();
+    //private List<Komentar> komenku = new ArrayList<Komentar>();
     private DatabaseReference databaseReference;;
     private StorageReference mStorageRef;
     private FirebaseStorage storage;
@@ -108,7 +104,7 @@ public class IsiKonsultasi extends AppCompatActivity implements View.OnClickList
         TVisikonsultasidesc = (TextView) findViewById(R.id.TVisikonsultasidesc);
         TVnamaposter = (TextView) findViewById(R.id.user_name_isi_konsul);
         IVfotoposter = (ImageView) findViewById(R.id.user_image_isi_konsul);
-                Bundle extras = getIntent().getExtras();
+        Bundle extras = getIntent().getExtras();
         if (extras != null) {
             posisiItemRecycler = extras.getInt("PosisiItemRecycler");}
 
@@ -159,8 +155,6 @@ public class IsiKonsultasi extends AppCompatActivity implements View.OnClickList
             @Override
             public void onDataChange(DataSnapshot snapshot) {
                 if (filter == 1){
-                    finish();
-                    startActivity(getIntent());
                     for (DataSnapshot postSnapshot : snapshot.getChildren()) {
                         mListItemKomen.add(new Komentar(postSnapshot.child("pengirim").getValue().toString(),
                                 postSnapshot.child("desc").getValue().toString(),
@@ -191,10 +185,10 @@ public class IsiKonsultasi extends AppCompatActivity implements View.OnClickList
         linearLayoutManager.setReverseLayout(true);
 
         recyclerView = (RecyclerView) findViewById(R.id.komenListView);
+        recyclerView.addItemDecoration(new DividerItemDecoration(recyclerView.getContext(), linearLayoutManager.getOrientation()));
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(linearLayoutManager);
         recyclerView.setAdapter(adapter);
-        recyclerView.addItemDecoration(new DividerItemDecoration(recyclerView.getContext(), linearLayoutManager.getOrientation()));
 
 
         /*ArrayAdapter<Komentar> adapter = new MyListAdapter();
@@ -300,7 +294,6 @@ public class IsiKonsultasi extends AppCompatActivity implements View.OnClickList
                         Glide.with(getApplicationContext())
                                 .using(new FirebaseImageLoader())
                                 .load(fotoposter)
-                                .signature(new StringSignature(Long.toString(System.currentTimeMillis()))).centerCrop()
                                 .into(IVfotoposter);
 
 
@@ -400,7 +393,6 @@ public class IsiKonsultasi extends AppCompatActivity implements View.OnClickList
         }
 
     }
-
 }
 
 

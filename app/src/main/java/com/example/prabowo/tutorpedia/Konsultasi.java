@@ -121,7 +121,7 @@ public class Konsultasi extends AppCompatActivity implements View.OnClickListene
         Bundle extras2=getIntent().getExtras();
         Jenis = extras2.getString("Jenis");
 
-        final ProgressDialog Dialog = new ProgressDialog(Konsultasi.this);
+        final ProgressDialog Dialog = new ProgressDialog(Konsultasi.this, R.style.AppTheme_Dark_Dialog);
         Dialog.setMessage("Fetching file .... ");
         Dialog.show();
         DatabaseReference event = mRootref.child(Jenis).child(Matkul);

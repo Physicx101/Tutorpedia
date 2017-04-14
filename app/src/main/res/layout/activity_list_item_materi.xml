@@ -18,7 +18,7 @@
 
 
         <TextView
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="8dp"
             android:layout_gravity="center_vertical"
             android:id="@+id/TVheadmateri"
             android:layout_width="wrap_content"
@@ -27,7 +27,7 @@
             android:layout_marginLeft="16dp"
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Headline"
             android:textColor="@color/colorPrimary"
-            android:text="country_name"
+            android:text="Judul Materi"
             android:textStyle="bold"/>
 
 
@@ -40,8 +40,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center"
+            android:textSize="14sp"
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Subhead"
-            android:text="country_haha"
+            android:text="Deskripsi materi"
             android:textColor="@color/colorPrimary"
             android:layout_marginBottom="20dp"
             />

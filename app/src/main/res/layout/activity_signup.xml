@@ -31,7 +31,9 @@
             <EditText android:id="@+id/ETnamapengguna"
                       android:layout_width="match_parent"
                       android:layout_height="wrap_content"
-                      android:hint="Nama" />
+                      android:hint="Nama"
+                android:maxLength="15"
+                />
         </com.github.florent37.materialtextfield.MaterialTextField>
 
 
