@@ -70,7 +70,6 @@ public class MainActivity extends AppCompatActivity {
         t.start();
 
 
-
        /* Bundle extras = getIntent().getExtras();
         if (extras != null) {
             NamaPengguna = extras.getString("namaku");
@@ -83,7 +82,7 @@ public class MainActivity extends AppCompatActivity {
             databaseReference.child("User").child(user.getUid()).child("Tes").child("Tes 1").child("nilai").setValue(0);
             databaseReference.child("User").child(user.getUid()).child("Pangkat").setValue(0);
             databaseReference.child("User").child(user.getUid()).child("Point").setValue(0);
-            databaseReference.child("Tes").child("Tes 1").child(user.getUid()).setValue(0);*/
+            databaseReference.child("Tes").child("Tes 1").child(user.getUid()).setValue(0); */
 
             /*(String alert1 = "Selamat Datang di Tutorpedia";
             //String alert2 = "Kode hadiah";
@@ -140,6 +139,7 @@ public class MainActivity extends AppCompatActivity {
                 });
             }
         }
+
 
 
 
