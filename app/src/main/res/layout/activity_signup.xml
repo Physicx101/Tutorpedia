@@ -78,7 +78,7 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="24dp"
-            android:text="Sudah punya akun ? Sign in"
+            android:text="Sudah punya akun ? Masuk"
             android:gravity="center"
             android:textSize="16dip"
             android:textColor="@color/white" />

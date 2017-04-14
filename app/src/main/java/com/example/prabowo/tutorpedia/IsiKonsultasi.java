@@ -159,6 +159,8 @@ public class IsiKonsultasi extends AppCompatActivity implements View.OnClickList
             @Override
             public void onDataChange(DataSnapshot snapshot) {
                 if (filter == 1){
+                    finish();
+                    startActivity(getIntent());
                     for (DataSnapshot postSnapshot : snapshot.getChildren()) {
                         mListItemKomen.add(new Komentar(postSnapshot.child("pengirim").getValue().toString(),
                                 postSnapshot.child("desc").getValue().toString(),
@@ -192,6 +194,7 @@ public class IsiKonsultasi extends AppCompatActivity implements View.OnClickList
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(linearLayoutManager);
         recyclerView.setAdapter(adapter);
+        recyclerView.addItemDecoration(new DividerItemDecoration(recyclerView.getContext(), linearLayoutManager.getOrientation()));
 
 
         /*ArrayAdapter<Komentar> adapter = new MyListAdapter();
