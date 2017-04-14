@@ -88,8 +88,7 @@ public class IsiTutor extends AppCompatActivity implements View.OnClickListener 
 
     @Override
     public boolean onSupportNavigateUp() {
-        finishAffinity();
-        startActivity(new Intent(this, MainActivity.class));
+        onBackPressed();
         return true;
     }
 
@@ -177,17 +176,6 @@ public class IsiTutor extends AppCompatActivity implements View.OnClickListener 
     }
 
 
-    public void onBackPressed() {
-        new AlertDialog.Builder(this)
-                .setMessage("Apa anda ingin keluar ?")
-                .setCancelable(false)
-                .setPositiveButton("Iya", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int id) {moveTaskToBack(true);
-                         finish();  System.exit(0); System.exit(0);
-                    }
-                })
-                .setNegativeButton("Enggak", null)
-                .show();
-    }}
+ }
 
 

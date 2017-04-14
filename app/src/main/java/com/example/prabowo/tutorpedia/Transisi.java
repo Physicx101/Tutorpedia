@@ -36,7 +36,7 @@ public class Transisi extends AppCompatActivity implements View.OnClickListener 
 
     @Override
     public boolean onSupportNavigateUp() {
-        startActivity(new Intent(this, MainActivity.class));
+        onBackPressed();
         return true;
     }
 
@@ -50,7 +50,7 @@ public class Transisi extends AppCompatActivity implements View.OnClickListener 
         System.out.println(Matkul);
 
         if(v == IVtransisikonsultasi){
-            finishAffinity();
+
             Intent intent = new Intent(this,Konsultasi.class);
             intent.putExtra("Jenis","Konsultasi");
             intent.putExtra("Matkul",Matkul);
@@ -58,22 +58,12 @@ public class Transisi extends AppCompatActivity implements View.OnClickListener 
         }
 
         if(v == IVtransisimateri){
-            finishAffinity();
+
             Intent intent = new Intent(this,Materi.class);
             intent.putExtra("Jenis","Materi");
             intent.putExtra("Matkul",Matkul);
             startActivity(intent);
         }
     }
-    public void onBackPressed() {
-        new AlertDialog.Builder(this)
-                .setMessage("Apa anda ingin keluar ?")
-                .setCancelable(false)
-                .setPositiveButton("Iya", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int id) {  finish(); System.exit(0);
-                    }
-                })
-                .setNegativeButton("Enggak", null)
-                .show();
-    }
+
 }

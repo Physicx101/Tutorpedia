@@ -19,6 +19,7 @@ import android.widget.Toast;
 
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.signature.StringSignature;
 import com.example.prabowo.tutorpedia.CekSoal.FirebaseImageLoader;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -122,8 +123,7 @@ public class IsiKonsultasi extends AppCompatActivity implements View.OnClickList
 
     @Override
     public boolean onSupportNavigateUp() {
-        finishAffinity();
-        startActivity(new Intent(this, MainActivity.class));
+        onBackPressed();
         return true;
     }
 
@@ -297,6 +297,7 @@ public class IsiKonsultasi extends AppCompatActivity implements View.OnClickList
                         Glide.with(getApplicationContext())
                                 .using(new FirebaseImageLoader())
                                 .load(fotoposter)
+                                .signature(new StringSignature(Long.toString(System.currentTimeMillis()))).centerCrop()
                                 .into(IVfotoposter);
 
 
@@ -396,17 +397,7 @@ public class IsiKonsultasi extends AppCompatActivity implements View.OnClickList
         }
 
     }
-    public void onBackPressed() {
-        new AlertDialog.Builder(this)
-                .setMessage("Apa anda ingin keluar ?")
-                .setCancelable(false)
-                .setPositiveButton("Iya", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int id) {  finishAffinity(); System.exit(0);
-                    }
-                })
-                .setNegativeButton("Enggak", null)
-                .show();
-    }
+
 }
 
 

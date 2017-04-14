@@ -161,15 +161,5 @@ public class PointActivity extends AppCompatActivity implements View.OnClickList
         }
 
     }
-    public void onBackPressed() {
-        new AlertDialog.Builder(this)
-                .setMessage("Apa anda ingin keluar ?")
-                .setCancelable(false)
-                .setPositiveButton("Iya", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int id) {  finish(); System.exit(0);
-                    }
-                })
-                .setNegativeButton("Enggak", null)
-                .show();
-    }
+
 }

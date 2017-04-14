@@ -26,6 +26,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.signature.StringSignature;
 import com.example.prabowo.tutorpedia.CekSoal.FirebaseImageLoader;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -192,9 +193,11 @@ public class ProfileTestFragment extends Fragment implements View.OnClickListene
 
                 mStorageRef = storage.getReferenceFromUrl("gs://tutorpedia-17ba0.appspot.com/FotoProfil/");
                 StorageReference foto = mStorageRef.child(UID + "PP"+".jpg");
+
                 Glide.with(getContext())
                         .using(new FirebaseImageLoader())
                         .load(foto)
+                        .signature(new StringSignature(Long.toString(System.currentTimeMillis()))).centerCrop()
                         .into(BTfoto);
                 Dialog.hide();
             }
@@ -358,16 +361,6 @@ public class ProfileTestFragment extends Fragment implements View.OnClickListene
 
         }
     }
-    public void onBackPressed() {
-        new AlertDialog.Builder(getActivity())
-                .setMessage("Apa anda ingin keluar ?")
-                .setCancelable(false)
-                .setPositiveButton("Iya", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int id) {  getActivity().finish(); System.exit(0);
-                    }
-                })
-                .setNegativeButton("Enggak", null)
-                .show();
-    }
+
 
 }

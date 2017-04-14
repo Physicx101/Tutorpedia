@@ -53,7 +53,7 @@ public class Tab1Ipa extends Fragment implements View.OnClickListener {
         IVmatipa.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                getActivity().finishAffinity();
+
                 Intent intent = new Intent(getActivity().getApplicationContext(), Transisi.class);
                 intent.putExtra("Matkul","Matematika");
                 startActivity(intent);
@@ -63,7 +63,7 @@ public class Tab1Ipa extends Fragment implements View.OnClickListener {
         IVbio.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                getActivity().finishAffinity();
+
                 Intent intent = new Intent(getActivity().getApplicationContext(), Transisi.class);
                 intent.putExtra("Matkul", "Biologi");
                 startActivity(intent);
@@ -74,7 +74,7 @@ public class Tab1Ipa extends Fragment implements View.OnClickListener {
         IVkim.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                getActivity().finishAffinity();
+
                 Intent intent = new Intent(getActivity().getApplicationContext(), Transisi.class);
                 intent.putExtra("Matkul", "Kimia");
                 startActivity(intent);
@@ -85,7 +85,7 @@ public class Tab1Ipa extends Fragment implements View.OnClickListener {
         IVfis.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                getActivity().finishAffinity();
+
                 Intent intent = new Intent(getActivity().getApplicationContext(), Transisi.class);
                 intent.putExtra("Matkul", "Fisika");
                 startActivity(intent);
@@ -105,15 +105,5 @@ public class Tab1Ipa extends Fragment implements View.OnClickListener {
     public void onClick(View v) {
 
     }
-    public void onBackPressed() {
-        new AlertDialog.Builder(getActivity())
-                .setMessage("Apa anda ingin keluar ?")
-                .setCancelable(false)
-                .setPositiveButton("Iya", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int id) { getActivity().finish(); System.exit(0);
-                    }
-                })
-                .setNegativeButton("Enggak", null)
-                .show();
-    }
+
 }

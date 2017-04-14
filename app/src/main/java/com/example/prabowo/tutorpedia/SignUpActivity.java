@@ -127,7 +127,6 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
         }
 
         if (v == TVsignin) {
-            finishAffinity();
             startActivity(new Intent(this,LoginActivity.class));
 
         }

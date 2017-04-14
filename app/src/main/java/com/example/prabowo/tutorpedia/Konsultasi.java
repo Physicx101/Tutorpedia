@@ -100,8 +100,7 @@ public class Konsultasi extends AppCompatActivity implements View.OnClickListene
 
     @Override
     public boolean onSupportNavigateUp() {
-        finishAffinity();
-        startActivity(new Intent(this, MainActivity.class));
+        onBackPressed();
         return true;
     }
 
@@ -169,17 +168,7 @@ public class Konsultasi extends AppCompatActivity implements View.OnClickListene
         }
 
     }
-    public void onBackPressed() {
-        new AlertDialog.Builder(this)
-                .setMessage("Apa anda ingin keluar ?")
-                .setCancelable(false)
-                .setPositiveButton("Iya", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int id) { finishAffinity(); System.exit(0);
-                    }
-                })
-                .setNegativeButton("Enggak", null)
-                .show();
-    }
+
 }
 
 

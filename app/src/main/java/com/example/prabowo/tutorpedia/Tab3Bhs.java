@@ -22,7 +22,7 @@ public class Tab3Bhs extends Fragment {
         IVbind = (ImageView) view.findViewById(R.id.IVbind);
         IVbind.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {getActivity().finishAffinity();
+            public void onClick(View view) {
                 Intent intent = new Intent(getActivity().getApplicationContext(), Transisi.class);
                 intent.putExtra("Matkul","Bindo");
                 startActivity(intent);
@@ -31,7 +31,7 @@ public class Tab3Bhs extends Fragment {
         IVbing = (ImageView) view.findViewById(R.id.IVbing);
         IVbing.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {getActivity().finishAffinity();
+            public void onClick(View view) {
                 Intent intent = new Intent(getActivity().getApplicationContext(), Transisi.class);
                 intent.putExtra("Matkul", "Bing");
                 startActivity(intent);
@@ -46,17 +46,6 @@ public class Tab3Bhs extends Fragment {
 
 
 
-    }
-    public void onBackPressed() {
-        new AlertDialog.Builder(getActivity())
-                .setMessage("Apa anda ingin keluar ?")
-                .setCancelable(false)
-                .setPositiveButton("Iya", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int id) { getActivity().finish(); System.exit(0);
-                    }
-                })
-                .setNegativeButton("Enggak", null)
-                .show();
     }
 
 }
