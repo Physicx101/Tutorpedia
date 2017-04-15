@@ -6,6 +6,8 @@ import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -353,6 +355,7 @@ public class IsiKonsultasi extends AppCompatActivity implements View.OnClickList
 
             DatabaseReference ref =mRootref.child("JumlahKomentarBenar").child(Matkuldis).child("Post"+posisiItemRecycler);
             ref.addValueEventListener(new ValueEventListener() {
+
 
                                           @Override
                                           public void onDataChange(DataSnapshot snapshot) {

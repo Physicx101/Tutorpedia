@@ -36,10 +36,13 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+
         //  Declare a new thread to do a preference check
         Thread t = new Thread(new Runnable() {
             @Override
             public void run() {
+
+                Bundle extras =  getIntent().getExtras();
                 //  Initialize SharedPreferences
                 SharedPreferences getPrefs = PreferenceManager
                         .getDefaultSharedPreferences(getBaseContext());
@@ -49,6 +52,20 @@ public class MainActivity extends AppCompatActivity {
 
                 //  If the activity has never started before...
                 if (isFirstStart) {
+
+                    if (extras != null) {
+                        NamaPengguna = extras.getString("namaku");
+                        firebaseAuth = FirebaseAuth.getInstance();
+                        FirebaseUser user = firebaseAuth.getCurrentUser();
+                        System.out.print(user.getUid());
+                        databaseReference = FirebaseDatabase.getInstance().getReference();
+                        databaseReference.child("User").child(user.getUid()).child("nama").setValue(NamaPengguna);
+                        databaseReference.child("User").child(user.getUid()).child("Tes").child("Tes 1").child("judul").setValue("Tes 1");
+                        databaseReference.child("User").child(user.getUid()).child("Tes").child("Tes 1").child("nilai").setValue(0);
+                        databaseReference.child("User").child(user.getUid()).child("Pangkat").setValue(0);
+                        databaseReference.child("User").child(user.getUid()).child("Point").setValue(0);
+                        databaseReference.child("Tes").child("Tes 1").child(user.getUid()).setValue(0);
+                    }
 
                     //  Launch app intro
                     Intent i = new Intent(MainActivity.this, IntroActivity.class);
