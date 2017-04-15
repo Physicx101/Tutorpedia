@@ -30,7 +30,7 @@ public class AdapterBhs extends RecyclerView.Adapter<AdapterBhs.ViewHolder> {
 
     @Override
     public AdapterBhs.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_mapel, parent, false);
+            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_mapel, parent, false);
         context = parent.getContext();
         return new ViewHolder(view);
     }

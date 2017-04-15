@@ -87,10 +87,14 @@ public class MyAdapterKonsultasi extends RecyclerView.Adapter<MyAdapterKonsultas
         mStorageRef = storage.getReferenceFromUrl("gs://tutorpedia-17ba0.appspot.com/FotoProfil/");
         StorageReference foto = mStorageRef.child(listItem.getImageUrlkonsultasi()+"Konsultasi.jpg");
         StorageReference fotoposter = mStorageRef.child(listItem.getPosterImage() + "PP" + ".jpg");
+        if (listItem.getImageUrlkonsultasi().equalsIgnoreCase("nol")){
+            holder.IVgambarkonsultasi.setImageResource(R.drawable.headbar);
+        } else {
         Glide.with(context)
                 .using(new FirebaseImageLoader())
                 .load(foto)
-                .into(holder.IVgambarkonsultasi);
+                .into(holder.IVgambarkonsultasi);}
+
         Glide.with(context)
                 .using(new FirebaseImageLoader())
                 .load(fotoposter)

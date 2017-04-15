@@ -14,6 +14,7 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.app.NotificationCompat;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -36,6 +37,7 @@ import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
 import java.io.ByteArrayOutputStream;
+import java.net.JarURLConnection;
 import java.util.Random;
 
 import static com.example.prabowo.tutorpedia.IsiKonsultasi.jumlah;
@@ -48,6 +50,7 @@ public class FormTambahKonsultasi extends AppCompatActivity implements View.OnCl
     public static int langkah = 1;
     private static int jmlpost;
     private FloatingActionButton fab;
+    private int counter = 0;
     private ImageView foto;
     private FirebaseStorage storage;
     DatabaseReference mRootref = FirebaseDatabase.getInstance().getReference();
@@ -62,7 +65,7 @@ public class FormTambahKonsultasi extends AppCompatActivity implements View.OnCl
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_form_tambah_konsultasi);
-
+        counter=0;
 
 
 
@@ -80,6 +83,19 @@ public class FormTambahKonsultasi extends AppCompatActivity implements View.OnCl
 
     @Override
     public void onClick(final View v) {
+        String judul = ETtambahjudul.getText().toString().trim();
+        String desc = ETtambahdesc.getText().toString().trim();
+
+
+        if (TextUtils.isEmpty(judul)){
+            Toast.makeText(this, "Masukkan Judul", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        if (TextUtils.isEmpty(desc)){
+            Toast.makeText(this, "Masukkan Deskripsi", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
         firebaseAuth = FirebaseAuth.getInstance();
         final FirebaseUser user = firebaseAuth.getCurrentUser();
         DatabaseReference mRootref = FirebaseDatabase.getInstance().getReference();
@@ -121,8 +137,10 @@ public class FormTambahKonsultasi extends AppCompatActivity implements View.OnCl
 
                                                   databaseReference.child("Konsultasi").child(Matkul).child("Post" + jumlah).child("judul").setValue(ETtambahjudul.getText().toString());
                                                   databaseReference.child("Konsultasi").child(Matkul).child("Post" + jumlah).child("deskripsi").setValue(ETtambahdesc.getText().toString());
-                                                  databaseReference.child("Konsultasi").child(Matkul).child("Post" + jumlah).child("img").setValue(random);
-                                                  databaseReference.child("Konsultasi").child(Matkul).child("Post" + jumlah).child("img").setValue(random);
+                                                  if (counter ==1){
+                                                      databaseReference.child("Konsultasi").child(Matkul).child("Post" + jumlah).child("img").setValue(random);
+                                                  } else  {databaseReference.child("Konsultasi").child(Matkul).child("Post" + jumlah).child("img").setValue("nol");}
+
 
                                                   databaseReference.child("Konsultasi").child(Matkul).child("Post" + jumlah).child("foto").setValue(user.getUid().toString());
                                                   databaseReference.child("Konsultasi").child(Matkul).child("Post" + jumlah).child("poster").setValue(poster);
@@ -234,7 +252,7 @@ public class FormTambahKonsultasi extends AppCompatActivity implements View.OnCl
 
 
                 StorageReference foto = mStorageRef.child(random+"Konsultasi.jpg");
-
+                counter=1;
                 UploadTask uploadTask = foto.putBytes(dataimage);
                 uploadTask.addOnFailureListener(new OnFailureListener() {
                     @Override
@@ -280,6 +298,7 @@ public class FormTambahKonsultasi extends AppCompatActivity implements View.OnCl
 
 
                 StorageReference foto = mStorageRef.child(random+"Konsultasi.jpg");
+                counter=1;
 
                 UploadTask uploadTask = foto.putFile(selectedImage);
                 uploadTask.addOnFailureListener(new OnFailureListener() {

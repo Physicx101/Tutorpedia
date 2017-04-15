@@ -7,6 +7,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.text.Editable;
+import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
@@ -317,6 +318,11 @@ public class IsiKonsultasi extends AppCompatActivity implements View.OnClickList
 
     @Override
     public void onClick(View v) {
+        String komen = ETtambahkomentar.getText().toString().trim();
+        if (TextUtils.isEmpty(komen)){
+            Toast.makeText(this, "Silahkan Masukkan Komentar", Toast.LENGTH_SHORT).show();
+            return;
+        }
 
 
 
@@ -374,8 +380,11 @@ public class IsiKonsultasi extends AppCompatActivity implements View.OnClickList
                                                   langkahkomen++;
                                               }
 
-                                              finish();
+
+
+                                                finish();
                                               startActivity(getIntent());
+
 
 
                                           }

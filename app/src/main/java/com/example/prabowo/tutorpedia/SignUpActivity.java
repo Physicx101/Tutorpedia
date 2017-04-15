@@ -80,12 +80,17 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
 
 
         if (TextUtils.isEmpty(email)) {
-            Toast.makeText(this, "Please Enter Email", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Masukkan Email", Toast.LENGTH_SHORT).show();
             return;
         }
 
         if (TextUtils.isEmpty(password)) {
-            Toast.makeText(this, "Please Enter Password", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Masukkan Password", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        if (namaku.length() > 16){
+            Toast.makeText(this, "Nama Maksimal 16 Karakter", Toast.LENGTH_SHORT).show();
             return;
         }
 
