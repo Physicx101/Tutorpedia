@@ -11,6 +11,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.prabowo.tutorpedia.MateriBaru.MateriMenyenangkan;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -96,14 +97,17 @@ public class MyAdapterMateri extends RecyclerView.Adapter<MyAdapterMateri.ViewHo
                     ListItemMateri listItem = listItems.get(getAdapterPosition());
 
                     recyclerItemPosition = getAdapterPosition();
-                    intent = new Intent(Intent.ACTION_VIEW, Uri.parse(listItem.getLinkmateri()));
-                    intent.putExtra("PosisiItemRecycler",recyclerItemPosition);
+//                    intent = new Intent(Intent.ACTION_VIEW, Uri.parse(listItem.getLinkmateri()));
+                    intent = new Intent(context,MateriMenyenangkan.class);
+
+//                    intent.putExtra("PosisiItemRecycler",recyclerItemPosition);
 
 
                     break;
             }
             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             context.startActivity(intent);
+
 
 
 

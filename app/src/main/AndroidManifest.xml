@@ -35,8 +35,9 @@
             android:name=".MainActivity"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".IntroActivity"
-                  android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".IntroActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".IsiTutor"
             android:label="Tutor" />
@@ -64,6 +65,8 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".Tutor1" />
         <activity android:name=".Tutor2" />
+        <activity android:name=".MateriBaru.MateriMenyenangkan"></activity>
+        <activity android:name=".MateriBaru.MateriMenyenangkan2"></activity>
     </application>
 
 </manifest>
