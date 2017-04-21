@@ -19,13 +19,18 @@
         tools:layout_editor_absoluteY="16dp">
 
         <TextView
-            android:id="@+id/TV21"
-            style="@style/TextAppearance.AppCompat.Title"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="0.05"
-            android:text="  Gajah"
-            android:textSize="20dp" />
+            android:id="@+id/TV21"
+            android:padding="0dp"
+            android:text="Gajah"
+            android:textColor="#8e24aa"
+            android:textSize="40sp"
+            android:textStyle="bold"
+            android:shadowColor="#388e3c"
+            android:shadowDx="4"
+            android:shadowDy="-4"
+            android:shadowRadius="1" />
 
         <AbsoluteLayout
             android:layout_width="match_parent"
@@ -99,7 +104,7 @@
             android:layout_marginBottom="10dp"
             android:layout_weight="0.1"
             android:background="#c8e6c9"
-            android:text="TextView"
+            android:text=""
             android:textSize="20dp" />
 
         <TextView
@@ -108,14 +113,14 @@
             android:layout_height="45dp"
             android:layout_weight="0.14"
             android:background="#c8e6c9"
-            android:text="TextView" />
+            android:text="" />
 
         <TextView
             android:id="@+id/TV24"
             android:layout_width="match_parent"
             android:layout_height="100dp"
             android:layout_weight="0.14"
-            android:text="TextView" />
+            android:text="" />
     </LinearLayout>
 
     <LinearLayout

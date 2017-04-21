@@ -1,12 +1,15 @@
 package com.example.prabowo.tutorpedia.MateriBaru;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.example.prabowo.tutorpedia.MainActivity;
 import com.example.prabowo.tutorpedia.R;
 
 /**
@@ -27,7 +30,9 @@ public class MateriMenyenangkan2 extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getWindow().getAttributes().windowAnimations = R.style.Fade;
             setContentView(R.layout.activity_materi_menyenangkan2);
+
 
 
         BTnext = (Button) findViewById(R.id.BTnext);
@@ -62,18 +67,30 @@ public class MateriMenyenangkan2 extends AppCompatActivity {
 
         if (v == BTnext) {
             finishAffinity();
-            startActivity(new Intent(this, MateriMenyenangkan.class));
+            startActivity(new Intent(this, MainActivity.class));
 
         }
 
 
         if (v == BTback) {
+
             finishAffinity();
             startActivity(new Intent(this, MateriMenyenangkan.class));
         }
 
 
 
+    }
+    public void onBackPressed() {
+        new AlertDialog.Builder(this)
+                .setMessage("Apa anda ingin keluar ?")
+                .setCancelable(false)
+                .setPositiveButton("Ya", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) { finish(); System.exit(0);
+                    }
+                })
+                .setNegativeButton("Tidak", null)
+                .show();
     }}
 
 
