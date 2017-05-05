@@ -5,18 +5,15 @@
               android:layout_width="match_parent"
               android:layout_height="match_parent"
               android:layout_marginBottom="60dp"
-              android:orientation="vertical">
+              android:orientation="vertical"
+              android:weightSum="1">
 
-    <include
-        android:id="@+id/toolbar"
-        layout="@layout/toolbar_main"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
 
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/toolbar"
+        android:layout_weight="1.70"
         android:clipToPadding="false"
         android:isScrollContainer="true">
 
@@ -46,7 +43,7 @@
                     android:layout_alignParentStart="true"
                     android:layout_centerVertical="true"
                     android:layout_marginStart="16dp"
-                    android:src="@drawable/avatar"/>
+                    android:src="@drawable/login2"/>
 
                 <TextView
                     android:id="@+id/email_user"
@@ -72,31 +69,29 @@
                     android:textColor="@color/primaryText"/>
 
 
-
                 <TextView
-                    android:layout_below="@+id/email_user"
-                    android:layout_marginTop="8dp"
                     android:id="@+id/TVpangkat"
-                    android:layout_toRightOf="@+id/user_profile_photo"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:paddingTop="6dp"
+                    android:layout_below="@+id/email_user"
                     android:layout_marginBottom="2dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_toRightOf="@+id/user_profile_photo"
                     android:paddingLeft="16dp"
+                    android:paddingTop="6dp"
                     android:text="Pangkat"
                     android:textColor="@color/primaryText"/>
-
 
 
                 <ProgressBar
                     android:id="@+id/PBpangkat"
                     style="?android:attr/progressBarStyleHorizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="24dp"
+                    android:layout_below="@+id/TVpangkat"
                     android:layout_marginLeft="16dp"
                     android:layout_marginRight="8dp"
-                    android:layout_below="@+id/TVpangkat"
-                    android:layout_toRightOf="@+id/user_profile_photo"
-                    android:layout_width="match_parent"
-                    android:layout_height="24dp" />
+                    android:layout_toRightOf="@+id/user_profile_photo"/>
 
 
             </RelativeLayout>
@@ -129,32 +124,16 @@
                     android:paddingBottom="4dp"
                     android:paddingTop="4dp"
                     android:text="1500"
-                    android:textSize="24sp"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
                     android:textColor="@color/colorPrimary"
-                    android:textStyle="bold"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Subhead"/>
+                    android:textSize="24sp"
+                    android:textStyle="bold"/>
 
-                <TextView
-                    android:id="@+id/TPoin"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="4dp"
-                    android:layout_toEndOf="@id/TV_point"
-                    android:paddingBottom="4dp"
-                    android:paddingTop="4dp"
-                    android:text="TPoin"
-                    android:textSize="24sp"
-                    android:textColor="@color/colorPrimary"
-                    android:textStyle="bold"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Subhead"/>
 
             </RelativeLayout>
 
 
             <include layout="@layout/item_divider"/>
-
-
-
 
 
             <RelativeLayout
@@ -252,9 +231,6 @@
                     android:textColor="@color/white"/>
 
             </RelativeLayout>
-
-
-
 
 
         </LinearLayout>

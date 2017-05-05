@@ -1,9 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.prabowo.tutorpedia">
+          package="com.example.prabowo.tutorpedia">
 
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
 
     <application
         android:allowBackup="true"
@@ -13,60 +17,73 @@
         android:largeHeap="true"
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar">
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyC1GCW5Tlwn9HYgdZkcHTWWVLuZTy17meo"/>
+
         <activity
             android:name=".SplashScreen"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+                <action android:name="android.intent.action.MAIN"/>
 
-                <category android:name="android.intent.category.LAUNCHER" />
+                <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
         <activity
             android:name=".SignUpActivity"
             android:theme="@style/AppTheme.NoActionBar"
-            android:windowSoftInputMode="stateVisible|adjustPan" />
+            android:windowSoftInputMode="stateVisible|adjustPan"/>
         <activity
             android:name=".LoginActivity"
             android:theme="@style/AppTheme.NoActionBar"
-            android:windowSoftInputMode="stateVisible|adjustPan" />
-        <activity android:name=".FirstActivity" />
+            android:windowSoftInputMode="stateVisible|adjustPan"/>
+        <activity android:name=".FirstActivity"/>
+        <activity
+            android:name=".MainDrawer"
+            android:theme="@style/AppTheme.NoActionBar"/>
         <activity
             android:name=".MainActivity"
             android:label="@string/app_name"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppTheme.NoActionBar"/>
         <activity
             android:name=".IntroActivity"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppTheme.NoActionBar"/>
         <activity
             android:name=".IsiTutor"
-            android:label="Tutor" />
+            android:label="Tutor"/>
         <activity
             android:name=".Konsultasi"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".Materi" />
-        <activity android:name=".Transisi" />
+            android:theme="@style/AppTheme.NoActionBar"/>
+        <activity android:name=".Materi"/>
+        <activity android:name=".Transisi"/>
         <activity
             android:name=".IsiKonsultasi"
-            android:windowSoftInputMode="adjustPan" />
-        <activity android:name=".Soal" />
-        <activity android:name=".CekSoal.CekSoal" />
+            android:windowSoftInputMode="adjustPan"/>
+        <activity android:name=".Soal"/>
+        <activity android:name=".CekSoal.CekSoal"/>
         <activity
             android:name=".FormTambahKonsultasi"
             android:label="Tambah Konsultasi"
-            android:theme="@style/Theme.AppCompat.Light.Dialog.Alert" />
-        <activity android:name=".NilaiActivity" />
-        <activity android:name=".ListItemNilai" />
-        <activity android:name=".PointActivity" />
-        <activity android:name=".Ringkasan" />
-        <activity android:name=".ListHadiahPoint" />
+            android:theme="@style/Theme.AppCompat.Light.Dialog.Alert"/>
+        <activity android:name=".NilaiActivity"/>
+        <activity android:name=".ListItemNilai"/>
+        <activity android:name=".PointActivity"/>
+        <activity android:name=".Ringkasan"/>
+        <activity android:name=".ListHadiahPoint"/>
         <activity
             android:name=".CreditActivity"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".Tutor1" />
-        <activity android:name=".Tutor2" />
-        <activity android:name=".MateriBaru.MateriMenyenangkan"></activity>
-        <activity android:name=".MateriBaru.MateriMenyenangkan2"></activity>
+            android:theme="@style/AppTheme.NoActionBar"/>
+        <activity android:name=".Tutor1"/>
+        <activity android:name=".Tutor2"/>
+        <activity android:name=".MateriBaru.MateriMenyenangkan"/>
+        <activity android:name=".MateriBaru.MateriMenyenangkan2"/>
+        <activity android:name=".MapsActivity"/>
+        <activity android:name=".RequestTutor"/>
+        <activity
+            android:name=".SettingsActivity"
+            android:label="@string/title_activity_settings">
+        </activity>
     </application>
 
 </manifest>

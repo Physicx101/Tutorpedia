@@ -185,14 +185,14 @@
             android:padding="@dimen/activity_horizontal_margin">
 
             <Button
-                android:id="@+id/BTgetcv"
+                android:id="@+id/BTrequest"
                 android:width="250dp"
                 style="@style/Widget.AppCompat.Button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:backgroundTint="@color/colorPrimary"
-                android:text="CURRICULUM VITAE"
+                android:text="Request Tutor"
                 android:textColor="@color/white"/>
 
 

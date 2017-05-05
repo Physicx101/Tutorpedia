@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -12,6 +13,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -36,8 +38,9 @@ public class IsiTutor extends AppCompatActivity implements View.OnClickListener 
     private TextView TVisieventagama;
     private TextView TVnomortutor;
     private TextView TVasaltutor;
-    private Button BTgetcv;
-    private FloatingActionButton fab;
+    //private Button BTgetcv;
+    private Button BTrequest;
+    private FloatingActionButton fab,fab2;
     private FirebaseAuth firebaseAuth;
     private String nomorTutor;
     String CV;
@@ -63,25 +66,61 @@ public class IsiTutor extends AppCompatActivity implements View.OnClickListener 
         TVemailtutor = (TextView) findViewById(R.id.TV_email_tutor);
         TVasaltutor = (TextView) findViewById(R.id.TV_asal_tutor);
         TVnomortutor = (TextView) findViewById(R.id.TV_nomor_tutor);
-        BTgetcv = (Button) findViewById(R.id.BTgetcv);
+        BTrequest = (Button) findViewById(R.id.BTrequest);
+        //BTgetcv = (Button) findViewById(R.id.BTgetcv);
         fab = (FloatingActionButton) findViewById(R.id.floatingActionButton);
+        //fab2 = (FloatingActionButton) findViewById(R.id.floatingActionButton2);
+
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
             posisiItemRecycler = extras.getInt("PosisiItemRecycler");
         }
 
-        BTgetcv.setOnClickListener(new View.OnClickListener() {
+        /*BTgetcv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(CV));
                 startActivity(intent);
             }
-        });
-        fab.setOnClickListener(this);
+        });*/
+        //fab2.setOnClickListener(this);
 
-                /*Intent sendIntent = new Intent(Intent.ACTION_VIEW);
-                sendIntent.setData(Uri.parse("sms:"));
-                startActivity(sendIntent);*/
+
+        DatabaseReference ref = mRootref.child("Ideafuse");
+        firebaseAuth = FirebaseAuth.getInstance();
+        final FirebaseUser user = firebaseAuth.getCurrentUser();
+
+        ref.addValueEventListener(new ValueEventListener() {
+
+
+            @Override
+            public void onDataChange(final DataSnapshot snapshot) {
+                fab.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        if (Integer.parseInt(snapshot.child("Respond").getValue().toString())==0){
+                            //fab.setVisibility(View.GONE);
+                            Toast.makeText(IsiTutor.this, "Harap buat request terlebih dahulu", Toast.LENGTH_LONG).show();
+                        } else {
+                            Intent sendIntent = new Intent(Intent.ACTION_VIEW);
+                            sendIntent.setData(Uri.parse("sms:" + nomorTutor));
+                            startActivity(sendIntent);
+                        }
+                    }
+                });
+
+
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+
+
+        });
+
 
 
     }
@@ -168,10 +207,33 @@ public class IsiTutor extends AppCompatActivity implements View.OnClickListener 
     @Override
     public void onClick(View view) {
 
-        if (view == fab) {
+       /* if (view == fab) {
             Intent sendIntent = new Intent(Intent.ACTION_VIEW);
             sendIntent.setData(Uri.parse("sms:" + nomorTutor));
             startActivity(sendIntent);
+        }*/
+
+        if (view == BTrequest) {
+
+            String alert1 = "Request Telah Dikirim, Tunggu Konfirmasi";
+
+
+            AlertDialog.Builder builder1 = new AlertDialog.Builder(this);
+            builder1.setMessage(alert1 );
+            builder1.setCancelable(true);
+
+            builder1.setPositiveButton(
+                    "OK",
+                    new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int id) {
+                           finish();
+                        }
+                    });
+            AlertDialog alert11 = builder1.create();
+            alert11.show();
+
+            mRootref.child("Ideafuse").child("Request").child("no").setValue(1);
+            mRootref.child("Ideafuse").child("Request").child("yes").setValue(1);
         }
     }
 

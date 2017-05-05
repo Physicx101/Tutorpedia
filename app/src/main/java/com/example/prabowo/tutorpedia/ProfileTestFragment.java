@@ -120,7 +120,7 @@ public class ProfileTestFragment extends Fragment implements View.OnClickListene
         bantuan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(getActivity(),CreditActivity.class));
+                startActivity(new Intent(getActivity(),RequestTutor.class));
             }
         });
         keluar = (RelativeLayout) getActivity().findViewById(R.id.keluar);
@@ -132,6 +132,7 @@ public class ProfileTestFragment extends Fragment implements View.OnClickListene
                 startActivity(new Intent(getActivity(), LoginActivity.class));
             }
         });
+
 
 
 
@@ -154,6 +155,7 @@ public class ProfileTestFragment extends Fragment implements View.OnClickListene
                 points = dataSnapshot.getValue().hashCode();
                 pointuser = String.valueOf(points);
                 userPoint.setText(pointuser);
+                userPoint.append(" TPoin");
             }
 
             @Override

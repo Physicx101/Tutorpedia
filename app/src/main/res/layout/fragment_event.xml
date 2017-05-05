@@ -7,16 +7,9 @@
                 android:layout_height="match_parent"
                 tools:context="com.example.prabowo.tutorpedia.MainActivity">
 
-    <include
-        android:id="@+id/toolbar"
-        layout="@layout/toolbar_main"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"/>
 
     <android.support.v7.widget.RecyclerView
-        android:layout_below="@id/toolbar"
-        android:layout_marginBottom="60dp"
+        android:layout_marginTop="8dp"
         android:id="@+id/recycleVieweventBeneran"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
