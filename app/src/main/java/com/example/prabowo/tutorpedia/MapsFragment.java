@@ -2,11 +2,13 @@ package com.example.prabowo.tutorpedia;
 
 import android.Manifest;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Build;
+import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
@@ -23,23 +25,32 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.GoogleMapOptions;
 import com.google.android.gms.maps.MapFragment;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptor;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
+import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MapStyleOptions;
 import com.google.android.gms.maps.model.MarkerOptions;
 
-public class MapsFragment extends Fragment implements OnMapReadyCallback, GoogleMap.OnMyLocationButtonClickListener {
+import static com.example.prabowo.tutorpedia.CekSoal.RecyclerViewAdapter.context;
+
+public class MapsFragment extends Fragment implements GoogleApiClient.OnConnectionFailedListener, GoogleApiClient.ConnectionCallbacks, OnMapReadyCallback, View.OnClickListener, GoogleMap.OnMyLocationButtonClickListener {
 
     private GoogleMap mMap;
     LocationManager locationManager;
     LocationListener locationListener;
+    private Location lastLocation;
+    private GoogleApiClient mGoogleApiClient;
 
 
     @Override
@@ -71,9 +82,23 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback, Google
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        if (mGoogleApiClient == null) {
+            mGoogleApiClient = new GoogleApiClient.Builder(getActivity())
+                    .addConnectionCallbacks(this)
+                    .addOnConnectionFailedListener(this)
+                    .addApi(LocationServices.API)
+                    .build();
+        }
+
+
+
+
+
         SupportMapFragment mapFragment = (SupportMapFragment)getChildFragmentManager().findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
     }
+
+
 
 
     /**
@@ -102,14 +127,17 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback, Google
 
 
 
+
+
+
         locationManager = (LocationManager) getActivity().getSystemService(Context.LOCATION_SERVICE);
         locationListener = new LocationListener() {
             @Override
-            public void onLocationChanged(final Location location) {
+            public void onLocationChanged(Location location) {
                 Log.i("Location", location.toString());
                 LatLng userLocation = new LatLng(location.getLatitude(), location.getLongitude());
                 mMap.clear();
-                mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(userLocation, 14));
+                mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(userLocation, 14));
                 mMap.addMarker(new MarkerOptions().position(userLocation).title("My location").icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_VIOLET)));
 
             }
@@ -131,6 +159,8 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback, Google
         };
 
 
+
+
         if (Build.VERSION.SDK_INT < 23) {
             locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, locationListener);
         } else {
@@ -141,15 +171,39 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback, Google
             } else {
                 mMap.setMyLocationEnabled(true);
 
-                locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, locationListener);
+                //locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, locationListener);
+                lastLocation = LocationServices.FusedLocationApi.getLastLocation(
+                        mGoogleApiClient);
+                //Location lastKnownLocation = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
 
-                Location lastKnownLocation = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
-                LatLng userLocation = new LatLng(lastKnownLocation.getLatitude(), lastKnownLocation.getLongitude());
-                mMap.clear();
-                mMap.addMarker(new MarkerOptions().position(userLocation).title("My location").icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_VIOLET)));
-                mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(userLocation, 14));
+                if(lastLocation != null) {
+                    LatLng userLocation = new LatLng(lastLocation.getLatitude(), lastLocation.getLongitude());
+                    mMap.clear();
+                    mMap.addMarker(new MarkerOptions().position(userLocation).title("My location").icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_VIOLET)));
+                    mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(userLocation, 14));
+                }
             }
         }
+
+    }
+
+    @Override
+    public void onClick(View view) {
+
+    }
+
+    @Override
+    public void onConnected(@Nullable Bundle bundle) {
+
+    }
+
+    @Override
+    public void onConnectionSuspended(int i) {
+
+    }
+
+    @Override
+    public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
 
     }
 }

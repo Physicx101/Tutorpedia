@@ -10,6 +10,9 @@
               android:name="com.google.android.gms.maps.SupportMapFragment"
               android:layout_width="match_parent"
               android:layout_height="match_parent"
+              map:cameraTargetLat="-7.766063"
+              map:cameraTargetLng="110.377639"
+              map:cameraZoom="14"
               tools:context="com.example.prabowo.tutorpedia.MapsActivity"/>
 
 
