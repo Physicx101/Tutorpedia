@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.AbsoluteLayout;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -31,6 +32,7 @@ public class MateriMenyenangkan2 extends AppCompatActivity {
     private TextView TV22;
     private TextView TV23;
     private LinearLayout BG;
+    private AbsoluteLayout GB;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -54,39 +56,48 @@ public class MateriMenyenangkan2 extends AppCompatActivity {
         TV23 = (TextView) findViewById(R.id.TV23);
 
         BG = (LinearLayout) findViewById(R.id.BG);
+        GB = (AbsoluteLayout) findViewById(R.id.GB);
 
         if (Materi.Mapel.equalsIgnoreCase("matematika") || Materi.Mapel.equalsIgnoreCase("matematikaips") ){
             TV21.setText("Matematika");
-            BG.setBackgroundResource(R.drawable.matematika);
+            GB.setBackgroundResource(R.drawable.matematika);
+            BG.setBackgroundResource(R.drawable.tmath);
         }
         else if (Materi.Mapel.equalsIgnoreCase("biologi")){
 
         }
         else if (Materi.Mapel.equalsIgnoreCase("fisika")){
             TV21.setText("Fisika");
-            BG.setBackgroundResource(R.drawable.fisika);
+            GB.setBackgroundResource(R.drawable.fisika);
+            BG.setBackgroundResource(R.drawable.tfisika);
         }
         else if (Materi.Mapel.equalsIgnoreCase("kimia")){
             TV21.setText("Kimia");
-            BG.setBackgroundResource(R.drawable.kimia);
+            GB.setBackgroundResource(R.drawable.kimia);
+            BG.setBackgroundResource(R.drawable.tchemist);
         }
         else if (Materi.Mapel.equalsIgnoreCase("geografi")){
             TV21.setText("Geografi");
-            BG.setBackgroundResource(R.drawable.geografi);
+            GB.setBackgroundResource(R.drawable.geografi);
+            BG.setBackgroundResource(R.drawable.tgeografi);
         }
         else if (Materi.Mapel.equalsIgnoreCase("sosiologi")){
            TV21.setText("Sosiologi");
-            BG.setBackgroundResource(R.drawable.sosiologi);
+            GB.setBackgroundResource(R.drawable.sosiologi);
+            BG.setBackgroundResource(R.drawable.tsosio);
         }
         else if (Materi.Mapel.equalsIgnoreCase("ekonomi")){
             TV21.setText("Ekonomi");
-            BG.setBackgroundResource(R.drawable.ekonomi);           }
+            GB.setBackgroundResource(R.drawable.ekonomi);
+            BG.setBackgroundResource(R.drawable.tekonom);}
         else if (Materi.Mapel.equalsIgnoreCase("bing")){
             TV21.setText("Bahasa Inggris");
-            BG.setBackgroundResource(R.drawable.bing);            }
+            GB.setBackgroundResource(R.drawable.bing);
+            BG.setBackgroundResource(R.drawable.tbing);   }
         else if (Materi.Mapel.equalsIgnoreCase("bindo")){
             TV21.setText("Bahasa Indonesia");
-            BG.setBackgroundResource(R.drawable.bindo);        }
+            GB.setBackgroundResource(R.drawable.bindo);
+            BG.setBackgroundResource(R.drawable.tbind); }
 
     }
 
