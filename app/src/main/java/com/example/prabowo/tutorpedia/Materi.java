@@ -33,6 +33,7 @@ public class Materi extends AppCompatActivity {
     private LinearLayoutManager linearLayoutManager;
     String Matkul;
     String Jenis;
+    public static String Mapel;
     DatabaseReference mRootref = FirebaseDatabase.getInstance().getReference();
 
     private List<ListItemMateri> listItems;
@@ -79,6 +80,7 @@ public class Materi extends AppCompatActivity {
         Matkul = extras.getString("Matkul");
         Bundle extras2 = getIntent().getExtras();
         Jenis = extras2.getString("Jenis");
+        Mapel = Matkul;
 
 
 
