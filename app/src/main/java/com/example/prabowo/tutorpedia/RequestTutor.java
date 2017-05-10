@@ -136,9 +136,9 @@ public class RequestTutor extends AppCompatActivity implements View.OnClickListe
                                                     .build();
                                         }
 
-                                        if (Build.VERSION.SDK_INT < 23) {
-                                            locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, locationListener);
-                                        }
+//                                        if (Build.VERSION.SDK_INT < 23) {
+//                                            locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0,locationListener );
+//                                        }
 
                                         lastLocation = LocationServices.FusedLocationApi.getLastLocation(mGoogleApiClient);
 
@@ -146,10 +146,12 @@ public class RequestTutor extends AppCompatActivity implements View.OnClickListe
                                         mRootref.child("Marker").child("Marker" + KAtutor).child("latitude").setValue(lastLocation.getLatitude());
                                         mRootref.child("Marker").child("Marker" + KAtutor).child("status").setValue("buka");
                                         Stutor.setChecked(true);
+                                        counter=2;
                                     } else {
                                         mRootref.child("Marker").child("Marker" + KAtutor).child("status").setValue("tutup");
                                         Toast.makeText(getApplicationContext(), "Terima Kasih", Toast.LENGTH_LONG).show();
                                         Stutor.setChecked(false);
+                                        counter=2;
 
 
                                     }
