@@ -61,8 +61,7 @@ public class MapsActivity extends FragmentActivity implements GoogleApiClient.On
         setContentView(R.layout.activity_maps);
 
 
-
-       // BTtoko = (Button) findViewById(R.id.BTtoko);
+        // BTtoko = (Button) findViewById(R.id.BTtoko);
         //BTtoko.setOnClickListener(this);
 
         if (mGoogleApiClient == null) {
@@ -97,7 +96,6 @@ public class MapsActivity extends FragmentActivity implements GoogleApiClient.On
         });
 
 
-
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
@@ -113,7 +111,6 @@ public class MapsActivity extends FragmentActivity implements GoogleApiClient.On
         mGoogleApiClient.disconnect();
         super.onStop();
     }
-
 
 
     /**
@@ -138,7 +135,6 @@ public class MapsActivity extends FragmentActivity implements GoogleApiClient.On
                 .icon(BitmapDescriptorFactory.fromResource(R.mipmap.ic_launcher)));
 
 
-
     }
 
     private int getCategoryPos(String category) {
@@ -148,6 +144,11 @@ public class MapsActivity extends FragmentActivity implements GoogleApiClient.On
     @Override
     public void onConnected(Bundle connectionHint) {
 
+        mLastLocation = LocationServices.FusedLocationApi.getLastLocation(
+                mGoogleApiClient);
+        if (mLastLocation != null) {
+            LatLng userLocation = new LatLng(mLastLocation.getLatitude(), mLastLocation.getLongitude());
+            mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(userLocation, 16));
 
 
         mMap.setOnInfoWindowClickListener(new GoogleMap.OnInfoWindowClickListener() {
@@ -160,7 +161,7 @@ public class MapsActivity extends FragmentActivity implements GoogleApiClient.On
                 String alert4 = "Isi IDENTITAS ANDA dan BUKTI ini, dengan klik KIRIM";
 
                 AlertDialog.Builder builder1 = new AlertDialog.Builder(MapsActivity.this);
-                builder1.setMessage(alert1 +"\n"+"\n" + alert2  +"\n"+"\n" + alert4);
+                builder1.setMessage(alert1 + "\n" + "\n" + alert2 + "\n" + "\n" + alert4);
                 builder1.setCancelable(true);
                 AlertDialog alert11 = builder1.create();
                 alert11.show();
@@ -180,11 +181,7 @@ public class MapsActivity extends FragmentActivity implements GoogleApiClient.On
         } else {
             mMap.setMyLocationEnabled(true);
         }
-        mLastLocation = LocationServices.FusedLocationApi.getLastLocation(
-                mGoogleApiClient);
-        if (mLastLocation != null) {
-            LatLng userLocation = new LatLng(mLastLocation.getLatitude(), mLastLocation.getLongitude());
-            mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(userLocation, 16));
+
             //mMap.addMarker(new MarkerOptions().position(klebengan).title("Marker in kost").snippet("Huweeeee").icon(BitmapDescriptorFactory.fromResource(R.mipmap.ic_launcher)));
 
             //mLatitudeText.setText(String.valueOf(mLastLocation.getLatitude()));
@@ -195,6 +192,8 @@ public class MapsActivity extends FragmentActivity implements GoogleApiClient.On
 
     @Override
     public void onMapReady(GoogleMap googleMap) {
+
+
         mMap = googleMap;
 
         //mMap.moveCamera(CameraUpdateFactory.newLatLngZoom( klebengan, 18));
@@ -207,7 +206,19 @@ public class MapsActivity extends FragmentActivity implements GoogleApiClient.On
         locationListener = new LocationListener() {
             @Override
             public void onLocationChanged(Location location) {
-                LatLng userLocation = new LatLng(location.getLatitude(), location.getLongitude());
+                if (ActivityCompat.checkSelfPermission(MapsActivity.this, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(MapsActivity.this, android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+                    // TODO: Consider calling
+                    //    ActivityCompat#requestPermissions
+                    // here to request the missing permissions, and then overriding
+                    //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+                    //                                          int[] grantResults)
+                    // to handle the case where the user grants the permission. See the documentation
+                    // for ActivityCompat#requestPermissions for more details.
+                    return;
+                }
+                mLastLocation = LocationServices.FusedLocationApi.getLastLocation(
+                        mGoogleApiClient);
+                LatLng userLocation = new LatLng(mLastLocation.getLatitude(), mLastLocation.getLongitude());
                 mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(userLocation, 16));
             }
 
@@ -244,8 +255,9 @@ public class MapsActivity extends FragmentActivity implements GoogleApiClient.On
                                     Double.parseDouble(postSnapshot.child("longitude").getValue().toString()),
                                     postSnapshot.child("status").getValue().toString(),
                                     postSnapshot.child("snippet").getValue().toString(),
-                                    postSnapshot.child("title").getValue().toString()));
-                    System.out.print(postSnapshot.child("latitude").getValue().toString());
+                                    postSnapshot.child("title").getValue().toString(),
+                                     postSnapshot.child("kode").getValue().toString()));
+
                 }
                 for(int i = 0 ; i < mListItemMarker.size() ; i++ ) {
 
@@ -290,36 +302,25 @@ public class MapsActivity extends FragmentActivity implements GoogleApiClient.On
 
     }
 
+
     @Override
     public void onClick(View v) {
 
+    }
 
+    public boolean onMarkerClick(Marker marker) {
+        for(int i = 0 ; i < mListItemMarker.size() ; i++ ) {
 
-        if(v==BTtoko){
-
-            DatabaseReference ref = mRootref.child("User");
-            firebaseAuth = FirebaseAuth.getInstance();
-            final FirebaseUser user = firebaseAuth.getCurrentUser();
-
-            ref.addValueEventListener(new ValueEventListener() {
-
-
-                @Override
-                public void onDataChange(DataSnapshot snapshot) {
-                    /*Intent intent = new Intent(MainActivity.this,TokoActivity.class);
-                    intent.putExtra("kode",snapshot.child(user.getUid()).child("toko").getValue().toString());
-                    startActivity(intent);*/
-                }
-
-                @Override
-                public void onCancelled(DatabaseError databaseError) {
-
-                }
-
-
-            });
+            if(mListItemMarker.get(i).getTitle().equals(marker.getTitle())){
+                Intent intent = new Intent(this, IsiTutor.class);
+                intent.putExtra("kodetutor", mListItemMarker.get(i).getKode());
+                startActivity(intent);
+            }
 
         }
+        Toast.makeText(this,marker.getTitle(),Toast.LENGTH_LONG).show();
 
+        return false;
     }
+
 }

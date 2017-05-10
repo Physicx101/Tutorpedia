@@ -52,6 +52,7 @@ public class IsiTutor extends AppCompatActivity implements View.OnClickListener 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tutor);
 
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -73,7 +74,7 @@ public class IsiTutor extends AppCompatActivity implements View.OnClickListener 
 
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
-            posisiItemRecycler = extras.getInt("PosisiItemRecycler");
+            posisiItemRecycler = extras.getInt("kodetutor");
         }
 
         /*BTgetcv.setOnClickListener(new View.OnClickListener() {

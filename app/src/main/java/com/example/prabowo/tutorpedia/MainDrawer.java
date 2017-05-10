@@ -41,6 +41,7 @@ public class MainDrawer extends AppCompatActivity
     private TextView userEmail;
     private TextView userName;
     private ImageView userImage;
+    private DatabaseReference databaseReference;
     private String UID, nama;
     DatabaseReference mRootref = FirebaseDatabase.getInstance().getReference();
 
@@ -48,6 +49,24 @@ public class MainDrawer extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_drawer);
+
+        Bundle extras =  getIntent().getExtras();
+
+
+        if (extras != null) {
+            String NamaPengguna = extras.getString("namaku");
+            firebaseAuth = FirebaseAuth.getInstance();
+            FirebaseUser user = firebaseAuth.getCurrentUser();
+            System.out.print(user.getUid());
+            databaseReference = FirebaseDatabase.getInstance().getReference();
+            databaseReference.child("User").child(user.getUid()).child("nama").setValue(NamaPengguna);
+            databaseReference.child("User").child(user.getUid()).child("Tes").child("Tes 1").child("judul").setValue("Tes 1");
+            databaseReference.child("User").child(user.getUid()).child("Tes").child("Tes 1").child("nilai").setValue(0);
+            databaseReference.child("User").child(user.getUid()).child("Pangkat").setValue(0);
+            databaseReference.child("User").child(user.getUid()).child("Point").setValue(0);
+            databaseReference.child("Tes").child("Tes 1").child(user.getUid()).setValue(0);
+        }
+
 
         firebaseAuth = FirebaseAuth.getInstance();
         final FirebaseUser user = firebaseAuth.getCurrentUser();

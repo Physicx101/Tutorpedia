@@ -208,7 +208,7 @@ public class ProfileTestFragment extends Fragment implements View.OnClickListene
                 mStorageRef = storage.getReferenceFromUrl("gs://tutorpedia-17ba0.appspot.com/FotoProfil/");
                 StorageReference foto = mStorageRef.child(UID + "PP"+".jpg");
 
-                Glide.with(getContext())
+         Glide.with(getContext())
                         .using(new FirebaseImageLoader())
                         .load(foto)
                         .signature(new StringSignature(Long.toString(System.currentTimeMillis()))).centerCrop()
