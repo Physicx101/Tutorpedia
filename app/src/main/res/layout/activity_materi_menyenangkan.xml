@@ -9,40 +9,43 @@
     tools:context="com.example.prabowo.tutorpedia.MateriBaru.MateriMenyenangkan">
 
 
-
     <LinearLayout
         android:layout_width="match_parent"
+        android:id="@+id/BG"
         android:layout_height="485dp"
-        android:orientation="vertical"
-        tools:layout_editor_absoluteY="8dp"
-        tools:layout_editor_absoluteX="8dp"
         android:layout_weight="1"
-        android:background="@drawable/nature">
+        android:background="@drawable/nature"
+        android:orientation="vertical"
+        tools:layout_editor_absoluteX="8dp"
+        tools:layout_editor_absoluteY="8dp">
 
         <TextView
+            android:id="@+id/title1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:padding="0dp"
-            android:text="      Kingdom"
-            android:textColor="#8e24aa"
-            android:textSize="50sp"
-            android:textStyle="bold"
             android:shadowColor="#388e3c"
             android:shadowDx="4"
             android:shadowDy="-4"
-            android:shadowRadius="1"/>
+            android:shadowRadius="1"
+            android:text="Kingdom"
+            android:textColor="#8e24aa"
+            android:textSize="50sp"
+            android:layout_gravity="center_horizontal"
+            android:textStyle="bold" />
 
         <TextView
-            android:id="@+id/textView3"
+            android:id="@+id/title2"
             android:layout_width="wrap_content"
             android:layout_height="82dp"
             android:padding="0dp"
+            android:layout_gravity="center_horizontal"
 
             android:shadowColor="#388e3c"
             android:shadowDx="4"
             android:shadowDy="-4"
             android:shadowRadius="1"
-            android:text="        Animalia"
+            android:text="Animalia"
             android:textColor="#8e24aa"
             android:textSize="50sp"
             android:textStyle="bold" />
@@ -52,28 +55,34 @@
             android:layout_width="match_parent"
             android:layout_height="100dp"
             android:layout_weight="0.14"
-            android:textSize="20sp"
-            android:textStyle="bold"
             android:text=""
-            />
+
+            android:paddingRight="40dp"
+            android:paddingLeft="40dp"
+            android:textSize="18dp"
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/TV3"
             android:layout_width="match_parent"
             android:layout_height="100dp"
             android:layout_weight="0.14"
-            android:textSize="20sp"
-            android:textStyle="bold"
-            android:text="" />
+            android:paddingRight="40dp"
+            android:paddingLeft="40dp"
+            android:text=""
+            android:textSize="18dp"
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/TV4"
             android:layout_width="match_parent"
             android:layout_height="100dp"
             android:layout_weight="0.14"
-            android:textSize="20sp"
-            android:textStyle="bold"
-            android:text="" />
+            android:paddingRight="40dp"
+            android:paddingLeft="40dp"
+            android:text=""
+            android:textSize="18dp"
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/textView4"

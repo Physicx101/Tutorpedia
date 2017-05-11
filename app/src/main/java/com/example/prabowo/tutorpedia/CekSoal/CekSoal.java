@@ -13,6 +13,7 @@ import android.view.View;
 
 import com.example.prabowo.tutorpedia.EventFragment;
 import com.example.prabowo.tutorpedia.MainActivity;
+import com.example.prabowo.tutorpedia.MainDrawer;
 import com.example.prabowo.tutorpedia.PointActivity;
 import com.example.prabowo.tutorpedia.R;
 import com.example.prabowo.tutorpedia.Soal;
@@ -143,7 +144,7 @@ public class CekSoal extends AppCompatActivity {
             databaseReference.child("User").child(user.getUid()).child("Point").setValue(point);
 
             finishAffinity();
-            Intent i = new Intent(this, MainActivity.class);
+            Intent i = new Intent(this, MainDrawer.class);
             startActivity(i);
 
     }

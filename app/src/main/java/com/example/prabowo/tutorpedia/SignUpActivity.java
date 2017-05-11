@@ -109,7 +109,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
                         if (task.isSuccessful()) {
                             Toast.makeText(SignUpActivity.this, "Registered Succesfull", Toast.LENGTH_SHORT).show();
                             finish();
-                            startActivity(new Intent(getApplicationContext(),MainActivity.class).putExtra("namaku",namaku));
+                            startActivity(new Intent(getApplicationContext(),MainDrawer.class).putExtra("namaku",namaku));
 
                         } else {
                             Toast.makeText(SignUpActivity.this, "Registered unsuccesfull", Toast.LENGTH_SHORT).show();

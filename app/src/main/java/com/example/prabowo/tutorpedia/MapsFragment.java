@@ -2,6 +2,7 @@ package com.example.prabowo.tutorpedia;
 
 import android.Manifest;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.location.Location;
@@ -40,7 +41,16 @@ import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MapStyleOptions;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.ArrayList;
+import java.util.HashMap;
 
 import static com.example.prabowo.tutorpedia.CekSoal.RecyclerViewAdapter.context;
 
@@ -51,6 +61,10 @@ public class MapsFragment extends Fragment implements GoogleApiClient.OnConnecti
     LocationListener locationListener;
     private Location lastLocation;
     private GoogleApiClient mGoogleApiClient;
+    private HashMap<Marker,Integer> mHashMap = new HashMap<Marker,Integer>();
+    private Marker markernih;
+    private ArrayList<Markerku> mListItemMarker = new ArrayList<Markerku>();
+    DatabaseReference mRootref = FirebaseDatabase.getInstance().getReference();
 
 
     @Override
@@ -119,11 +133,86 @@ public class MapsFragment extends Fragment implements GoogleApiClient.OnConnecti
         return false;
     }
 
+
+    public Marker createMarker(double latitude, double longitude, String title, String snippet,String kode) {
+
+
+
+        return mMap.addMarker(new MarkerOptions()
+                .position(new LatLng(latitude, longitude))
+                .anchor(0.5f, 0.5f)
+                .title(title)
+                .snippet(snippet)
+                .icon(BitmapDescriptorFactory.fromResource(R.drawable.mmanhehe)));
+
+
+
+    }
+
+
+
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
+        mMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
+            @Override
+            public boolean onMarkerClick(Marker marker) {
+                for(int i = 0 ; i < mListItemMarker.size() ; i++ ) {
+
+                    if(mListItemMarker.get(i).getTitle().equals(marker.getTitle())){
+                        Intent intent = new Intent(getContext(), IsiTutor.class);
+                        intent.putExtra("kodetutor", mListItemMarker.get(i).getKode());
+                        startActivity(intent);
+                    }
+
+                }
+
+                return false;
+            }
+        });
 
         mMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
+
+        DatabaseReference ref = mRootref.child("Marker");
+
+        ref.addValueEventListener(new ValueEventListener() {
+
+            @Override
+            public void onDataChange(DataSnapshot snapshot) {
+                for (DataSnapshot postSnapshot : snapshot.getChildren()) {
+                    mListItemMarker.add(new Markerku
+                            (Double.parseDouble(postSnapshot.child("latitude").getValue().toString()),
+                                    Double.parseDouble(postSnapshot.child("longitude").getValue().toString()),
+                                    postSnapshot.child("status").getValue().toString(),
+                                    postSnapshot.child("snippet").getValue().toString(),
+                                    postSnapshot.child("title").getValue().toString(),
+                                    postSnapshot.child("kode").getValue().toString()));
+                }
+                for(int i = 0 ; i < mListItemMarker.size() ; i++ ) {
+
+                    markernih = createMarker(mListItemMarker.get(i).getLatitude(), mListItemMarker.get(i).getLongitude(), mListItemMarker.get(i).getTitle(), mListItemMarker.get(i).getSnippet(),mListItemMarker.get(i).getKode());
+                    mHashMap.put(markernih, i);
+
+
+
+
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+
+
+        });
+
+        for(int i = 0 ; i < mListItemMarker.size() ; i++ ) {
+
+            createMarker(mListItemMarker.get(i).getLatitude(), mListItemMarker.get(i).getLongitude(), mListItemMarker.get(i).getTitle(), mListItemMarker.get(i).getSnippet(),mListItemMarker.get(i).getKode());
+
+        }
+
 
 
 
@@ -137,7 +226,7 @@ public class MapsFragment extends Fragment implements GoogleApiClient.OnConnecti
                 Log.i("Location", location.toString());
                 LatLng userLocation = new LatLng(location.getLatitude(), location.getLongitude());
                 mMap.clear();
-                mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(userLocation, 14));
+                mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(userLocation, 17));
                 mMap.addMarker(new MarkerOptions().position(userLocation).title("My location").icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_VIOLET)));
 
             }
@@ -171,16 +260,15 @@ public class MapsFragment extends Fragment implements GoogleApiClient.OnConnecti
             } else {
                 mMap.setMyLocationEnabled(true);
 
-                //locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, locationListener);
-                lastLocation = LocationServices.FusedLocationApi.getLastLocation(
-                        mGoogleApiClient);
-                //Location lastKnownLocation = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+                locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, locationListener);
+                //lastLocation = LocationServices.FusedLocationApi.getLastLocation(mGoogleApiClient);
+                Location lastKnownLocation = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
 
-                if(lastLocation != null) {
-                    LatLng userLocation = new LatLng(lastLocation.getLatitude(), lastLocation.getLongitude());
+                if(lastKnownLocation != null) {
+                    LatLng userLocation = new LatLng(lastKnownLocation.getLatitude(), lastKnownLocation.getLongitude());
                     mMap.clear();
                     mMap.addMarker(new MarkerOptions().position(userLocation).title("My location").icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_VIOLET)));
-                    mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(userLocation, 14));
+                    mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(userLocation, 17));
                 }
             }
         }
@@ -206,4 +294,6 @@ public class MapsFragment extends Fragment implements GoogleApiClient.OnConnecti
     public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
 
     }
+
+
 }
