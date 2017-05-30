@@ -69,7 +69,7 @@ public class ProfileTestFragment extends Fragment implements View.OnClickListene
     private ProgressBar pangkat;
     public static int points,pangkats;
     private static String pointuser;
-    private RelativeLayout ringkasan,riwayat,bantuan,keluar,tpoin;
+    private RelativeLayout ringkasan,riwayat,bantuan,info,tpoin;
     DatabaseReference mRootref = FirebaseDatabase.getInstance().getReference();
 
 
@@ -85,7 +85,7 @@ public class ProfileTestFragment extends Fragment implements View.OnClickListene
 
 
         firebaseAuth = FirebaseAuth.getInstance();
-        FirebaseUser user = firebaseAuth.getCurrentUser();
+        final FirebaseUser user = firebaseAuth.getCurrentUser();
 
 
         if (user == null) {
@@ -107,8 +107,7 @@ public class ProfileTestFragment extends Fragment implements View.OnClickListene
             }
         });
         userPoint = (TextView) getActivity().findViewById(R.id.TV_point);
-        //ringkasan = (RelativeLayout) getActivity().findViewById(R.id.ringkasanAkun);
-        //ringkasan.setOnClickListener(this);
+        info = (RelativeLayout) getActivity().findViewById(R.id.infoTutor);
         riwayat = (RelativeLayout) getActivity().findViewById(R.id.riwayatTes);
         riwayat.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -116,14 +115,57 @@ public class ProfileTestFragment extends Fragment implements View.OnClickListene
                 startActivity(new Intent(getActivity(),NilaiActivity.class));
             }
         });
-        bantuan = (RelativeLayout) getActivity().findViewById(R.id.bantuan);
+
+        bantuan = (RelativeLayout) getActivity().findViewById(R.id.tutorial);
         bantuan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(getActivity(),RequestTutor.class));
+                startActivity(new Intent(getActivity(),IntroActivity.class));
             }
         });
-        keluar = (RelativeLayout) getActivity().findViewById(R.id.keluar);
+
+
+        DatabaseReference refff = mRootref.child("User");
+        firebaseAuth = FirebaseAuth.getInstance();
+
+
+        refff.addValueEventListener(new ValueEventListener() {
+
+
+            @Override
+            public void onDataChange(DataSnapshot snapshot) {
+                if (Integer.parseInt(snapshot.child(user.getUid()).child("Tutor").getValue().toString())!=0){
+                    info.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            startActivity(new Intent(getActivity(),RequestTutor.class));
+                        }
+                    });
+                }else {
+
+                    info.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            Toast.makeText(getContext(),"Anda Bukan Tutor",Toast.LENGTH_LONG).show();
+                        }
+                    });
+
+                }
+
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+
+
+        });
+
+
+
+        /*keluar = (RelativeLayout) getActivity().findViewById(R.id.keluar);
         keluar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -131,7 +173,7 @@ public class ProfileTestFragment extends Fragment implements View.OnClickListene
                 getActivity().finish();
                 startActivity(new Intent(getActivity(), LoginActivity.class));
             }
-        });
+        });*/
 
 
 

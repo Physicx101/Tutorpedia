@@ -9,6 +9,7 @@ import android.support.design.widget.Snackbar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -29,7 +30,7 @@ import java.util.List;
 
 public class IsiTutor extends AppCompatActivity implements View.OnClickListener {
     private ImageView IVfototutor;
-    int posisiItemRecycler;
+    int posisiItemRecycler, kodeTutor;
     private List<ListItemTutor> mListItemTutors;
     private TextView TVnamatutor;
     private TextView TVisievent;
@@ -75,6 +76,7 @@ public class IsiTutor extends AppCompatActivity implements View.OnClickListener 
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
             posisiItemRecycler = extras.getInt("kodetutor");
+            //kodeTutor = extras.getInt("kodetutor");
         }
 
         /*BTgetcv.setOnClickListener(new View.OnClickListener() {
@@ -139,12 +141,21 @@ public class IsiTutor extends AppCompatActivity implements View.OnClickListener 
 
 
         DatabaseReference ref = mRootref.child("Mentor");
-        DatabaseReference ref2 = mRootref.child("Mentor").child("Guru" + (posisiItemRecycler + 1));
+        DatabaseReference ref2 = mRootref.child("Mentor").child("Guru" + posisiItemRecycler);
 
         ref2.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                nomorTutor = dataSnapshot.child("kontak").getValue().toString();
+               nomorTutor = dataSnapshot.child("kontak").getValue().toString();
+                TVnamatutor.setText(dataSnapshot.child("nama").getValue().toString());
+                TVasaltutor.setText(dataSnapshot.child("lokasi").getValue().toString());
+                TVemailtutor.setText(dataSnapshot.child("email").getValue().toString());
+                TVdesctutor.setText(dataSnapshot.child("deskripsi").getValue().toString());
+                TVnomortutor.setText(dataSnapshot.child("kontak").getValue().toString());
+                Picasso.with(getApplicationContext())
+                        .load((dataSnapshot.child("img").getValue().toString()))
+                        .into(IVfototutor);
+                CV = (dataSnapshot.child("linkcv").getValue().toString());
             }
 
             @Override
@@ -152,7 +163,7 @@ public class IsiTutor extends AppCompatActivity implements View.OnClickListener 
 
             }
         });
-        ref.addValueEventListener(new ValueEventListener() {
+        /*ref.addValueEventListener(new ValueEventListener() {
 
 
             @Override
@@ -202,7 +213,7 @@ public class IsiTutor extends AppCompatActivity implements View.OnClickListener 
             public void onCancelled(DatabaseError firebaseError) {
                 System.out.println("The read failed: " + firebaseError.getMessage());
             }
-        });
+        });*/
     }
 
     @Override

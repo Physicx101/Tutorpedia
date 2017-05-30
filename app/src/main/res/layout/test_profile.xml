@@ -132,6 +132,38 @@
 
             </RelativeLayout>
 
+            <include layout="@layout/item_divider"/>
+
+            <RelativeLayout
+                android:id="@+id/infoTutor"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="?attr/selectableItemBackground"
+                android:clickable="true"
+                android:padding="@dimen/activity_horizontal_margin">
+
+                <ImageView
+                    android:id="@+id/icon_infoTutor"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginEnd="@dimen/activity_horizontal_margin"
+                    android:src="@drawable/ic_person"
+                    tools:ignore="ContentDescription,UnusedAttribute"/>
+
+                <TextView
+                    android:id="@+id/TV_infoTutr"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/activity_horizontal_margin"
+                    android:layout_toEndOf="@id/icon_infoTutor"
+                    android:paddingBottom="4dp"
+                    android:paddingTop="4dp"
+                    android:text="Info Tutor"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Subhead"/>
+
+            </RelativeLayout>
+
 
             <include layout="@layout/item_divider"/>
 
@@ -168,8 +200,9 @@
 
             <include layout="@layout/item_divider"/>
 
+
             <RelativeLayout
-                android:id="@+id/bantuan"
+                android:id="@+id/tutorial"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="?attr/selectableItemBackground"
@@ -182,55 +215,25 @@
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
                     android:layout_marginEnd="@dimen/activity_horizontal_margin"
-                    android:src="@drawable/ic_help_circle"
+                    android:src="@drawable/ic_info_black_24dp"
+                    android:tint="@color/colorPrimary"
                     tools:ignore="ContentDescription,UnusedAttribute"/>
 
                 <TextView
-                    android:id="@+id/TV_help"
+                    android:id="@+id/TV_tutorial"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/activity_horizontal_margin"
                     android:layout_toEndOf="@id/icon_help"
                     android:paddingBottom="4dp"
                     android:paddingTop="4dp"
-                    android:text="Tentang Kami"
+                    android:text="Tutorial"
                     android:textAppearance="@style/TextAppearance.AppCompat.Subhead"/>
 
             </RelativeLayout>
 
 
             <include layout="@layout/item_divider"/>
-
-            <RelativeLayout
-                android:id="@+id/keluar"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="#DC143C"
-                android:clickable="true"
-                android:padding="@dimen/activity_horizontal_margin">
-
-                <ImageView
-                    android:id="@+id/icon_exit"
-                    android:layout_width="24dp"
-                    android:layout_height="24dp"
-                    android:layout_centerVertical="true"
-                    android:layout_marginEnd="@dimen/activity_horizontal_margin"
-                    android:src="@drawable/ic_exit"
-                    tools:ignore="ContentDescription,UnusedAttribute"/>
-
-                <TextView
-                    android:id="@+id/TV_exit"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/activity_horizontal_margin"
-                    android:layout_toEndOf="@id/icon_exit"
-                    android:paddingBottom="4dp"
-                    android:paddingTop="4dp"
-                    android:text="KELUAR"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
-                    android:textColor="@color/white"/>
-
-            </RelativeLayout>
 
 
         </LinearLayout>

@@ -53,7 +53,7 @@ public class TabTesBhs extends android.support.v4.app.Fragment implements View.O
 
         recyclerView = (RecyclerView) view.findViewById(R.id.recycle_view_bhs);
         recyclerView.setHasFixedSize(true);
-        recyclerView.addItemDecoration(new GridSpacingItemDecoration(2, 18, true, 0));
+        recyclerView.addItemDecoration(new GridSpacingItemDecoration(2, 32, true, 0));
 
 
         recyclerViewLayoutManager = new GridLayoutManager(context, 2);

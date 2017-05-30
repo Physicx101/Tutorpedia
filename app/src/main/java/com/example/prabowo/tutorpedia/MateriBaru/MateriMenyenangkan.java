@@ -11,6 +11,7 @@ import android.graphics.LinearGradient;
 import android.graphics.Matrix;
 import android.graphics.Paint;
 import android.graphics.Shader;
+import android.media.Image;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -29,8 +30,10 @@ import android.view.animation.AnimationSet;
 import android.view.animation.AnimationUtils;
 import android.view.animation.DecelerateInterpolator;
 import android.view.animation.LinearInterpolator;
+import android.view.animation.ScaleAnimation;
 import android.view.animation.TranslateAnimation;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -65,9 +68,9 @@ public class MateriMenyenangkan extends AppCompatActivity {
     private TextView TV2;
     private TextView TV3;
     private TextView TV4;
-    private Button BTnext;
-    private Button BTback;
-    private Button BTshow;
+    private ImageButton BTnext;
+    private ImageButton BTback;
+    private ImageButton BTshow;
     private TextView Title1;
     private TextView Title2;
     private LinearLayout BG;
@@ -83,9 +86,9 @@ public class MateriMenyenangkan extends AppCompatActivity {
 
             counter = 0;
 
-            BTnext = (Button) findViewById(R.id.BTnext);
-            BTback = (Button) findViewById(R.id.BTback);
-            BTshow = (Button) findViewById(R.id.BTshow);
+            BTnext = (ImageButton) findViewById(R.id.BTnext);
+            BTback = (ImageButton) findViewById(R.id.BTback);
+            BTshow = (ImageButton) findViewById(R.id.BTshow);
             TV1 = (TextView) findViewById(R.id.TV1);
             TV2 = (TextView) findViewById(R.id.TV2);
             TV3 = (TextView) findViewById(R.id.TV3);
@@ -150,8 +153,17 @@ public class MateriMenyenangkan extends AppCompatActivity {
         animation.setDuration(1000);
         animation.setRepeatMode(Animation.RESTART);
 
+        Animation animationBT =new TranslateAnimation(250,0,0,0);
+        animationBT.setDuration(1500);
+        animationBT.setRepeatMode(Animation.RESTART);
+
+        Animation animationBT2 =new TranslateAnimation(-250,0,0,0);
+        animationBT2.setDuration(1500);
+        animationBT2.setRepeatMode(Animation.RESTART);
+
 
             if (v == BTshow) {
+
                 if (Materi.Mapel.equalsIgnoreCase("matematika") || Materi.Mapel.equalsIgnoreCase("matematikaips") ){
                 counter++;
                 switch (counter) {
@@ -353,13 +365,16 @@ public class MateriMenyenangkan extends AppCompatActivity {
                 }
 
             if (v == BTnext) {
+                BTnext.startAnimation(animationBT);
                 finishAffinity();
                 startActivity(new Intent(this, MateriMenyenangkan2.class));
 
             }
 
 
+
             if (v == BTback) {
+                BTback.startAnimation(animationBT2);
                 finishAffinity();
                 startActivity(new Intent(this, MainDrawer.class));
 
@@ -368,6 +383,7 @@ public class MateriMenyenangkan extends AppCompatActivity {
 
 
 }
+
     public void onBackPressed() {
         new AlertDialog.Builder(this)
                 .setMessage("Apa anda ingin keluar ?")

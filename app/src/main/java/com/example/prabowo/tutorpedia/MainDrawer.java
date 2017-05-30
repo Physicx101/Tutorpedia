@@ -2,7 +2,9 @@ package com.example.prabowo.tutorpedia;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.FragmentManager;
@@ -33,7 +35,7 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
 public class MainDrawer extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+        implements NavigationView.OnNavigationItemSelectedListener{
 
     private FirebaseAuth firebaseAuth;
     private FirebaseStorage storage;
@@ -50,7 +52,57 @@ public class MainDrawer extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_drawer);
 
+
         Bundle extras =  getIntent().getExtras();
+
+        //  Declare a new thread to do a preference check
+        Thread t = new Thread(new Runnable() {
+            @Override
+            public void run() {
+
+                Bundle extras =  getIntent().getExtras();
+                //  Initialize SharedPreferences
+                SharedPreferences getPrefs = PreferenceManager
+                        .getDefaultSharedPreferences(getBaseContext());
+
+                //  Create a new boolean and preference and set it to true
+                boolean isFirstStart = getPrefs.getBoolean("firstStart", true);
+
+                //  If the activity has never started before...
+                if (isFirstStart) {
+
+                    if (extras != null) {
+                        String NamaPengguna = extras.getString("namaku");
+                        firebaseAuth = FirebaseAuth.getInstance();
+                        FirebaseUser user = firebaseAuth.getCurrentUser();
+                        System.out.print(user.getUid());
+                        databaseReference = FirebaseDatabase.getInstance().getReference();
+                        databaseReference.child("User").child(user.getUid()).child("nama").setValue(NamaPengguna);
+                        databaseReference.child("User").child(user.getUid()).child("Tes").child("Tes 1").child("judul").setValue("Tes 1");
+                        databaseReference.child("User").child(user.getUid()).child("Tes").child("Tes 1").child("nilai").setValue(0);
+                        databaseReference.child("User").child(user.getUid()).child("Pangkat").setValue(0);
+                        databaseReference.child("User").child(user.getUid()).child("Point").setValue(0);
+                        databaseReference.child("Tes").child("Tes 1").child(user.getUid()).setValue(0);
+                    }
+
+                    //  Launch app intro
+                    Intent i = new Intent(MainDrawer.this, IntroActivity.class);
+                    startActivity(i);
+
+                    //  Make a new preferences editor
+                    SharedPreferences.Editor e = getPrefs.edit();
+
+                    //  Edit preference to make it false because we don't want this to run again
+                    e.putBoolean("firstStart", false);
+
+                    //  Apply changes
+                    e.apply();
+                }
+            }
+        });
+
+        // Start the thread
+        t.start();
 
 
         if (extras != null) {
@@ -64,6 +116,7 @@ public class MainDrawer extends AppCompatActivity
             databaseReference.child("User").child(user.getUid()).child("Tes").child("Tes 1").child("nilai").setValue(0);
             databaseReference.child("User").child(user.getUid()).child("Pangkat").setValue(0);
             databaseReference.child("User").child(user.getUid()).child("Point").setValue(0);
+            databaseReference.child("User").child(user.getUid()).child("Tutor").setValue(0);
             databaseReference.child("Tes").child("Tes 1").child(user.getUid()).setValue(0);
         }
 
@@ -147,9 +200,10 @@ public class MainDrawer extends AppCompatActivity
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
+        if (id == R.id.action_math) {
             return true;
         }
+
 
         return super.onOptionsItemSelected(item);
     }

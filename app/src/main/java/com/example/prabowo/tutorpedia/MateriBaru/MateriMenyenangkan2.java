@@ -6,8 +6,11 @@ import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.TranslateAnimation;
 import android.widget.AbsoluteLayout;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -20,8 +23,8 @@ import com.example.prabowo.tutorpedia.R;
  */
 
 public class MateriMenyenangkan2 extends AppCompatActivity {
-    private Button BTnext;
-    private Button BTback;
+//    private Button BTnext;
+    private ImageButton BTback;
     private Button BTshow;
     private Button Gkaki;
     private Button Ggading;
@@ -41,8 +44,8 @@ public class MateriMenyenangkan2 extends AppCompatActivity {
 
 
 
-        BTnext = (Button) findViewById(R.id.BTnext);
-        BTback = (Button) findViewById(R.id.BTback);
+//        BTnext = (Button) findViewById(R.id.BTnext);
+        BTback = (ImageButton) findViewById(R.id.BTback);
         BTshow = (Button) findViewById(R.id.BTshow);
 
         Gbadan = (Button) findViewById(R.id.Gbadan);
@@ -104,6 +107,9 @@ public class MateriMenyenangkan2 extends AppCompatActivity {
 
     //    @Override
     public void Pencet(View v) {
+        Animation animationBT2 =new TranslateAnimation(-250,0,0,0);
+        animationBT2.setDuration(1500);
+        animationBT2.setRepeatMode(Animation.RESTART);
             if (v == Gbadan){
                 TV22.setText("Badan Gajah");TV23.setText("Berat mencapai 1 Ton,gajah dewasa menggunakan perut untuk berguling");
             } else if (v == Gkaki){
@@ -117,15 +123,15 @@ public class MateriMenyenangkan2 extends AppCompatActivity {
             }
 
 
-        if (v == BTnext) {
-            finishAffinity();
-            startActivity(new Intent(this, MainActivity.class));
-
-        }
+//        if (v == BTnext) {
+//            finishAffinity();
+//            startActivity(new Intent(this, MainActivity.class));
+//
+//        }
 
 
         if (v == BTback) {
-
+            BTback.startAnimation(animationBT2);
             finishAffinity();
             startActivity(new Intent(this, MateriMenyenangkan.class));
         }

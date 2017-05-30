@@ -1,15 +1,18 @@
 package com.example.prabowo.tutorpedia;
 
 import android.Manifest;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.location.Criteria;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Build;
 import android.preference.PreferenceManager;
+import android.provider.Settings;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
@@ -20,12 +23,14 @@ import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
+import com.arlib.floatingsearchview.FloatingSearchView;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.location.LocationServices;
@@ -57,6 +62,7 @@ import static com.example.prabowo.tutorpedia.CekSoal.RecyclerViewAdapter.context
 public class MapsFragment extends Fragment implements GoogleApiClient.OnConnectionFailedListener, GoogleApiClient.ConnectionCallbacks, OnMapReadyCallback, View.OnClickListener, GoogleMap.OnMyLocationButtonClickListener {
 
     private GoogleMap mMap;
+    private FloatingSearchView mSearchView;
     LocationManager locationManager;
     LocationListener locationListener;
     private Location lastLocation;
@@ -77,16 +83,35 @@ public class MapsFragment extends Fragment implements GoogleApiClient.OnConnecti
                 if (ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
                     mMap.setMyLocationEnabled(true);
                     locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, locationListener);
+                    Location lastKnownLocation = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+                    if (lastKnownLocation != null) {
+                        LatLng userLocation = new LatLng(lastKnownLocation.getLatitude(), lastKnownLocation.getLongitude());
+                        //mMap.addMarker(new MarkerOptions().position(userLocation).title("My location").icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_VIOLET)));
+                        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(userLocation, 17));
+                    }
                 }
             }
         }
     }
 
 
+
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_maps, container, false);
+
+        // Get the button view
+        View locationButton = ((View) view.findViewById(1).getParent()).findViewById(2);
+
+        // and next place it, for exemple, on bottom right (as Google Maps app)
+        RelativeLayout.LayoutParams rlp = (RelativeLayout.LayoutParams) locationButton.getLayoutParams();
+        // position on right bottom
+        rlp.addRule(RelativeLayout.ALIGN_PARENT_TOP, 0);
+        rlp.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM, RelativeLayout.TRUE);
+        rlp.setMargins(0, 0, 30, 30);
+
 
 
         return view;
@@ -95,6 +120,38 @@ public class MapsFragment extends Fragment implements GoogleApiClient.OnConnecti
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
+        mSearchView = (FloatingSearchView) view.findViewById(R.id.floating_search_view);
+        mSearchView.setOnMenuItemClickListener(new FloatingSearchView.OnMenuItemClickListener() {
+            @Override
+            public void onActionMenuItemSelected(MenuItem item) {
+                int id = item.getItemId();
+                if (id == R.id.action_math) {
+                    mRootref.child("Marker").child("Marker2").child("longitude").setValue(100000);
+                    mRootref.child("Marker").child("Marker2").child("latitude").setValue(100000);
+                    getActivity().finish();
+                    startActivity(getActivity().getIntent());
+                }
+                if (id == R.id.action_phys) {
+                    mRootref.child("Marker").child("Marker3").child("longitude").setValue(100000);
+                    mRootref.child("Marker").child("Marker3").child("latitude").setValue(100000);
+                    getActivity().finish();
+                    startActivity(getActivity().getIntent());
+                }
+                if (id == R.id.action_chem) {
+                    mRootref.child("Marker").child("Marker2").child("latitude").setValue(3.587674);
+                    mRootref.child("Marker").child("Marker2").child("longitude").setValue(98.69051);
+                    mRootref.child("Marker").child("Marker3").child("latitude").setValue(3.587545);
+                    mRootref.child("Marker").child("Marker3").child("longitude").setValue(98.691154);
+                }
+                if (id == R.id.action_bio) {
+                    mRootref.child("Marker").child("Marker2").child("latitude").setValue(3.587674);
+                    mRootref.child("Marker").child("Marker2").child("longitude").setValue(98.69051);
+                    mRootref.child("Marker").child("Marker3").child("latitude").setValue(3.587545);
+                    mRootref.child("Marker").child("Marker3").child("longitude").setValue(98.691154);
+                }
+            }
+        });
 
         if (mGoogleApiClient == null) {
             mGoogleApiClient = new GoogleApiClient.Builder(getActivity())
@@ -108,10 +165,10 @@ public class MapsFragment extends Fragment implements GoogleApiClient.OnConnecti
 
 
 
+
         SupportMapFragment mapFragment = (SupportMapFragment)getChildFragmentManager().findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
     }
-
 
 
 
@@ -154,14 +211,18 @@ public class MapsFragment extends Fragment implements GoogleApiClient.OnConnecti
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
+
+
+
         mMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
             @Override
             public boolean onMarkerClick(Marker marker) {
                 for(int i = 0 ; i < mListItemMarker.size() ; i++ ) {
 
                     if(mListItemMarker.get(i).getTitle().equals(marker.getTitle())){
+                        Log.i("MARKER", mListItemMarker.get(i).getKode());
                         Intent intent = new Intent(getContext(), IsiTutor.class);
-                        intent.putExtra("kodetutor", mListItemMarker.get(i).getKode());
+                        intent.putExtra("kodetutor", Integer.parseInt(mListItemMarker.get(i).getKode().toString()));
                         startActivity(intent);
                     }
 
@@ -173,7 +234,14 @@ public class MapsFragment extends Fragment implements GoogleApiClient.OnConnecti
 
         mMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
 
+
+
+            final ProgressDialog Dialog = new ProgressDialog(getActivity(), R.style.AppTheme_Dark_Dialog);
+        Dialog.setMessage("Loading.... ");
+        Dialog.show();
+
         DatabaseReference ref = mRootref.child("Marker");
+
 
         ref.addValueEventListener(new ValueEventListener() {
 
@@ -192,6 +260,7 @@ public class MapsFragment extends Fragment implements GoogleApiClient.OnConnecti
 
                     markernih = createMarker(mListItemMarker.get(i).getLatitude(), mListItemMarker.get(i).getLongitude(), mListItemMarker.get(i).getTitle(), mListItemMarker.get(i).getSnippet(),mListItemMarker.get(i).getKode());
                     mHashMap.put(markernih, i);
+                    Dialog.hide();
 
 
 
@@ -225,9 +294,9 @@ public class MapsFragment extends Fragment implements GoogleApiClient.OnConnecti
             public void onLocationChanged(Location location) {
                 Log.i("Location", location.toString());
                 LatLng userLocation = new LatLng(location.getLatitude(), location.getLongitude());
-                mMap.clear();
                 mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(userLocation, 17));
-                mMap.addMarker(new MarkerOptions().position(userLocation).title("My location").icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_VIOLET)));
+                locationManager.removeUpdates(this);
+                //mMap.addMarker(new MarkerOptions().position(userLocation).title("My location").icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_VIOLET)));
 
             }
 
@@ -252,6 +321,9 @@ public class MapsFragment extends Fragment implements GoogleApiClient.OnConnecti
 
         if (Build.VERSION.SDK_INT < 23) {
             locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, locationListener);
+            mMap.setMyLocationEnabled(true);
+
+
         } else {
 
             if (ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
@@ -266,14 +338,17 @@ public class MapsFragment extends Fragment implements GoogleApiClient.OnConnecti
 
                 if(lastKnownLocation != null) {
                     LatLng userLocation = new LatLng(lastKnownLocation.getLatitude(), lastKnownLocation.getLongitude());
-                    mMap.clear();
-                    mMap.addMarker(new MarkerOptions().position(userLocation).title("My location").icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_VIOLET)));
+                    //mMap.addMarker(new MarkerOptions().position(userLocation).title("My location").icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_VIOLET)));
                     mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(userLocation, 17));
                 }
             }
         }
 
     }
+
+
+
+
 
     @Override
     public void onClick(View view) {

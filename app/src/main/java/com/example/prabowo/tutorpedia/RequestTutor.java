@@ -148,10 +148,10 @@ public class RequestTutor extends AppCompatActivity implements View.OnClickListe
                                         Stutor.setChecked(true);
                                         counter=2;
                                     } else {
-                                        mRootref.child("Marker").child("Marker" + KAtutor).child("longitude").setValue(10000000);
-                                        mRootref.child("Marker").child("Marker" + KAtutor).child("latitude").setValue(1000000);
+                                        mRootref.child("Marker").child("Marker" + KAtutor).child("longitude").setValue(100000);
+                                        mRootref.child("Marker").child("Marker" + KAtutor).child("latitude").setValue(100000);
                                         mRootref.child("Marker").child("Marker" + KAtutor).child("status").setValue("tutup");
-                                        Toast.makeText(getApplicationContext(), "Terima Kasih", Toast.LENGTH_LONG).show();
+                                        Toast.makeText(getApplicationContext(), "Terima Kasih", Toast.LENGTH_SHORT).show();
                                         Stutor.setChecked(false);
                                         counter=2;
 
